@@ -166,7 +166,7 @@
   .hero-micro { font-size:14px; color:#94a6c4; display:flex; align-items:center; gap:8px; }
   .hero-micro svg { flex-shrink:0; }
 
-  /* hero search mockup */
+  /* hero search mockup (animated) */
   .mock {
     background: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
     padding: 8px; color: var(--ink); position: relative;
@@ -175,19 +175,53 @@
   .mock-dot { width:11px; height:11px; border-radius:50%; }
   .mock-dot.r{background:#ff5f57}.mock-dot.y{background:#febc2e}.mock-dot.g{background:#28c840}
   .mock-title { margin-left:8px; font-size:13px; font-weight:600; color:var(--muted); }
-  .mock-body { background: var(--bg-soft); border-radius: 18px; padding: 22px; }
-  .mock-row { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
-  .mock-row:last-child{margin-bottom:0;}
-  .mock-label { font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.03em; margin-bottom:3px; }
+  .mock-body { background: var(--bg-soft); border-radius: 18px; padding: 18px; }
+
+  /* search input */
+  .mock-search {
+    display:flex; align-items:center; gap:10px; background:#fff; border:1.5px solid var(--line);
+    border-radius:12px; padding:12px 12px 12px 14px; margin-bottom:16px; transition:border-color .25s, box-shadow .25s;
+  }
+  .mock-search.is-focus { border-color:var(--blue); box-shadow:0 0 0 4px rgba(29,111,255,.12); }
+  .mock-search .s-ico { color:var(--blue); flex-shrink:0; display:grid; place-items:center; }
+  .mock-search .s-text { flex:1; font-size:15.5px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; min-height:20px; }
+  .mock-search .s-text.placeholder { color:#b3bccb; font-weight:500; }
+  .mock-caret { display:inline-block; width:2px; height:18px; background:var(--blue); margin-left:1px; vertical-align:-3px; animation:blink 1s step-end infinite; }
+  .mock-caret.hide { display:none; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .mock-sbtn {
+    flex-shrink:0; background:var(--gradient); color:#fff; border:none; border-radius:9px;
+    font-weight:700; font-size:13.5px; padding:9px 16px; display:flex; align-items:center; gap:7px; min-width:96px; justify-content:center;
+  }
+  .spinner { width:14px; height:14px; border:2px solid rgba(255,255,255,.45); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to{ transform:rotate(360deg);} }
+
+  /* result rows */
+  .mock-row { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px 16px; margin-bottom:11px;
+    opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease; }
+  .mock-row.show { opacity:1; transform:translateY(0); }
+  .mock-label { font-size:11.5px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.03em; margin-bottom:3px; }
   .mock-val { font-size:16px; font-weight:700; color:var(--ink); }
-  .mock-ico { width:40px; height:40px; border-radius:10px; background:var(--blue-soft); display:grid; place-items:center; color:var(--blue); flex-shrink:0; }
-  .mock-deliver { display:flex; align-items:center; gap:10px; background:var(--green-soft); border:1px solid #c5ecd6; border-radius:12px; padding:14px 16px; }
+  .mock-ico { width:40px; height:40px; border-radius:10px; background:var(--blue-soft); display:grid; place-items:center; color:var(--blue); flex-shrink:0; font-size:18px; }
+  .mock-deliver { display:flex; align-items:center; gap:10px; background:var(--green-soft); border:1px solid #c5ecd6; border-radius:12px; padding:13px 16px; margin-top:11px;
+    opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease; }
+  .mock-deliver.show { opacity:1; transform:translateY(0); }
   .mock-deliver .pill { font-size:14px; font-weight:700; color:#0c7a45; }
+
+  /* toast */
   .mock-float {
     position:absolute; bottom:-22px; right:-14px; background:#fff; border-radius:14px; box-shadow:var(--shadow-lg);
     padding:12px 16px; display:flex; align-items:center; gap:10px; border:1px solid var(--line);
+    opacity:0; transform:translateY(14px) scale(.92); transition:opacity .4s cubic-bezier(.2,1.3,.5,1), transform .4s cubic-bezier(.2,1.3,.5,1); pointer-events:none;
   }
+  .mock-float.show { opacity:1; transform:translateY(0) scale(1); }
   .mock-float b{color:var(--ink); font-size:14px;} .mock-float span{font-size:12px; color:var(--muted);}
+  .mock-float .t-check { width:26px; height:26px; border-radius:50%; background:var(--green-soft); color:var(--green); display:grid; place-items:center; flex-shrink:0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mock-row, .mock-deliver, .mock-float { opacity:1 !important; transform:none !important; transition:none; }
+    .mock-caret { display:none; }
+  }
 
   @media (max-width: 900px){
     .hero-grid { grid-template-columns: 1fr; gap: 44px; }
@@ -468,41 +502,49 @@
       </p>
     </div>
 
-    <!-- Hero search mockup -->
-    <div class="mock" aria-hidden="true">
+    <!-- Hero search mockup (animated — driven by JS, see "ANIMATED HERO MOCKUP") -->
+    <div class="mock" id="mock" aria-hidden="true">
       <div class="mock-bar">
         <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
         <span class="mock-title">Lead Request — Live Preview</span>
       </div>
       <div class="mock-body">
-        <div class="mock-row">
+        <!-- animated search input -->
+        <div class="mock-search" id="mockSearch">
+          <span class="s-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+          <span class="s-text placeholder" id="mockText">Search a business type…</span><span class="mock-caret hide" id="mockCaret"></span>
+          <button class="mock-sbtn" id="mockBtn" type="button">Search</button>
+        </div>
+
+        <!-- result rows (revealed in sequence) -->
+        <div class="mock-row" id="rowType">
           <div>
             <div class="mock-label">Business type</div>
-            <div class="mock-val">Dentists</div>
+            <div class="mock-val" id="valType">Dentists</div>
           </div>
-          <div class="mock-ico">🦷</div>
+          <div class="mock-ico" id="icoType">🦷</div>
         </div>
-        <div class="mock-row">
+        <div class="mock-row" id="rowCountry">
           <div>
             <div class="mock-label">Country</div>
-            <div class="mock-val">United States</div>
+            <div class="mock-val" id="valCountry">United States</div>
           </div>
-          <div class="mock-ico">🇺🇸</div>
+          <div class="mock-ico" id="icoCountry">🇺🇸</div>
         </div>
-        <div class="mock-row">
+        <div class="mock-row" id="rowRegion">
           <div>
-            <div class="mock-label">State</div>
-            <div class="mock-val">Texas</div>
+            <div class="mock-label" id="labRegion">State</div>
+            <div class="mock-val" id="valRegion">Texas</div>
           </div>
           <div class="mock-ico">📍</div>
         </div>
-        <div class="mock-deliver">
+        <div class="mock-deliver" id="rowDeliver">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0c7a45" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
           <span class="pill">Delivery: CSV within 24 hours</span>
         </div>
       </div>
-      <div class="mock-float">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16b364" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="mock-float" id="mockToast">
+        <span class="t-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
         <div><b>Request received</b><br><span>Confirmation email sent</span></div>
       </div>
     </div>
@@ -1476,6 +1518,126 @@ form.addEventListener('submit', function (e) {
     alert('Sorry, something went wrong sending your request. Please try again or contact us directly.');
   }
 });
+
+/* ================================================================
+   ANIMATED HERO MOCKUP
+   Simulates a live lead request: types the keyword, runs a "search"
+   spinner, reveals the result rows one by one, shows the delivery
+   badge, then pops the "Request received" toast — looping through a
+   few realistic niche/country scenarios. Pure JS timeline, no deps.
+   ================================================================ */
+(function () {
+  const mock = document.getElementById('mock');
+  if (!mock) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const els = {
+    search:  document.getElementById('mockSearch'),
+    text:    document.getElementById('mockText'),
+    caret:   document.getElementById('mockCaret'),
+    btn:     document.getElementById('mockBtn'),
+    rowType: document.getElementById('rowType'),
+    rowCountry: document.getElementById('rowCountry'),
+    rowRegion:  document.getElementById('rowRegion'),
+    rowDeliver: document.getElementById('rowDeliver'),
+    toast:   document.getElementById('mockToast'),
+    valType: document.getElementById('valType'),
+    icoType: document.getElementById('icoType'),
+    valCountry: document.getElementById('valCountry'),
+    icoCountry: document.getElementById('icoCountry'),
+    labRegion: document.getElementById('labRegion'),
+    valRegion: document.getElementById('valRegion'),
+  };
+
+  // Scenarios cycled through to keep it feeling alive
+  const SCENES = [
+    { kw:'Dentists',        kwIco:'🦷', country:'United States', cIco:'🇺🇸', regLabel:'State', region:'Texas' },
+    { kw:'Roofers',         kwIco:'🛠️', country:'United Kingdom', cIco:'🇬🇧', regLabel:'City',  region:'London' },
+    { kw:'Restaurants',     kwIco:'🍽️', country:'Canada',        cIco:'🇨🇦', regLabel:'City',  region:'Toronto' },
+    { kw:'Real estate agents', kwIco:'🏠', country:'Australia',  cIco:'🇦🇺', regLabel:'City',  region:'Sydney' },
+  ];
+
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  function resetRows() {
+    [els.rowType, els.rowCountry, els.rowRegion].forEach(r => r.classList.remove('show'));
+    els.rowDeliver.classList.remove('show');
+    els.toast.classList.remove('show');
+  }
+
+  async function typeText(str) {
+    els.text.classList.remove('placeholder');
+    els.text.textContent = '';
+    els.caret.classList.remove('hide');
+    els.search.classList.add('is-focus');
+    for (let i = 0; i < str.length; i++) {
+      els.text.textContent += str[i];
+      await wait(70 + Math.random() * 60);
+    }
+    await wait(350);
+    els.caret.classList.add('hide');
+  }
+
+  function searching(on) {
+    if (on) {
+      els.btn.innerHTML = '<span class="spinner"></span> Searching';
+    } else {
+      els.btn.textContent = 'Search';
+    }
+  }
+
+  async function runScene(s) {
+    // fill the (hidden) values first
+    els.valType.textContent = s.kw;       els.icoType.textContent = s.kwIco;
+    els.valCountry.textContent = s.country; els.icoCountry.textContent = s.cIco;
+    els.labRegion.textContent = s.regLabel; els.valRegion.textContent = s.region;
+
+    resetRows();
+    els.text.classList.add('placeholder');
+    els.text.textContent = 'Search a business type…';
+    els.search.classList.remove('is-focus');
+    await wait(600);
+
+    await typeText(s.kw);
+    searching(true);
+    await wait(950);
+    searching(false);
+
+    els.rowType.classList.add('show');    await wait(280);
+    els.rowCountry.classList.add('show'); await wait(280);
+    els.rowRegion.classList.add('show');  await wait(320);
+    els.rowDeliver.classList.add('show'); await wait(520);
+    els.toast.classList.add('show');
+
+    await wait(3200); // hold the completed state
+  }
+
+  async function loop() {
+    let i = 0;
+    while (true) {
+      await runScene(SCENES[i % SCENES.length]);
+      i++;
+    }
+  }
+
+  if (reduce) {
+    // Static final state for users who prefer reduced motion
+    const s = SCENES[0];
+    els.valType.textContent = s.kw; els.icoType.textContent = s.kwIco;
+    els.text.classList.remove('placeholder'); els.text.textContent = s.kw;
+    ['rowType','rowCountry','rowRegion'].forEach(k => els[k].classList.add('show'));
+    els.rowDeliver.classList.add('show');
+    els.toast.classList.add('show');
+    return;
+  }
+
+  // Start only when the hero is on screen (saves CPU / battery)
+  const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) { io.disconnect(); loop(); }
+  }, { threshold: 0.25 });
+  io.observe(mock);
+})();
 
 /* ================================================================
    5. SMOOTH SCROLL for in-page anchor links
