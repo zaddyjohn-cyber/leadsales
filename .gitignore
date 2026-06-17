@@ -17,3 +17,10 @@ Screenshot *.png
 # Temp crop/verify files and the censoring script
 _*.png
 _censor.py
+
+# Raw WhatsApp screenshots & source videos — may contain names, emails,
+# phone numbers, wallet addresses, anti-phishing codes. NEVER publish raw.
+# Only web-optimised, censored copies in /proof go to the repo.
+WhatsApp Image *.jpeg
+WhatsApp Image *.jpg
+*.mp4
