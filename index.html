@@ -710,23 +710,9 @@
           <div class="field-row">
             <div class="field">
               <label for="country">Country <span class="req">*</span></label>
+              <!-- Countries injected by JS (see COUNTRIES array). African countries excluded. -->
               <select id="country" name="country">
                 <option value="">Select a country…</option>
-                <!-- Popular countries; JS adds US-state logic -->
-                <option value="Nigeria">Nigeria</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
-                <option value="South Africa">South Africa</option>
-                <option value="Ghana">Ghana</option>
-                <option value="United Arab Emirates">United Arab Emirates</option>
-                <option value="Germany">Germany</option>
-                <option value="Ireland">Ireland</option>
-                <option value="Kenya">Kenya</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="New Zealand">New Zealand</option>
-                <option value="Other">Other (mention in notes)</option>
               </select>
               <div class="err-msg" data-for="country">Please select a country.</div>
             </div>
@@ -922,7 +908,7 @@
       <div class="card"><div class="ico">⚡</div><h3>Find clients faster</h3><p>Find businesses to pitch faster and stop guessing who needs your service.</p></div>
       <div class="card"><div class="ico">📋</div><h3>Your own prospect list</h3><p>Build your own prospect list you control — not random recycled data.</p></div>
       <div class="card"><div class="ico">🛠️</div><h3>Pitch any service</h3><p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p></div>
-      <div class="card"><div class="ico">🌍</div><h3>Local or global</h3><p>Target Nigeria, USA, UK, Canada, Australia, South Africa, Ghana, UAE, and other countries.</p></div>
+      <div class="card"><div class="ico">🌍</div><h3>50+ countries</h3><p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p></div>
       <div class="card"><div class="ico green">📄</div><h3>Simple CSV format</h3><p>Use the file in Google Sheets, Excel, CRMs, or outreach tools instantly.</p></div>
       <div class="card"><div class="ico">⏱️</div><h3>Save research time</h3><p>Stop searching Google one business at a time. We do the work for you.</p></div>
       <div class="card"><div class="ico">💸</div><h3>No expensive software</h3><p>Start outreach without buying or learning expensive lead software.</p></div>
@@ -975,14 +961,14 @@
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Law firms in Australia</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Real estate agents in United Kingdom</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Cleaning companies in UAE</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hotels in Ghana</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Schools in Nigeria</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Clinics in South Africa</span>
+      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hotels in Spain</span>
+      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Schools in Singapore</span>
+      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Clinics in Germany</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Gyms in Canada</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Salons in United States</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Auto repair shops in Germany</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Churches in United States</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Event planners in Lagos, Nigeria</span>
+      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Event planners in Sydney, Australia</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Interior designers in Dubai, UAE</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Accountants in London, UK</span>
       <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> HVAC companies in California, USA</span>
@@ -1008,7 +994,7 @@
       <div class="card"><div class="ico green">✅</div><h3>Simple CSV format</h3><p>Open in Excel, Google Sheets, CRMs, or any outreach tool — no learning curve.</p></div>
       <div class="card"><div class="ico green">✅</div><h3>Built for Nigerians</h3><p>Made for Nigerian freelancers, agencies, and service providers.</p></div>
       <div class="card"><div class="ico green">✅</div><h3>No manual searching</h3><p>Stop digging through Google. We handle the research for you.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Local &amp; international</h3><p>Useful for prospecting both local Nigerian and foreign clients.</p></div>
+      <div class="card"><div class="ico green">✅</div><h3>International reach</h3><p>Useful for prospecting clients across 50+ countries in North America, Europe, the Middle East, Asia, and Oceania.</p></div>
       <div class="card"><div class="ico green">✅</div><h3>Human-reviewed</h3><p>Every request is reviewed by a human before delivery.</p></div>
       <div class="card"><div class="ico green">✅</div><h3>Proof on the page</h3><p>Proof of replies and payments will be shown so you can buy with confidence.</p></div>
     </div>
@@ -1145,7 +1131,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">Can I request foreign leads? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Yes. You can request leads from different countries, including USA, UK, Canada, Australia, UAE, South Africa, Ghana, Nigeria, and more.</p></div>
+        <div class="faq-a"><p>Yes. You can request leads from 50+ countries, including the USA, UK, Canada, Australia, UAE, Germany, Singapore, and many more.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Why is there a state field only for the United States? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -1255,6 +1241,33 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     }
   });
 });
+
+/* ================================================================
+   2a. COUNTRIES — populate country dropdown (50 countries)
+   African countries are intentionally excluded. Edit this list to
+   add/remove target countries. Keep "United States" exactly as-is
+   so the US-state logic below keeps working.
+   ================================================================ */
+const COUNTRIES = [
+  "Argentina","Australia","Austria","Bahrain","Bangladesh","Belgium","Brazil",
+  "Canada","Chile","China","Colombia","Czech Republic","Denmark","Finland",
+  "France","Germany","Greece","Hong Kong","India","Indonesia","Ireland","Israel",
+  "Italy","Japan","Kuwait","Luxembourg","Malaysia","Mexico","Netherlands",
+  "New Zealand","Norway","Oman","Pakistan","Philippines","Poland","Portugal",
+  "Qatar","Romania","Saudi Arabia","Singapore","South Korea","Spain","Sweden",
+  "Switzerland","Thailand","Turkey","United Arab Emirates","United Kingdom",
+  "United States","Vietnam"
+];
+const countryEl = document.getElementById('country');
+COUNTRIES.forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c; opt.textContent = c;
+  countryEl.appendChild(opt);
+});
+// "Other" option always last
+const otherOpt = document.createElement('option');
+otherOpt.value = 'Other'; otherOpt.textContent = 'Other (mention in notes)';
+countryEl.appendChild(otherOpt);
 
 /* ================================================================
    2. US STATES — populate state dropdown
