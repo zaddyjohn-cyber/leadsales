@@ -9,3 +9,11 @@ desktop.ini
 # Editor
 .vscode/
 .idea/
+
+# Original payment screenshots — contain FULL wallet addresses.
+# Never commit these. Only the censored copies in /proof are published.
+Screenshot *.png
+
+# Temp crop/verify files and the censoring script
+_*.png
+_censor.py
