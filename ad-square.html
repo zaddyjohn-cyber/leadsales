@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lead Request — Square Ad (1:1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     RECORDING-READY SQUARE AD  (1:1 — 1080x1080)
+     The .stage is a 1:1 container scaled to fit the screen.
+     Everything inside is sized in container-query units (cqw),
+     so it stays pixel-perfect at any size. Fullscreen the browser
+     (F11) and screen-record the square area. Output ratio = 1:1.
+     ============================================================ */
+  :root{
+    --navy:#0b1f3a; --blue:#1d6fff; --blue-dark:#0a4fd4; --blue-soft:#eaf1ff;
+    --green:#16b364; --green-soft:#e7f8ef; --ink:#0f172a; --muted:#98a2b3; --line:#e6e9ef;
+    --gradient:linear-gradient(135deg,#1d6fff 0%,#0a4fd4 100%);
+    --gradient-navy:linear-gradient(160deg,#0b1f3a 0%,#102a4c 60%,#14315a 100%);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Inter',system-ui,sans-serif; background:#05101f;
+    display:grid; place-items:center; overflow:hidden;
+  }
+  .stage{
+    width:min(100vw,100vh); aspect-ratio:1/1; container-type:size;
+    background:var(--gradient-navy); position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:6cqw 6cqw 6cqw; color:#fff;
+  }
+  .stage::before{content:"";position:absolute;top:-18cqw;right:-14cqw;width:46cqw;height:46cqw;background:radial-gradient(circle,rgba(29,111,255,.5),transparent 70%);}
+  .stage::after{content:"";position:absolute;bottom:-20cqw;left:-16cqw;width:44cqw;height:44cqw;background:radial-gradient(circle,rgba(22,179,100,.22),transparent 70%);}
+
+  .brand{display:flex;align-items:center;gap:2.2cqw;position:relative;z-index:2;}
+  .logo-mark{width:7cqw;height:7cqw;border-radius:1.8cqw;background:var(--gradient);display:grid;place-items:center;color:#fff;font-weight:900;font-size:4cqw;box-shadow:0 1cqw 2.5cqw rgba(29,111,255,.5);}
+  .brand b{font-size:3.4cqw;font-weight:800;letter-spacing:-.02em;}
+
+  .head{position:relative;z-index:2;}
+  .head h1{font-size:6.6cqw;font-weight:900;line-height:1.08;letter-spacing:-.02em;}
+  .head h1 .hl{color:#5fa0ff;}
+  .head p{font-size:3cqw;color:#b9c6dd;margin-top:2.4cqw;font-weight:500;}
+
+  /* ---- animated mock ---- */
+  .mock{background:#fff;border-radius:3.2cqw;box-shadow:0 4cqw 9cqw rgba(0,0,0,.4);padding:1.4cqw;color:var(--ink);position:relative;z-index:2;}
+  .mock-bar{display:flex;align-items:center;gap:1.2cqw;padding:2cqw 2.4cqw;}
+  .mock-dot{width:1.9cqw;height:1.9cqw;border-radius:50%;}
+  .r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+  .mock-title{margin-left:1.4cqw;font-size:2.2cqw;font-weight:600;color:var(--muted);}
+  .mock-body{background:#f7f9fc;border-radius:2.6cqw;padding:3cqw;}
+  .mock-search{display:flex;align-items:center;gap:1.6cqw;background:#fff;border:.3cqw solid var(--line);border-radius:2cqw;padding:2cqw 2cqw 2cqw 2.4cqw;margin-bottom:2.6cqw;transition:border-color .25s,box-shadow .25s;}
+  .mock-search.is-focus{border-color:var(--blue);box-shadow:0 0 0 .7cqw rgba(29,111,255,.14);}
+  .s-ico{color:var(--blue);display:grid;place-items:center;}
+  .s-text{flex:1;font-size:2.8cqw;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;min-height:3cqw;}
+  .s-text.placeholder{color:#b3bccb;font-weight:500;}
+  .mock-caret{display:inline-block;width:.35cqw;height:3cqw;background:var(--blue);margin-left:.3cqw;vertical-align:-.5cqw;animation:blink 1s step-end infinite;}
+  .mock-caret.hide{display:none;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .mock-sbtn{background:var(--gradient);color:#fff;border:none;border-radius:1.5cqw;font-weight:700;font-size:2.4cqw;font-family:inherit;padding:1.6cqw 2.8cqw;display:flex;align-items:center;gap:1.2cqw;min-width:17cqw;justify-content:center;}
+  .spinner{width:2.4cqw;height:2.4cqw;border:.45cqw solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .mock-row{display:flex;align-items:center;justify-content:space-between;gap:2cqw;background:#fff;border:.2cqw solid var(--line);border-radius:2cqw;padding:2.2cqw 2.6cqw;margin-bottom:1.9cqw;opacity:0;transform:translateY(2cqw);transition:opacity .45s,transform .45s;}
+  .mock-row.show{opacity:1;transform:translateY(0);}
+  .mock-label{font-size:2cqw;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.5cqw;}
+  .mock-val{font-size:2.9cqw;font-weight:700;color:var(--ink);}
+  .mock-ico{width:7cqw;height:7cqw;border-radius:1.8cqw;background:var(--blue-soft);display:grid;place-items:center;font-size:3.4cqw;}
+  .mock-deliver{display:flex;align-items:center;gap:1.8cqw;background:var(--green-soft);border:.2cqw solid #c5ecd6;border-radius:2cqw;padding:2.2cqw 2.6cqw;margin-top:1.9cqw;opacity:0;transform:translateY(2cqw);transition:opacity .45s,transform .45s;}
+  .mock-deliver.show{opacity:1;transform:translateY(0);}
+  .mock-deliver .pill{font-size:2.5cqw;font-weight:700;color:#0c7a45;}
+  .mock-float{position:absolute;bottom:-4cqw;right:-2.4cqw;background:#fff;border-radius:2.4cqw;box-shadow:0 3cqw 7cqw rgba(0,0,0,.3);padding:2cqw 2.8cqw;display:flex;align-items:center;gap:1.8cqw;border:.2cqw solid var(--line);opacity:0;transform:translateY(2.4cqw) scale(.9);transition:opacity .4s cubic-bezier(.2,1.3,.5,1),transform .4s cubic-bezier(.2,1.3,.5,1);}
+  .mock-float.show{opacity:1;transform:translateY(0) scale(1);}
+  .mock-float b{color:var(--ink);font-size:2.5cqw;} .mock-float span{font-size:2.1cqw;color:var(--muted);}
+  .t-check{width:4.6cqw;height:4.6cqw;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;}
+
+  /* ---- CTA footer ---- */
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:3cqw;position:relative;z-index:2;}
+  .cta-btn{background:var(--gradient);color:#fff;font-weight:800;font-size:3.2cqw;padding:3cqw 5cqw;border-radius:2.4cqw;box-shadow:0 2cqw 5cqw rgba(29,111,255,.45);display:flex;align-items:center;gap:1.6cqw;}
+  .cta .handle{font-size:2.6cqw;color:#9db0cd;font-weight:600;text-align:right;}
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="brand">
+      <span class="logo-mark">L</span>
+      <b>[Your Business Name]</b>
+    </div>
+
+    <div class="head">
+      <h1>You have the skill.<br>Now get the <span class="hl">businesses to pitch.</span></h1>
+      <p>Targeted business leads delivered as a CSV — within 24 hours.</p>
+    </div>
+
+    <!-- animated mock -->
+    <div class="mock" id="mock">
+      <div class="mock-bar">
+        <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+        <span class="mock-title">Lead Request — Live Preview</span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-search" id="mockSearch">
+          <span class="s-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+          <span class="s-text placeholder" id="mockText">Search a business type…</span><span class="mock-caret hide" id="mockCaret"></span>
+          <button class="mock-sbtn" id="mockBtn" type="button">Search</button>
+        </div>
+        <div class="mock-row" id="rowType">
+          <div><div class="mock-label">Business type</div><div class="mock-val" id="valType">Dentists</div></div>
+          <div class="mock-ico" id="icoType">🦷</div>
+        </div>
+        <div class="mock-row" id="rowCountry">
+          <div><div class="mock-label">Country</div><div class="mock-val" id="valCountry">United States</div></div>
+          <div class="mock-ico" id="icoCountry">🇺🇸</div>
+        </div>
+        <div class="mock-row" id="rowRegion">
+          <div><div class="mock-label" id="labRegion">State</div><div class="mock-val" id="valRegion">Texas</div></div>
+          <div class="mock-ico">📍</div>
+        </div>
+        <div class="mock-deliver" id="rowDeliver">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0c7a45" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span class="pill">Delivery: CSV within 24 hours</span>
+        </div>
+      </div>
+      <div class="mock-float" id="mockToast">
+        <span class="t-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <div><b>Request received</b><br><span>Confirmation email sent</span></div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <span class="cta-btn">Get Leads to Pitch
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+      <span class="handle">[your-website.com]</span>
+    </div>
+  </div>
+
+<script src="ad-animation.js"></script>
+</body>
+</html>
