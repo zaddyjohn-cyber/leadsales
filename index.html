@@ -583,6 +583,245 @@
   }
 
   /* ============================================================
+     BENEFITS — mini animated visuals (8 cards)
+     ============================================================ */
+  .bcard { display:flex; flex-direction:column; padding-top: 0; overflow:hidden; }
+  .bcard h3 { padding: 0 24px; margin-top: 16px; }
+  .bcard p { padding: 0 24px 24px; }
+  .bviz {
+    position:relative; width:100%; aspect-ratio: 16/9; overflow:hidden; isolation:isolate;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* B1 — Find clients faster: speed lines + lightning bolt */
+  .bv1 { background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); }
+  .bv1 .bolt {
+    position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);
+    color:#f59e0b; filter: drop-shadow(0 8px 16px rgba(245,158,11,.45));
+    animation: boltPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes boltPulse {
+    0%,100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    40%     { transform: translate(-50%, -50%) scale(1.18) rotate(-6deg); }
+    60%     { transform: translate(-50%, -50%) scale(1.18) rotate(6deg); }
+  }
+  .bv1 .slines { position:absolute; inset:0; overflow:hidden; opacity:.65; }
+  .bv1 .slines i {
+    position:absolute; height:2px; border-radius:2px; background: linear-gradient(90deg, transparent, #f59e0b);
+    animation: speedLine 1.4s linear infinite; right:100%;
+  }
+  .bv1 .slines i:nth-child(1) { top:18%; width:34%; animation-delay: 0s;   }
+  .bv1 .slines i:nth-child(2) { top:34%; width:50%; animation-delay: -.4s; }
+  .bv1 .slines i:nth-child(3) { top:62%; width:42%; animation-delay: -.8s; }
+  .bv1 .slines i:nth-child(4) { top:78%; width:28%; animation-delay:-1.1s; }
+  @keyframes speedLine {
+    0%   { transform: translateX(0); opacity:0; }
+    20%  { opacity:1; }
+    100% { transform: translateX(180%); opacity:0; }
+  }
+
+  /* B2 — Your own prospect list: rows building up */
+  .bv2 { background: linear-gradient(160deg, #eef2ff 0%, #f5f3ff 100%); padding: 18px; }
+  .bv2 .row {
+    width:100%; height:18%; background:#fff; border:1px solid var(--line); border-radius:6px;
+    display:flex; align-items:center; gap:8px; padding:0 10px;
+    transform: translateX(-110%); animation: rowIn 5s ease-in-out infinite;
+    margin-bottom: 6%;
+  }
+  .bv2 .row:nth-child(1) { animation-delay: 0s; }
+  .bv2 .row:nth-child(2) { animation-delay: .5s; }
+  .bv2 .row:nth-child(3) { animation-delay: 1s; }
+  .bv2 .row:nth-child(4) { animation-delay: 1.5s; }
+  .bv2 .row .dot { width:8px; height:8px; border-radius:50%; background:var(--blue); flex-shrink:0; }
+  .bv2 .row .bar { height:7px; border-radius:4px; background: linear-gradient(90deg, #c7d2fe, #e0e7ff); flex:1; }
+  @keyframes rowIn {
+    0%        { transform: translateX(-110%); }
+    10%, 88%  { transform: translateX(0); }
+    100%      { transform: translateX(-110%); }
+  }
+
+  /* B3 — Pitch any service: rotating service chip carousel */
+  .bv3 { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); display:grid; place-items:center; }
+  .bv3 .schip {
+    position:absolute; padding: 8px 16px; background:#fff; border:1px solid #a7f3d0; border-radius:999px;
+    font-size:14px; font-weight:700; color:var(--ink); box-shadow: 0 6px 14px rgba(0,0,0,.08);
+    opacity:0; animation: schipCycle 12s linear infinite;
+  }
+  .bv3 .schip:nth-child(1) { animation-delay: 0s;  }
+  .bv3 .schip:nth-child(2) { animation-delay: -1.5s;}
+  .bv3 .schip:nth-child(3) { animation-delay: -3s;  }
+  .bv3 .schip:nth-child(4) { animation-delay: -4.5s;}
+  .bv3 .schip:nth-child(5) { animation-delay: -6s;  }
+  .bv3 .schip:nth-child(6) { animation-delay: -7.5s;}
+  .bv3 .schip:nth-child(7) { animation-delay: -9s;  }
+  .bv3 .schip:nth-child(8) { animation-delay: -10.5s;}
+  @keyframes schipCycle {
+    0%,12.5%,100%   { opacity:0; transform: translateY(8px) scale(.9); }
+    1%,11%          { opacity:1; transform: translateY(0) scale(1); }
+  }
+
+  /* B4 — 50+ countries: spinning globe with flag carousel */
+  .bv4 { background: linear-gradient(160deg, #dbeafe 0%, #ede9fe 100%); }
+  .bv4 .globe {
+    position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);
+    width:62px; height:62px; border-radius:50%;
+    background: radial-gradient(circle at 32% 32%, #5fa0ff, #1d6fff 65%, #0a4fd4 100%);
+    box-shadow: 0 8px 22px rgba(29,111,255,.4), inset -8px -8px 18px rgba(0,0,0,.2), inset 6px 6px 12px rgba(255,255,255,.4);
+    overflow:hidden;
+  }
+  .bv4 .globe::before {
+    content:""; position:absolute; inset:8% 18%; border-radius:50%;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.15) 0 30%, transparent 31%),
+      radial-gradient(ellipse at 70% 60%, rgba(255,255,255,.13) 0 35%, transparent 36%);
+    animation: globeSpin 8s linear infinite;
+  }
+  @keyframes globeSpin {
+    0%   { transform: translateX(-30%); }
+    100% { transform: translateX(30%); }
+  }
+  .bv4 .flag {
+    position:absolute; font-size:22px; opacity:0; animation: flagOrb 12s linear infinite;
+    top:50%; left:50%; --r: 56px;
+  }
+  .bv4 .flag:nth-child(2) { animation-delay: 0s; }
+  .bv4 .flag:nth-child(3) { animation-delay: -1.5s; }
+  .bv4 .flag:nth-child(4) { animation-delay: -3s; }
+  .bv4 .flag:nth-child(5) { animation-delay: -4.5s; }
+  .bv4 .flag:nth-child(6) { animation-delay: -6s; }
+  .bv4 .flag:nth-child(7) { animation-delay: -7.5s; }
+  .bv4 .flag:nth-child(8) { animation-delay: -9s; }
+  .bv4 .flag:nth-child(9) { animation-delay: -10.5s; }
+  @keyframes flagOrb {
+    0%,100% { opacity:0; transform: translate(-50%,-50%) translateX(var(--r)) scale(.85); }
+    10%, 90% { opacity:1; }
+    50%      { transform: translate(-50%,-50%) translateX(calc(var(--r) * -1)) scale(1); opacity:1; }
+  }
+
+  /* B5 — Simple CSV format: spreadsheet with cells lighting up */
+  .bv5 { background: linear-gradient(160deg, #ecfdf5 0%, #f0fdf4 100%); padding:20px; }
+  .bv5 .sheet {
+    position:absolute; inset:14% 14% 14% 14%;
+    background:#fff; border:1.5px solid var(--green); border-radius:6px;
+    overflow:hidden;
+    box-shadow: 0 8px 20px rgba(22,179,100,.18);
+    display:grid; grid-template-rows: 18% 1fr 1fr 1fr; grid-template-columns: 25% 1fr 1fr;
+  }
+  .bv5 .sheet > div { border:.5px solid #e5e7eb; }
+  .bv5 .sheet > div.hdr { background: var(--green); color:#fff; font-size:9px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .bv5 .sheet > div.cell { background:#fff; position:relative; }
+  .bv5 .sheet > div.cell::after {
+    content:""; position:absolute; inset:25% 18%; background:#cbd5e1; border-radius:3px;
+  }
+  .bv5 .sheet > div.cell.hl { animation: cellHl 4s ease-in-out infinite; }
+  .bv5 .sheet > div.cell.hl:nth-of-type(2) { animation-delay: 0s; }
+  .bv5 .sheet > div.cell.hl:nth-of-type(5) { animation-delay: -1s; }
+  .bv5 .sheet > div.cell.hl:nth-of-type(8) { animation-delay: -2s; }
+  @keyframes cellHl {
+    0%, 70%, 100% { background:#fff; }
+    20%, 50%      { background: rgba(22,179,100,.22); }
+  }
+  .bv5 .csv-tag {
+    position:absolute; top:8px; left:8px;
+    background:var(--green); color:#fff; font-size:10px; font-weight:900; padding:3px 7px; border-radius:5px;
+    box-shadow: 0 4px 8px rgba(22,179,100,.3); letter-spacing:.04em;
+  }
+
+  /* B6 — Save research time: clock with rapid sweep + ticking */
+  .bv6 { background: linear-gradient(160deg, #fff1f2 0%, #fce7f3 100%); }
+  .bv6 .clk {
+    position:absolute; top:50%; left:50%; transform: translate(-50%, -50%);
+    width:74px; height:74px; border-radius:50%; background:#fff;
+    border: 3px solid #f43f5e;
+    box-shadow: 0 8px 20px rgba(244,63,94,.25);
+  }
+  .bv6 .clk::before,
+  .bv6 .clk::after {
+    content:""; position:absolute; left:50%; top:50%; background:#1f2937; border-radius:2px;
+    transform-origin: 50% 100%;
+  }
+  .bv6 .clk::before { /* hour hand */
+    width:3px; height:20px; transform: translate(-50%, -100%) rotate(0deg);
+    animation: clkHr 5s linear infinite;
+  }
+  .bv6 .clk::after { /* minute hand */
+    width:2px; height:28px; background:#f43f5e; transform: translate(-50%, -100%) rotate(0deg);
+    animation: clkMin .9s linear infinite;
+  }
+  @keyframes clkHr  { to { transform: translate(-50%, -100%) rotate(360deg); } }
+  @keyframes clkMin { to { transform: translate(-50%, -100%) rotate(360deg); } }
+  .bv6 .clk-dot {
+    position:absolute; top:50%; left:50%; width:6px; height:6px; border-radius:50%;
+    background:#1f2937; transform: translate(-50%,-50%); z-index:2;
+  }
+  .bv6 .fast { position:absolute; right:14px; top:14px; font-size:11px; font-weight:900; color:#be123c; background:#fff; padding:3px 8px; border-radius:999px; box-shadow:0 4px 10px rgba(0,0,0,.1);}
+
+  /* B7 — No expensive software: dollar bill / receipt with a "cancelled" red strike */
+  .bv7 { background: linear-gradient(160deg, #f0fdf4 0%, #fef9c3 100%); }
+  .bv7 .recpt {
+    position:absolute; top:50%; left:50%; transform: translate(-50%, -50%) rotate(-6deg);
+    width:74px; height:90px; background:#fff;
+    border:1.5px solid var(--line); border-radius:4px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+    padding:8px 10px; display:flex; flex-direction:column; gap:5px;
+  }
+  .bv7 .recpt::before {
+    content:"$0"; position:absolute; top:8px; left:50%; transform: translateX(-50%);
+    font-size:18px; font-weight:900; color:var(--green);
+  }
+  .bv7 .recpt i { display:block; height:5px; border-radius:3px; background:#e5e7eb; margin-top: auto; }
+  .bv7 .recpt i:nth-child(1) { width:80%; }
+  .bv7 .recpt i:nth-child(2) { width:60%; }
+  .bv7 .recpt i:nth-child(3) { width:90%; }
+  .bv7 .stamp {
+    position:absolute; top:50%; left:50%; transform: translate(-50%, -50%) rotate(-14deg);
+    color: var(--green); font-size:14px; font-weight:900; letter-spacing:.05em;
+    border: 2.5px solid var(--green); padding: 4px 10px; border-radius: 6px;
+    opacity:0; animation: stampIn 3.6s ease-in-out infinite; text-transform: uppercase;
+  }
+  @keyframes stampIn {
+    0%, 60%, 100% { opacity:0; transform: translate(-50%, -50%) rotate(-14deg) scale(1.6); }
+    70%, 90%      { opacity:1; transform: translate(-50%, -50%) rotate(-14deg) scale(1); }
+  }
+
+  /* B8 — Handled for you: handshake / human review checkmark */
+  .bv8 { background: linear-gradient(160deg, #eff6ff 0%, #ecfdf5 100%); }
+  .bv8 .avatar {
+    position:absolute; top:50%; left:50%; transform: translate(-60%, -50%);
+    width:46px; height:46px; border-radius:50%;
+    background: var(--gradient); display:grid; place-items:center; color:#fff;
+    box-shadow: 0 6px 14px rgba(29,111,255,.4);
+  }
+  .bv8 .doc {
+    position:absolute; top:50%; left:50%; transform: translate(15%, -50%) rotate(4deg);
+    width:50px; height:60px; background:#fff; border:1px solid var(--line); border-radius:4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1); padding:8px 6px; display:flex; flex-direction:column; gap:4px;
+  }
+  .bv8 .doc i { display:block; height:4px; border-radius:2px; background:#e5e7eb; }
+  .bv8 .doc i:nth-child(1) { width:70%; }
+  .bv8 .doc i:nth-child(2) { width:90%; }
+  .bv8 .doc i:nth-child(3) { width:50%; background: var(--green); }
+  .bv8 .check {
+    position:absolute; right:14px; bottom:14px;
+    width:28px; height:28px; border-radius:50%; background: var(--green); color:#fff;
+    display:grid; place-items:center; box-shadow: 0 6px 14px rgba(22,179,100,.4);
+    animation: checkPop 3s ease-in-out infinite;
+  }
+  @keyframes checkPop {
+    0%, 70%, 100% { transform: scale(0); }
+    78%           { transform: scale(1.25); }
+    85%, 95%      { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bv1 .bolt, .bv1 .slines i, .bv2 .row, .bv3 .schip, .bv4 .globe::before, .bv4 .flag,
+    .bv5 .sheet > div.cell.hl, .bv6 .clk::before, .bv6 .clk::after, .bv7 .stamp, .bv8 .check {
+      animation: none !important;
+    }
+    .bv3 .schip:first-child, .bv4 .flag:first-of-type { opacity:1 !important; transform: translate(-50%, -50%) translateX(56px) !important; }
+  }
+
+  /* ============================================================
      FORM SECTION
      ============================================================ */
   .form-section { position:relative; }
@@ -1567,14 +1806,112 @@
       <h2>Everything You Need to Start Pitching — Nothing You Don’t</h2>
     </div>
     <div class="grid g4">
-      <div class="card"><div class="ico">⚡</div><h3>Find clients faster</h3><p>Find businesses to pitch faster and stop guessing who needs your service.</p></div>
-      <div class="card"><div class="ico">📋</div><h3>Your own prospect list</h3><p>Build your own prospect list you control — not random recycled data.</p></div>
-      <div class="card"><div class="ico">🛠️</div><h3>Pitch any service</h3><p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p></div>
-      <div class="card"><div class="ico">🌍</div><h3>50+ countries</h3><p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p></div>
-      <div class="card"><div class="ico green">📄</div><h3>Simple CSV format</h3><p>Use the file in Google Sheets, Excel, CRMs, or outreach tools instantly.</p></div>
-      <div class="card"><div class="ico">⏱️</div><h3>Save research time</h3><p>Stop searching Google one business at a time. We do the work for you.</p></div>
-      <div class="card"><div class="ico">💸</div><h3>No expensive software</h3><p>Start outreach without buying or learning expensive lead software.</p></div>
-      <div class="card"><div class="ico">🤝</div><h3>Handled for you</h3><p>A custom request reviewed by a human — no complicated dashboard. Great for beginners and pros.</p></div>
+      <!-- B1 — Find clients faster -->
+      <div class="card bcard">
+        <div class="bviz bv1" aria-hidden="true">
+          <div class="slines"><i></i><i></i><i></i><i></i></div>
+          <span class="bolt">
+            <svg width="42" height="58" viewBox="0 0 24 32" fill="currentColor"><path d="M13 0 0 18h8L6 32 22 12h-8L17 0z"/></svg>
+          </span>
+        </div>
+        <h3>Find clients faster</h3>
+        <p>Find businesses to pitch faster and stop guessing who needs your service.</p>
+      </div>
+
+      <!-- B2 — Your own prospect list -->
+      <div class="card bcard">
+        <div class="bviz bv2" aria-hidden="true">
+          <div class="row"><span class="dot"></span><span class="bar"></span></div>
+          <div class="row"><span class="dot"></span><span class="bar"></span></div>
+          <div class="row"><span class="dot"></span><span class="bar"></span></div>
+          <div class="row"><span class="dot"></span><span class="bar"></span></div>
+        </div>
+        <h3>Your own prospect list</h3>
+        <p>Build your own prospect list you control — not random recycled data.</p>
+      </div>
+
+      <!-- B3 — Pitch any service -->
+      <div class="card bcard">
+        <div class="bviz bv3" aria-hidden="true">
+          <span class="schip">🖥️ Website design</span>
+          <span class="schip">🔍 SEO</span>
+          <span class="schip">📈 Paid ads</span>
+          <span class="schip">✍️ Copywriting</span>
+          <span class="schip">📱 Social media</span>
+          <span class="schip">🎨 Branding</span>
+          <span class="schip">🎬 Video editing</span>
+          <span class="schip">📞 Appointment setting</span>
+        </div>
+        <h3>Pitch any service</h3>
+        <p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p>
+      </div>
+
+      <!-- B4 — 50+ countries -->
+      <div class="card bcard">
+        <div class="bviz bv4" aria-hidden="true">
+          <span class="globe"></span>
+          <span class="flag">🇺🇸</span>
+          <span class="flag">🇬🇧</span>
+          <span class="flag">🇨🇦</span>
+          <span class="flag">🇦🇺</span>
+          <span class="flag">🇩🇪</span>
+          <span class="flag">🇦🇪</span>
+          <span class="flag">🇸🇬</span>
+          <span class="flag">🇯🇵</span>
+        </div>
+        <h3>50+ countries</h3>
+        <p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p>
+      </div>
+
+      <!-- B5 — Simple CSV format -->
+      <div class="card bcard">
+        <div class="bviz bv5" aria-hidden="true">
+          <span class="csv-tag">CSV</span>
+          <div class="sheet">
+            <div class="hdr">A</div><div class="hdr">B</div><div class="hdr">C</div>
+            <div class="cell hl"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell hl"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell hl"></div>
+          </div>
+        </div>
+        <h3>Simple CSV format</h3>
+        <p>Use the file in Google Sheets, Excel, CRMs, or outreach tools instantly.</p>
+      </div>
+
+      <!-- B6 — Save research time -->
+      <div class="card bcard">
+        <div class="bviz bv6" aria-hidden="true">
+          <span class="fast">10× faster</span>
+          <span class="clk"></span><span class="clk-dot"></span>
+        </div>
+        <h3>Save research time</h3>
+        <p>Stop searching Google one business at a time. We do the work for you.</p>
+      </div>
+
+      <!-- B7 — No expensive software -->
+      <div class="card bcard">
+        <div class="bviz bv7" aria-hidden="true">
+          <div class="recpt"><i></i><i></i><i></i></div>
+          <span class="stamp">No SaaS</span>
+        </div>
+        <h3>No expensive software</h3>
+        <p>Start outreach without buying or learning expensive lead software.</p>
+      </div>
+
+      <!-- B8 — Handled for you -->
+      <div class="card bcard">
+        <div class="bviz bv8" aria-hidden="true">
+          <span class="avatar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4 0-9 2-9 6v2h18v-2c0-4-5-6-9-6Z"/></svg>
+          </span>
+          <div class="doc"><i></i><i></i><i></i></div>
+          <span class="check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+        </div>
+        <h3>Handled for you</h3>
+        <p>A custom request reviewed by a human — no complicated dashboard. Great for beginners and pros.</p>
+      </div>
     </div>
   </div>
 </section>
