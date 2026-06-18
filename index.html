@@ -310,20 +310,40 @@
   }
   .ico.green { background: var(--green-soft); color: var(--green); }
 
-  /* card with embedded live video sample */
-  .card-video { position:relative; border-color:#d6e2ff; }
-  .card-vid {
-    width:100%; display:block; border-radius:12px; border:1px solid var(--line);
-    background:#0b1f3a; margin-bottom:18px; aspect-ratio:1040/383; object-fit:cover; box-shadow:var(--shadow-sm);
+  /* solution cards: equal height, each with a matching visual on top */
+  .sol-grid { align-items: stretch; }
+  .sol-grid .card { display:flex; flex-direction:column; }
+  .card-media {
+    position:relative; width:100%; aspect-ratio:16/10; border-radius:12px; overflow:hidden;
+    border:1px solid var(--line); box-shadow:var(--shadow-sm); margin-bottom:18px; background:#f7f9fc;
   }
+  .card-vid { width:100%; height:100%; object-fit:cover; object-position:left top; display:block; background:#0b1f3a; }
   .card-vid-tag {
-    position:absolute; top:38px; left:38px; z-index:2; font-size:11px; font-weight:800; color:#fff;
+    position:absolute; top:10px; left:10px; z-index:2; font-size:11px; font-weight:800; color:#fff;
     background:var(--blue); padding:4px 10px; border-radius:999px; box-shadow:0 4px 10px rgba(29,111,255,.4);
   }
+  /* card 1 — request form mockup */
+  .card-form { background:linear-gradient(160deg,#eef3ff,#fdfdff); padding:14px; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+  .cf-row { display:flex; align-items:center; justify-content:space-between; gap:8px; background:#fff; border:1px solid var(--line); border-radius:8px; padding:7px 10px; }
+  .cf-lbl { font-size:10.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.02em; }
+  .cf-val { font-size:13px; font-weight:700; color:var(--ink); }
+  .cf-btn { margin-top:2px; text-align:center; background:var(--gradient); color:#fff; font-weight:700; font-size:12.5px; padding:8px; border-radius:8px; box-shadow:0 6px 14px rgba(29,111,255,.3); }
+  /* card 3 — email/CSV delivery mockup */
+  .card-mail { background:linear-gradient(160deg,#eafaf1,#fdfffe); padding:14px; display:flex; flex-direction:column; gap:10px; justify-content:center; }
+  .cm-head { display:flex; align-items:center; gap:6px; }
+  .cm-dot { width:9px; height:9px; border-radius:50%; background:#cfe6d8; }
+  .cm-subj { margin-left:6px; font-size:13px; font-weight:700; color:var(--ink); }
+  .cm-file { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .cm-csv { flex-shrink:0; font-size:11px; font-weight:800; color:#fff; background:var(--green); padding:6px 8px; border-radius:7px; }
+  .cm-meta { flex:1; font-size:13px; color:var(--ink); } .cm-meta b{font-weight:700;} .cm-meta span{ font-size:11px; color:var(--muted); }
+  .cm-dl { color:var(--blue); font-size:16px; }
+  .cm-deliver { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#0c7a45; background:var(--green-soft); border:1px solid #c5ecd6; border-radius:8px; padding:8px 10px; }
+  /* shared note */
+  .card .card-note { margin-top:auto; }
   .card-note {
     display:flex; gap:9px; align-items:flex-start; margin-top:14px;
     background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:11px 13px;
-    font-size:13.5px; color:#9a3412; line-height:1.5;
+    font-size:13px; color:#9a3412; line-height:1.5;
   }
   .card-note svg { color:#ea580c; flex-shrink:0; margin-top:2px; }
   .card-note strong { color:#7c2d12; }
@@ -660,29 +680,51 @@
       <h2>We Help You Get Targeted Business Leads You Can Pitch Directly</h2>
       <p>Tell us the type of businesses you want to target and the country you want to reach. For United States searches, you can also choose the state. Within 24 hours, we send you a CSV file with available business details you can use for outreach.</p>
     </div>
-    <div class="grid g3" style="align-items:start;">
+    <div class="grid g3 sol-grid">
+      <!-- Card 1: matching visual = a mini request form -->
       <div class="card">
-        <div class="ico">🎯</div>
+        <div class="card-media card-form" aria-hidden="true">
+          <div class="cf-row"><span class="cf-lbl">Business type</span><span class="cf-val">Dentists</span></div>
+          <div class="cf-row"><span class="cf-lbl">Country</span><span class="cf-val">United States 🇺🇸</span></div>
+          <div class="cf-row"><span class="cf-lbl">State</span><span class="cf-val">Texas</span></div>
+          <div class="cf-row"><span class="cf-lbl">Leads needed</span><span class="cf-val">500</span></div>
+          <div class="cf-btn">Submit request</div>
+        </div>
         <h3>You tell us your target</h3>
         <p>The type of business you want, the country, the state (US only), how many leads you need, and the service you want to pitch.</p>
       </div>
-      <div class="card card-video">
-        <!-- Live sample: real leads of businesses WITHOUT websites (phones, no emails) -->
-        <video class="card-vid" src="assets/leads-no-website-demo.mp4"
-               poster="assets/leads-no-website-poster.jpg"
-               autoplay muted loop playsinline preload="metadata"
-               aria-label="Sample CSV of businesses without websites, showing phone numbers and details"></video>
-        <span class="card-vid-tag">Live sample · businesses with no website</span>
-        <div class="ico">📝</div>
+
+      <!-- Card 2: matching visual = live sample video of no-website leads -->
+      <div class="card">
+        <div class="card-media card-vidwrap">
+          <video class="card-vid" src="assets/leads-no-website-demo.mp4"
+                 poster="assets/leads-no-website-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Sample CSV of businesses without websites, showing names, ratings and phone numbers"></video>
+          <span class="card-vid-tag">Live sample · no-website businesses</span>
+        </div>
         <h3>Add special instructions</h3>
         <p>Want <strong>businesses without a website</strong> you can call or text? Just indicate it in the notes. A web designer, for example, can ask for only no-website businesses to pitch a brand-new site.</p>
         <p class="card-note">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
-          Heads up: no-website leads usually come with <strong>phone numbers, names, ratings and other details — not emails</strong>. You reach out by call, WhatsApp or text (like the sample above).
+          Heads up: no-website leads come with <strong>names, ratings, phone numbers and other details — not emails</strong>. You reach out by call, WhatsApp or text.
         </p>
       </div>
+
+      <!-- Card 3: matching visual = CSV delivered to inbox -->
       <div class="card">
-        <div class="ico green">📩</div>
+        <div class="card-media card-mail" aria-hidden="true">
+          <div class="cm-head">
+            <span class="cm-dot"></span><span class="cm-dot"></span><span class="cm-dot"></span>
+            <span class="cm-subj">Your leads are ready 📬</span>
+          </div>
+          <div class="cm-file">
+            <span class="cm-csv">CSV</span>
+            <span class="cm-meta"><b>dentists-texas.csv</b><br><span>500 rows · 24 KB</span></span>
+            <span class="cm-dl">⬇</span>
+          </div>
+          <div class="cm-deliver">✓ Delivered to your inbox within 24 hours</div>
+        </div>
         <h3>We deliver your CSV</h3>
         <p>Your request is human-reviewed, prepared, and delivered to your email as a clean CSV file within 24 hours.</p>
       </div>
