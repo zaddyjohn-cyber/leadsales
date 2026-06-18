@@ -689,6 +689,42 @@
   .proof-badge { position:absolute; top:12px; left:12px; z-index:3; display:inline-flex; align-items:center; gap:6px;
     background:var(--green); color:#fff; font-size:12px; font-weight:800; padding:6px 12px; border-radius:999px; box-shadow:0 6px 16px rgba(0,0,0,.3); }
   .proof-badge.blue{ background:var(--blue); }
+  /* video proof tiles in the masonry */
+  .proof-vidwrap { position:relative; background:#0b1f3a; }
+  .proof-vidwrap video { width:100%; height:auto; display:block; }
+  .proof-vidcard .proof-badge { top:auto; bottom:12px; left:12px; }
+
+  /* payment spotlight strip (between income + how-it-works) */
+  .paystrip { padding: 60px 0; background: linear-gradient(180deg, #0b1f3a 0%, #102a4c 100%); color:#fff; position:relative; overflow:hidden; }
+  .paystrip::before { content:""; position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:600px; height:300px; background:radial-gradient(circle, rgba(22,179,100,.25), transparent 70%); }
+  .paystrip-wrap { position:relative; z-index:1; }
+  .paystrip-head { text-align:center; max-width:760px; margin:0 auto 36px; }
+  .paystrip-head .eyebrow { color:#5fa0ff; background:rgba(95,160,255,.12); }
+  .paystrip-head h2 { color:#fff; font-size: clamp(26px, 3.6vw, 38px); margin-bottom: 12px; }
+  .paystrip-head p { color:#b9c6dd; font-size:16px; }
+  .paystrip-rail {
+    display:flex; gap:16px; overflow-x:auto; padding: 8px 4px 22px; scroll-snap-type: x mandatory;
+    scrollbar-color: #4a6494 transparent; mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+  }
+  .paystrip-rail::-webkit-scrollbar { height: 8px; }
+  .paystrip-rail::-webkit-scrollbar-thumb { background: #4a6494; border-radius:4px; }
+  .paystrip-tile {
+    position:relative; flex: 0 0 220px; height: 200px; border-radius: 14px; overflow:hidden;
+    border:1px solid rgba(255,255,255,.16); box-shadow: 0 10px 24px rgba(0,0,0,.4);
+    scroll-snap-align: start; transition: transform .2s, border-color .2s;
+    background:#fff;
+  }
+  .paystrip-tile:hover { transform: translateY(-4px); border-color: rgba(95,160,255,.6); }
+  .paystrip-tile img { width:100%; height:100%; object-fit: cover; object-position: center top; display:block; }
+  .paystrip-amt {
+    position:absolute; left:10px; bottom:10px; z-index:2;
+    background: var(--green); color:#fff; font-size:13px; font-weight:800; padding:5px 12px; border-radius:999px;
+    box-shadow: 0 6px 14px rgba(22,179,100,.4); letter-spacing:.01em; white-space:nowrap;
+  }
+  .paystrip-foot { text-align:center; margin-top: 18px; font-size: 13.5px; color:#8fa3c4; }
+  @media (max-width: 600px) {
+    .paystrip-tile { flex: 0 0 180px; height: 170px; }
+  }
 
   /* ============================================================
      SEARCH EXAMPLES (chips)
@@ -1020,6 +1056,73 @@
       <div class="center mt-32">
         <a href="#request" class="btn btn-primary btn-lg">Get Leads to Pitch</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PAYMENT SPOTLIGHT STRIP — between income and how-it-works
+     ============================================================ -->
+<section class="paystrip" aria-label="Recent payments received">
+  <div class="wrap paystrip-wrap">
+    <div class="paystrip-head">
+      <span class="eyebrow">Receipts speak louder</span>
+      <h2>This Is What “Pitch &amp; Get Paid” Actually Looks Like.</h2>
+      <p>A few of the payments that landed after pitching real businesses found through this exact service. Tap any tile to see it full-size.</p>
+    </div>
+    <div class="paystrip-rail" id="payStripRail">
+      <a class="paystrip-tile" href="proof/payment-bybit-1200usdt.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT confirmed" loading="lazy" />
+        <span class="paystrip-amt">$1,200 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-tronscan-1200usdt.png" target="_blank" rel="noopener">
+        <img src="proof/payment-tronscan-1200usdt.png" alt="$1,200 USDT on TronScan" loading="lazy" />
+        <span class="paystrip-amt">$1,200 ✓ chain</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-wa-usdt1000.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-wa-usdt1000.jpg" alt="1,000 USDT received" loading="lazy" />
+        <span class="paystrip-amt">1,000 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-wa-1500.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-wa-1500.jpg" alt="$1,500 paid" loading="lazy" />
+        <span class="paystrip-amt">$1,500</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-bybit-500usdc.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC confirmed" loading="lazy" />
+        <span class="paystrip-amt">500 USDC</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-wa-500usdt.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-wa-500usdt.jpg" alt="500 USDT sent" loading="lazy" />
+        <span class="paystrip-amt">500 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-bybit-499usdt.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-bybit-499usdt.jpg" alt="$500 USDT confirmed" loading="lazy" />
+        <span class="paystrip-amt">$500 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-bybit-300usdt.jpg" target="_blank" rel="noopener">
+        <img src="proof/payment-bybit-300usdt.jpg" alt="$300 USDT confirmed" loading="lazy" />
+        <span class="paystrip-amt">$300 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-btc-290.png" target="_blank" rel="noopener">
+        <img src="proof/payment-btc-290.png" alt="$290 BTC sent" loading="lazy" />
+        <span class="paystrip-amt">$290 BTC</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-btc-200.png" target="_blank" rel="noopener">
+        <img src="proof/payment-btc-200.png" alt="$200 BTC sent" loading="lazy" />
+        <span class="paystrip-amt">$200 BTC</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-usdt-bep20-bscscan.png" target="_blank" rel="noopener">
+        <img src="proof/payment-usdt-bep20-bscscan.png" alt="80 USDT BEP20" loading="lazy" />
+        <span class="paystrip-amt">80 USDT</span>
+      </a>
+      <a class="paystrip-tile" href="proof/payment-sar-screen.png" target="_blank" rel="noopener">
+        <img src="proof/payment-sar-screen.png" alt="SAR 389 international" loading="lazy" />
+        <span class="paystrip-amt">SAR 389 ≈ $104</span>
+      </a>
+    </div>
+    <p class="paystrip-foot">↓ scroll the rail · Wallet addresses &amp; anti-phishing codes are redacted. Amounts and confirmations are not.</p>
+    <div class="center" style="margin-top:18px;">
+      <a href="#proof" class="btn btn-ghost">See all proof &amp; videos</a>
     </div>
   </div>
 </section>
@@ -1388,19 +1491,58 @@
         <div class="proof-meta"><h3>Client conversation</h3><p>Discussing scope and budget for a paid gig.</p></div>
       </div>
 
-      <!-- COMING SOON placeholders — replace with your own files when ready -->
+      <!-- Bybit deposit confirmations -->
       <div class="proof-card">
-        <div class="proof-ph" style="aspect-ratio:16/11;display:grid;place-items:center;">
-          <div class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="proof-meta"><h3>Video Walkthrough</h3><p>Coming soon — how freelancers use these leads to pitch.</p></div>
+        <span class="proof-badge">$1,200 USDT</span>
+        <a class="proof-shot" href="proof/payment-bybit-1200usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT Bybit deposit confirmation" loading="lazy" />
+        </a>
+        <div class="proof-meta"><h3>$1,200 USDT — Bybit confirmation</h3><p>“Your deposit has been confirmed.”</p></div>
       </div>
 
       <div class="proof-card">
-        <div class="proof-ph" style="aspect-ratio:16/11;display:grid;place-items:center;">
-          <div class="ph-inner"><div class="pico">📧</div><span>Cold email reply screenshot</span></div>
+        <span class="proof-badge">500 USDC</span>
+        <a class="proof-shot" href="proof/payment-bybit-500usdc.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC Bybit deposit on Base Mainnet" loading="lazy" />
+        </a>
+        <div class="proof-meta"><h3>500 USDC — Base Mainnet</h3><p>Bybit deposit confirmed.</p></div>
+      </div>
+
+      <div class="proof-card">
+        <span class="proof-badge">$500 USDT</span>
+        <a class="proof-shot" href="proof/payment-bybit-499usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-499usdt.jpg" alt="499.7 USDT Bybit deposit on TON" loading="lazy" />
+        </a>
+        <div class="proof-meta"><h3>499.7 USDT — TON chain</h3><p>Bybit deposit confirmed.</p></div>
+      </div>
+
+      <div class="proof-card">
+        <span class="proof-badge">$300 USDT</span>
+        <a class="proof-shot" href="proof/payment-bybit-300usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-300usdt.jpg" alt="300 USDT Bybit deposit confirmation" loading="lazy" />
+        </a>
+        <div class="proof-meta"><h3>$300 USDT — Bybit confirmation</h3><p>Deposit confirmed (anti-phishing code redacted).</p></div>
+      </div>
+
+      <!-- Lead-sample videos -->
+      <div class="proof-card proof-vidcard">
+        <div class="proof-vidwrap">
+          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Live walkthrough of looking up businesses on Google Maps from a lead list"></video>
+          <span class="proof-badge blue">Video · Live lookup</span>
         </div>
-        <div class="proof-meta"><h3>Cold Email Replies</h3><p>Coming soon — replies from business owners.</p></div>
+        <div class="proof-meta"><h3>Real businesses, looked up live on Google Maps</h3><p>Walk through a CSV row and find the same business open on Maps — proof these are real, contactable.</p></div>
+      </div>
+
+      <div class="proof-card proof-vidcard">
+        <div class="proof-vidwrap">
+          <video src="assets/sample-leads-csv.mp4" poster="assets/sample-leads-csv-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Sample CSV of salon leads with websites and contact details"></video>
+          <span class="proof-badge blue">Video · Sample CSV</span>
+        </div>
+        <div class="proof-meta"><h3>Sample CSV — salon leads in the DMV</h3><p>Real rows of business names, addresses, websites and contact pages, just as you’ll receive them.</p></div>
       </div>
 
     </div>
