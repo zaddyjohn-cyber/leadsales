@@ -24,3 +24,5 @@ _censor.py
 WhatsApp Image *.jpeg
 WhatsApp Image *.jpg
 *.mp4
+# ...except web-optimised demo clips published in /assets
+!assets/*.mp4

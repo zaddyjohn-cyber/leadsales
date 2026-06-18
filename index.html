@@ -310,6 +310,24 @@
   }
   .ico.green { background: var(--green-soft); color: var(--green); }
 
+  /* card with embedded live video sample */
+  .card-video { position:relative; border-color:#d6e2ff; }
+  .card-vid {
+    width:100%; display:block; border-radius:12px; border:1px solid var(--line);
+    background:#0b1f3a; margin-bottom:18px; aspect-ratio:1040/383; object-fit:cover; box-shadow:var(--shadow-sm);
+  }
+  .card-vid-tag {
+    position:absolute; top:38px; left:38px; z-index:2; font-size:11px; font-weight:800; color:#fff;
+    background:var(--blue); padding:4px 10px; border-radius:999px; box-shadow:0 4px 10px rgba(29,111,255,.4);
+  }
+  .card-note {
+    display:flex; gap:9px; align-items:flex-start; margin-top:14px;
+    background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:11px 13px;
+    font-size:13.5px; color:#9a3412; line-height:1.5;
+  }
+  .card-note svg { color:#ea580c; flex-shrink:0; margin-top:2px; }
+  .card-note strong { color:#7c2d12; }
+
   /* ============================================================
      PROBLEM SECTION
      ============================================================ */
@@ -642,16 +660,26 @@
       <h2>We Help You Get Targeted Business Leads You Can Pitch Directly</h2>
       <p>Tell us the type of businesses you want to target and the country you want to reach. For United States searches, you can also choose the state. Within 24 hours, we send you a CSV file with available business details you can use for outreach.</p>
     </div>
-    <div class="grid g3">
+    <div class="grid g3" style="align-items:start;">
       <div class="card">
         <div class="ico">🎯</div>
         <h3>You tell us your target</h3>
         <p>The type of business you want, the country, the state (US only), how many leads you need, and the service you want to pitch.</p>
       </div>
-      <div class="card">
+      <div class="card card-video">
+        <!-- Live sample: real leads of businesses WITHOUT websites (phones, no emails) -->
+        <video class="card-vid" src="assets/leads-no-website-demo.mp4"
+               poster="assets/leads-no-website-poster.jpg"
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="Sample CSV of businesses without websites, showing phone numbers and details"></video>
+        <span class="card-vid-tag">Live sample · businesses with no website</span>
         <div class="ico">📝</div>
         <h3>Add special instructions</h3>
-        <p>Businesses without websites, low-rated businesses, poor online presence, or a specific industry or city — just tell us in the notes.</p>
+        <p>Want <strong>businesses without a website</strong> you can call or text? Just indicate it in the notes. A web designer, for example, can ask for only no-website businesses to pitch a brand-new site.</p>
+        <p class="card-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          Heads up: no-website leads usually come with <strong>phone numbers, names, ratings and other details — not emails</strong>. You reach out by call, WhatsApp or text (like the sample above).
+        </p>
       </div>
       <div class="card">
         <div class="ico green">📩</div>
