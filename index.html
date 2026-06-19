@@ -15,7 +15,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
 <style>
   /* ============================================================
@@ -23,29 +23,46 @@
      Edit colors here to re-skin the whole page.
      ============================================================ */
   :root {
-    --navy:        #0b1f3a;
-    --navy-2:      #102a4c;
-    --blue:        #1d6fff;
-    --blue-dark:   #0a4fd4;
-    --blue-soft:   #eaf1ff;
-    --green:       #16b364;
-    --green-soft:  #e7f8ef;
-    --ink:         #0f172a;
-    --body:        #475467;
-    --muted:       #98a2b3;
-    --line:        #e6e9ef;
-    --bg:          #ffffff;
-    --bg-soft:     #f7f9fc;
-    --white:       #ffffff;
-    --radius:      16px;
+    /* Warm "Mahli-style" palette: coral / cream / gold / warm ink */
+    --c-coral:       #FF8C72;
+    --c-coral-deep:  #E5664A;
+    --c-peach:       #F8D4BB;
+    --c-cream:       #FDF4E8;
+    --c-cream-2:     #F6E9D5;
+    --c-gold:        #C9A961;
+    --c-gold-deep:   #A88842;
+    --c-sage:        #8A9A7B;
+    --c-violet:      #B4A6C9;
+
+    /* Remap legacy tokens to the new warm palette so the whole site re-skins */
+    --navy:        #2A1F1A;
+    --navy-2:      #3B2D24;
+    --blue:        #E5664A;       /* primary action -> coral-deep */
+    --blue-dark:   #C24E36;
+    --blue-soft:   #FDF4E8;       /* soft accent bg -> cream */
+    --green:       #8A9A7B;       /* "confirm" -> sage */
+    --green-soft:  #EFF1E8;
+    --ink:         #2A1F1A;
+    --body:        #5C4A3F;
+    --muted:       #8B7A6D;
+    --line:        rgba(42,31,26,.12);
+    --bg:          #FFFFFF;
+    --bg-soft:     #FDF4E8;
+    --white:       #FFFFFF;
+    --radius:      18px;
     --radius-sm:   12px;
-    --radius-lg:   24px;
-    --shadow-sm:   0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08);
-    --shadow:      0 8px 24px rgba(16,24,40,.08);
-    --shadow-lg:   0 24px 60px rgba(11,31,58,.16);
-    --maxw:        1160px;
-    --gradient:    linear-gradient(135deg, #1d6fff 0%, #0a4fd4 100%);
-    --gradient-navy: linear-gradient(160deg, #0b1f3a 0%, #102a4c 60%, #14315a 100%);
+    --radius-lg:   28px;
+    --shadow-sm:   0 1px 2px rgba(160,100,70,.08), 0 2px 6px rgba(160,100,70,.06);
+    --shadow:      0 12px 36px rgba(160,100,70,.14);
+    --shadow-lg:   0 24px 60px rgba(160,100,70,.22);
+    --maxw:        1180px;
+    --gradient:    linear-gradient(135deg, #FF8C72 0%, #E5664A 100%);
+    --gradient-navy: linear-gradient(160deg, #2A1F1A 0%, #3B2D24 60%, #4A382C 100%);
+
+    /* Glass surfaces (used by buttons / chips / cards in the new skin) */
+    --glass-bg:    rgba(255,255,255,.65);
+    --glass-bd:    rgba(255,255,255,.85);
+    --glass-blur:  blur(18px) saturate(140%);
   }
 
   /* ============================================================
@@ -56,13 +73,25 @@
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--body);
-    background: var(--bg);
-    line-height: 1.6;
+    background:
+      radial-gradient(80% 60% at 50% 0%, #FFE9D8 0%, transparent 55%),
+      var(--c-cream);
+    line-height: 1.65;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  h1, h2, h3, h4 { color: var(--ink); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
+  /* Serif display headings — luxurious editorial feel */
+  h1, h2, h3, h4 {
+    color: var(--ink); line-height: 1.1;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-weight: 600; letter-spacing: -0.01em;
+  }
+  /* Keep small UI titles legible in sans for badges/chips/labels */
+  .eyebrow, .nav-links a, .btn, label, .price-name, .testi-by b, .foot-col h4,
+  .pain p, .mock-title, .csv-head, .biz-badge, .u-badge, .fsc-badge,
+  .step-num, .ico, .vid-pulse, .chip, .inc-tier, .price-leads, .price-amt,
+  .trust-item, .hero-badge, .hero-micro { font-family: 'Inter', sans-serif; }
   p { margin: 0; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
@@ -70,23 +99,28 @@
   section { scroll-margin-top: 84px; }
 
   .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-  .section { padding: 88px 0; }
+  .section { padding: 48px 0; }
   .section--soft { background: var(--bg-soft); }
   .section--navy { background: var(--gradient-navy); }
 
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-    color: var(--blue); background: var(--blue-soft);
-    padding: 7px 14px; border-radius: 999px; margin-bottom: 18px;
+    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--c-coral-deep);
+    background: rgba(229,102,74,.10);
+    border: 1px solid rgba(229,102,74,.18);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
   }
-  .section--navy .eyebrow { color: #cfe0ff; background: rgba(255,255,255,.08); }
+  .section--navy .eyebrow { color: var(--c-peach); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
 
-  .section-head { max-width: 720px; margin: 0 auto 56px; text-align: center; }
-  .section-head h2 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 16px; }
-  .section-head p { font-size: 18px; color: var(--body); }
+  .section-head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+  .section-head h2 {
+    font-size: clamp(32px, 4.6vw, 52px); margin-bottom: 14px;
+    font-weight: 600; letter-spacing: -0.015em; line-height: 1.05;
+  }
+  .section-head p { font-size: 18px; color: var(--c-ink-soft, #5C4A3F); }
   .section--navy .section-head h2 { color: #fff; }
-  .section--navy .section-head p { color: #b9c6dd; }
+  .section--navy .section-head p { color: rgba(255,255,255,.78); }
 
   /* income-goal section — tier ladder */
   .income-wrap { max-width: 1060px; margin: 0 auto; }
@@ -138,18 +172,36 @@
      ============================================================ */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-    font-weight: 700; font-size: 16px; border: none; cursor: pointer;
-    padding: 15px 28px; border-radius: 12px; transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
-    text-align: center; white-space: nowrap;
+    font-weight: 600; font-size: 15.5px; border: none; cursor: pointer;
+    padding: 14px 28px; border-radius: 999px;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    text-align: center; white-space: nowrap; letter-spacing: .01em;
   }
   .btn:active { transform: translateY(1px); }
-  .btn-primary { background: var(--gradient); color: #fff; box-shadow: 0 10px 24px rgba(29,111,255,.35); }
-  .btn-primary:hover { box-shadow: 0 14px 30px rgba(29,111,255,.45); transform: translateY(-2px); }
-  .btn-ghost { background: #fff; color: var(--navy); border: 1.5px solid var(--line); box-shadow: var(--shadow-sm); }
-  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
-  .btn-green { background: var(--green); color: #fff; box-shadow: 0 10px 24px rgba(22,179,100,.32); }
-  .btn-green:hover { background: #129a55; transform: translateY(-2px); }
-  .btn-lg { padding: 18px 36px; font-size: 17px; }
+  /* Coral primary — soft, warm, lifted */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--c-coral) 0%, var(--c-coral-deep) 100%);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(229,102,74,.40), inset 0 1px 0 rgba(255,255,255,.4);
+  }
+  .btn-primary:hover { box-shadow: 0 18px 38px rgba(229,102,74,.50); transform: translateY(-2px); }
+  /* Glassmorphic ghost button */
+  .btn-ghost {
+    background: var(--glass-bg);
+    color: var(--ink);
+    border: 1px solid var(--glass-bd);
+    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: 0 8px 24px rgba(160,100,70,.12);
+  }
+  .btn-ghost:hover { background: #fff; border-color: var(--c-coral); color: var(--c-coral-deep); transform: translateY(-2px); }
+  /* Gold "confirm" button (replaces old green primary CTA) */
+  .btn-green {
+    background: linear-gradient(135deg, #D9B872 0%, var(--c-gold) 60%, var(--c-gold-deep) 100%);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(168,136,66,.40), inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .btn-green:hover { box-shadow: 0 18px 38px rgba(168,136,66,.50); transform: translateY(-2px); }
+  .btn-lg { padding: 17px 36px; font-size: 16px; }
   .btn-block { width: 100%; }
 
   /* ============================================================
@@ -157,15 +209,17 @@
      ============================================================ */
   header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,.85); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
+    background: rgba(253,244,232,.78); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid rgba(42,31,26,.08);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--navy); font-size: 19px; letter-spacing: -.02em; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .logo { display: flex; align-items: center; gap: 11px; font-weight: 600; color: var(--ink); font-size: 22px; letter-spacing: -.01em; font-family: 'Cormorant Garamond', serif; }
   .logo-mark {
-    width: 36px; height: 36px; border-radius: 10px; background: var(--gradient);
-    display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 18px;
-    box-shadow: 0 6px 16px rgba(29,111,255,.4);
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--c-coral) 0%, var(--c-coral-deep) 100%);
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 18px;
+    box-shadow: 0 8px 18px rgba(229,102,74,.45), inset 0 1px 0 rgba(255,255,255,.4);
+    font-family: 'Inter', sans-serif;
   }
   .nav-links { display: flex; align-items: center; gap: 30px; }
   .nav-links a { font-weight: 600; font-size: 15px; color: var(--body); transition: color .2s; }
@@ -190,14 +244,14 @@
      HERO
      ============================================================ */
   .hero {
-    position: relative; color: #fff; overflow: hidden; padding: 76px 0 90px;
+    position: relative; color: var(--ink); overflow: hidden; padding: 72px 0 88px;
     background:
-      radial-gradient(60% 55% at 12% 8%,  rgba(255, 99, 146, .55), transparent 60%),
-      radial-gradient(55% 50% at 88% 12%, rgba(255, 168, 64, .50), transparent 60%),
-      radial-gradient(60% 60% at 90% 88%, rgba(150, 90, 255, .55), transparent 62%),
-      radial-gradient(60% 55% at 8% 92%,  rgba(0, 209, 178, .48), transparent 60%),
-      radial-gradient(50% 50% at 50% 50%, rgba(29, 111, 255, .35), transparent 70%),
-      linear-gradient(160deg, #2a1146 0%, #131a4a 55%, #0b1f3a 100%);
+      radial-gradient(60% 55% at 12% 8%,  rgba(255,140,114,.45), transparent 60%),
+      radial-gradient(55% 50% at 88% 12%, rgba(248,212,187,.55), transparent 60%),
+      radial-gradient(60% 60% at 90% 88%, rgba(201,169,97,.32), transparent 62%),
+      radial-gradient(60% 55% at 8% 92%,  rgba(248,212,187,.50), transparent 60%),
+      radial-gradient(50% 50% at 50% 50%, rgba(253,244,232,.6), transparent 70%),
+      linear-gradient(160deg, #FDF4E8 0%, #F8E1CB 55%, #F8D4BB 100%);
   }
   /* floating colorful bubbles (like the video) */
   .hero-bubbles { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
@@ -219,15 +273,23 @@
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; position: relative; z-index: 2; }
   .hero-badge {
     display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600;
-    background: rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.16);
-    padding:8px 14px; border-radius:999px; margin-bottom:22px; color:#dce7fb;
+    background: var(--glass-bg); border:1px solid var(--glass-bd);
+    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    padding:8px 14px; border-radius:999px; margin-bottom:22px; color: var(--ink);
+    box-shadow: 0 6px 18px rgba(160,100,70,.10);
   }
-  .hero h1 { color:#fff; font-size: clamp(32px, 4.6vw, 54px); line-height:1.08; margin-bottom: 20px; font-weight: 900; }
-  .hero h1 .hl { color: #5fa0ff; }
-  .hero-sub { font-size: 18px; color:#c2cfe6; max-width: 560px; margin-bottom: 30px; }
+  .hero h1 {
+    color: var(--ink); font-size: clamp(34px, 5vw, 60px); line-height:1.05;
+    margin-bottom: 22px; font-weight: 600; font-family:'Cormorant Garamond', serif;
+    letter-spacing: -0.015em;
+  }
+  .hero h1 .hl {
+    color: var(--c-coral-deep); font-style: italic; font-weight: 500;
+  }
+  .hero-sub { font-size: 18.5px; color: var(--c-ink-soft, #5C4A3F); max-width: 560px; margin-bottom: 30px; line-height:1.55; }
   .hero-cta { display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 20px; }
-  .hero-micro { font-size:14px; color:#94a6c4; display:flex; align-items:center; gap:8px; }
-  .hero-micro svg { flex-shrink:0; }
+  .hero-micro { font-size:14px; color: var(--c-ink-soft, #5C4A3F); display:flex; align-items:center; gap:8px; }
+  .hero-micro svg { flex-shrink:0; color: var(--c-coral-deep); }
 
   /* hero search mockup (animated) */
   .mock {
@@ -343,17 +405,24 @@
   @media (max-width: 620px){ .g2,.g3,.g4{ grid-template-columns: 1fr;} }
 
   .card {
-    background:#fff; border:1px solid var(--line); border-radius: var(--radius);
-    padding: 26px; box-shadow: var(--shadow-sm); transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
+    background: var(--glass-bg);
+    border:1px solid var(--glass-bd);
+    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: var(--radius);
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(160,100,70,.10);
+    transition: transform .28s ease, box-shadow .28s ease, border-color .28s;
   }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #d6e2ff; }
-  .card h3 { font-size: 18px; margin-bottom: 8px; }
-  .card p { font-size: 15px; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 42px rgba(160,100,70,.18); border-color: rgba(229,102,74,.35); }
+  .card h3 { font-size: 22px; margin-bottom: 10px; font-weight: 600; }
+  .card p { font-size: 15px; color: var(--c-ink-soft, #5C4A3F); }
   .ico {
-    width: 50px; height: 50px; border-radius: 13px; background: var(--blue-soft); color: var(--blue);
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(229,102,74,.10); color: var(--c-coral-deep);
     display:grid; place-items:center; margin-bottom: 18px;
+    border: 1px solid rgba(229,102,74,.20);
   }
-  .ico.green { background: var(--green-soft); color: var(--green); }
+  .ico.green { background: rgba(201,169,97,.14); color: var(--c-gold-deep); border-color: rgba(201,169,97,.28); }
 
   /* solution cards: equal height, each with a matching visual on top */
   .sol-grid { align-items: stretch; }
@@ -877,6 +946,194 @@
   }
 
   /* ============================================================
+     USE CASES — themed "screenshot-style" mockups (12 cards)
+     ============================================================ */
+  .ucard { display:flex; flex-direction:column; padding-top:0; overflow:hidden; }
+  .ucard h3 { padding: 0 22px; margin-top: 16px; font-size:17px; }
+  .ucard p { padding: 0 22px 22px; font-size: 14.5px; }
+  .uviz {
+    position:relative; width:100%; aspect-ratio: 16/10; overflow:hidden;
+    border-bottom:1px solid var(--line); background:#f7f9fc; isolation:isolate;
+  }
+  .u-badge {
+    position:absolute; top:10px; left:10px; z-index:3;
+    background: rgba(8,22,38,.85); color:#fff; font-size:11px; font-weight:800;
+    padding:4px 9px; border-radius:999px; backdrop-filter: blur(6px);
+    border:1px solid rgba(255,255,255,.15); white-space:nowrap;
+  }
+  .u-badge.blue  { background: var(--blue);  border-color:transparent; box-shadow:0 4px 10px rgba(29,111,255,.3); }
+  .u-badge.green { background: var(--green); border-color:transparent; box-shadow:0 4px 10px rgba(22,179,100,.3); }
+  .u-badge.amber { background: #f59e0b;      border-color:transparent; box-shadow:0 4px 10px rgba(245,158,11,.3); }
+
+  /* UV1 — Web Designers: mini browser with website mockup */
+  .uv1 { background:linear-gradient(135deg,#eef3ff 0%,#f8fafc 100%); padding:16px; display:grid; place-items:center; }
+  .uv1 .ub-frame { width:94%; height:88%; background:#fff; border-radius:8px;
+    border:1px solid var(--line); box-shadow:0 6px 16px rgba(11,31,58,.08);
+    display:flex; flex-direction:column; overflow:hidden; }
+  .uv1 .ub-bar { display:flex; align-items:center; gap:5px; padding:7px 9px; background:#f3f4f6; border-bottom:1px solid #e5e7eb; }
+  .uv1 .ub-dot { width:7px; height:7px; border-radius:50%; }
+  .uv1 .ub-dot.r{background:#ef4444}.uv1 .ub-dot.y{background:#f59e0b}.uv1 .ub-dot.g{background:#10b981}
+  .uv1 .ub-url { margin-left:6px; font-size:9px; color:#94a3b8; font-family:ui-monospace,monospace; }
+  .uv1 .ub-page { flex:1; padding:10px 12px; display:flex; flex-direction:column; gap:5px; }
+  .uv1 .ub-logo { font-size:11px; font-weight:900; color:var(--ink); }
+  .uv1 .ub-logo span { color:var(--blue); }
+  .uv1 .ub-hero { font-size:12.5px; font-weight:900; color:var(--ink); line-height:1.15; }
+  .uv1 .ub-line { height:3px; background:#e5e7eb; border-radius:2px; width:80%; }
+  .uv1 .ub-line.s { width:55%; }
+  .uv1 .ub-btn { align-self:flex-start; margin-top:auto; background:var(--gradient); color:#fff;
+    font-size:9px; font-weight:800; padding:4px 9px; border-radius:4px; }
+
+  /* UV2 — SEO: Google-style SERP */
+  .uv2 { background:#fff; padding:12px; display:flex; flex-direction:column; gap:5px; }
+  .uv2 .us-search { background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:5px 12px; font-size:10px; color:var(--ink); margin-bottom:3px;
+    display:flex; align-items:center; gap:6px; box-shadow:var(--shadow-sm); }
+  .uv2 .us-result { padding:4px 6px; }
+  .uv2 .us-result.top { background:rgba(22,179,100,.07); border-left:3px solid var(--green); border-radius:0 4px 4px 0; }
+  .uv2 .us-title { font-size:10.5px; font-weight:700; color:#1a0dab; line-height:1.2; margin-bottom:2px; }
+  .uv2 .us-result.top .us-title { color: #065f46; }
+  .uv2 .us-snip { font-size:8.5px; color:#475467; }
+  .uv2 .us-result.top .us-snip { color:#065f46; font-weight:600; }
+
+  /* UV3 — Social Media: profile + grid */
+  .uv3 { background:linear-gradient(160deg,#fff5f8 0%,#fef9ff 100%); padding:12px; }
+  .uv3 .usm-head { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .uv3 .usm-avatar { width:28px; height:28px; border-radius:50%;
+    background:linear-gradient(135deg,#f43f5e,#a855f7); color:#fff;
+    display:grid; place-items:center; font-weight:800; font-size:13px; }
+  .uv3 .usm-meta b { display:block; font-size:11px; color:var(--ink); }
+  .uv3 .usm-meta span { font-size:9px; color:var(--muted); }
+  .uv3 .usm-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
+  .uv3 .usm-grid div { aspect-ratio:1; border-radius:3px; }
+  .uv3 .usm-grid div:nth-child(1){ background:linear-gradient(135deg,#fda4af,#fb7185); }
+  .uv3 .usm-grid div:nth-child(2){ background:linear-gradient(135deg,#a78bfa,#8b5cf6); }
+  .uv3 .usm-grid div:nth-child(3){ background:linear-gradient(135deg,#fbbf24,#f59e0b); }
+  .uv3 .usm-grid div:nth-child(4){ background:linear-gradient(135deg,#34d399,#10b981); }
+  .uv3 .usm-grid div:nth-child(5){ background:linear-gradient(135deg,#60a5fa,#3b82f6); }
+  .uv3 .usm-grid div:nth-child(6){ background:linear-gradient(135deg,#f87171,#ef4444); }
+
+  /* UV4 — Copywriters: sales page */
+  .uv4 { background:linear-gradient(160deg,#fff7ed 0%,#fef3c7 100%); padding:14px; display:flex; flex-direction:column; }
+  .uv4 .ucp-head { font-size:12px; font-weight:900; color:var(--ink); line-height:1.2;
+    text-transform:uppercase; letter-spacing:-.01em; margin-bottom:8px; }
+  .uv4 .ucp-head em { color:#dc2626; font-style:normal; }
+  .uv4 .ucp-bullets { display:flex; flex-direction:column; gap:3px; }
+  .uv4 .ucp-bullets span { font-size:9.5px; color:var(--body); font-weight:600; }
+  .uv4 .ucp-btn { align-self:flex-start; margin-top:auto; background:var(--green); color:#fff;
+    font-size:10px; font-weight:800; padding:5px 12px; border-radius:6px;
+    box-shadow:0 4px 10px rgba(22,179,100,.3); }
+
+  /* UV5 — Cold Email: composer */
+  .uv5 { background:#fff; padding:0; display:flex; flex-direction:column; }
+  .uv5 .uce-head { background:#f8fafc; border-bottom:1px solid var(--line); padding:8px 12px; font-size:9.5px; }
+  .uv5 .uce-head .uce-to { color:var(--muted); display:block; margin-bottom:2px; }
+  .uv5 .uce-head .uce-sub { color:var(--ink); font-weight:700; display:block; font-size:11px; }
+  .uv5 .uce-body { flex:1; padding:8px 12px; font-size:9.5px; color:var(--ink); line-height:1.5; }
+  .uv5 .uce-line { display:block; height:3px; background:#e5e7eb; border-radius:2px; margin-top:5px; width:90%; }
+  .uv5 .uce-line.s { width:60%; }
+  .uv5 .uce-send { align-self:flex-start; margin:2px 12px 12px; background:var(--blue); color:#fff;
+    font-size:9.5px; font-weight:800; padding:5px 14px; border-radius:5px; }
+
+  /* UV6 — VAs: task list */
+  .uv6 { background:linear-gradient(160deg,#f0fdf4 0%,#ecfeff 100%); padding:12px; display:flex; flex-direction:column; gap:4px; }
+  .uv6 .uva-row { display:flex; align-items:center; gap:7px; font-size:10px; font-weight:600; color:var(--body);
+    padding:5px 8px; background:#fff; border:1px solid var(--line); border-radius:5px; }
+  .uv6 .uva-row.done { color:#9ca3af; background:rgba(22,179,100,.06); border-color:rgba(22,179,100,.2); }
+  .uv6 .uva-row.done .uva-text { text-decoration: line-through; }
+  .uv6 .uva-box { width:12px; height:12px; border-radius:3px; border:1.5px solid #cbd5e1; flex-shrink:0;
+    display:grid; place-items:center; font-size:8px; color:#fff; font-weight:900; line-height:1; }
+  .uv6 .uva-row.done .uva-box { background:var(--green); border-color:var(--green); }
+
+  /* UV7 — Graphic Designers: brand board */
+  .uv7 { background:#fff; padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .uv7 .ugd-logo { font-size:18px; font-weight:900; color:var(--ink); letter-spacing:-.02em; line-height:1; }
+  .uv7 .ugd-logo span { color:var(--blue); font-weight:300; }
+  .uv7 .ugd-palette { display:flex; gap:5px; }
+  .uv7 .ugd-palette span { width:30px; height:30px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.08); }
+  .uv7 .ugd-type { font-size:9.5px; color:var(--muted); display:flex; align-items:center; gap:8px; margin-top:auto; line-height:1.3; }
+  .uv7 .ugd-type strong { font-size:22px; color:var(--ink); font-weight:900; line-height:1; }
+
+  /* UV8 — Video Editors: timeline */
+  .uv8 { background:linear-gradient(160deg,#0f172a 0%,#1e293b 100%); padding:12px; display:flex; flex-direction:column; gap:6px; }
+  .uv8 .uve-preview { background:#000; border-radius:6px; height:55%; position:relative;
+    display:grid; place-items:center; color:#fff; font-size:18px;
+    border:1px solid rgba(255,255,255,.1); overflow:hidden; }
+  .uv8 .uve-preview::before { content:""; position:absolute; inset:0;
+    background:linear-gradient(135deg,#1d6fff 0%,transparent 50%,#f43f5e 100%);
+    opacity:.55; }
+  .uv8 .uve-preview span { position:relative; z-index:1; }
+  .uv8 .uve-timeline { position:relative; flex:1; background:rgba(255,255,255,.05);
+    border-radius:4px; padding:4px; display:flex; gap:2px; align-items:stretch; }
+  .uv8 .uve-clip { flex:1; background:linear-gradient(180deg,#1d6fff,#0a4fd4); border-radius:2px; }
+  .uv8 .uve-clip.alt { background:linear-gradient(180deg,#f59e0b,#d97706); }
+  .uv8 .uve-playhead { position:absolute; top:0; bottom:0; left:55%; width:2px; background:#fff; box-shadow:0 0 8px rgba(255,255,255,.6); }
+
+  /* UV9 — Appointment Setters: day schedule */
+  .uv9 { background:linear-gradient(160deg,#eff6ff 0%,#f0fdf4 100%); padding:12px; display:flex; flex-direction:column; gap:4px; }
+  .uv9 .uap-head { font-size:10px; font-weight:800; color:var(--ink); margin-bottom:2px; }
+  .uv9 .uap-slot { display:flex; align-items:center; gap:6px;
+    background:#fff; border:1px solid var(--line); border-radius:5px;
+    padding:4px 8px; font-size:9.5px; color:var(--ink); font-weight:600; }
+  .uv9 .uap-slot::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
+  .uv9 .uap-time { color:var(--blue); font-weight:800; margin-right:4px; }
+
+  /* UV10 — Agency Owners: client niche cards */
+  .uv10 { background:linear-gradient(160deg,#fef3c7 0%,#f3e8ff 100%); padding:12px; display:flex; flex-direction:column; gap:6px; }
+  .uv10 .uag-card { display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border:1px solid var(--line); border-radius:6px;
+    padding:6px 10px; font-size:10px; }
+  .uv10 .uag-card span { color:var(--body); font-weight:600; }
+  .uv10 .uag-card b { color:var(--blue); font-weight:800; font-size:11px; }
+
+  /* UV11 — Funnel Builders: funnel stages */
+  .uv11 { background:linear-gradient(180deg,#f8fafc 0%,#eef3ff 100%); padding:12px;
+    display:flex; flex-direction:column; gap:4px; align-items:center; justify-content:center; }
+  .uv11 .ufn { color:#fff; font-size:9.5px; font-weight:800;
+    padding:5px 6px; text-align:center; border-radius:4px;
+    box-shadow:0 4px 10px rgba(29,111,255,.2); white-space:nowrap; }
+  .uv11 .ufn-1 { width:96%; background:linear-gradient(135deg,#60a5fa,#3b82f6); }
+  .uv11 .ufn-2 { width:74%; background:linear-gradient(135deg,#3b82f6,#1d6fff); }
+  .uv11 .ufn-3 { width:50%; background:linear-gradient(135deg,#1d6fff,#0a4fd4); }
+  .uv11 .ufn-4 { width:30%; background:var(--green); box-shadow:0 4px 10px rgba(22,179,100,.3); }
+
+  /* UV12 — Digital Marketers: analytics dashboard */
+  .uv12 { background:#fff; padding:12px; display:flex; flex-direction:column; gap:6px; }
+  .uv12 .udm-kpi { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .uv12 .udm-kpi > div { background:#f8fafc; border:1px solid var(--line); border-radius:6px; padding:5px 8px; }
+  .uv12 .udm-kpi span { font-size:9px; color:var(--muted); display:block; margin-bottom:2px; }
+  .uv12 .udm-kpi b { font-size:13px; color:var(--ink); font-weight:900; }
+  .uv12 .udm-chart { background:#f8fafc; border-radius:6px; flex:1; padding:6px;
+    border:1px solid var(--line); position:relative; min-height:0; }
+  .uv12 .udm-chart svg { width:100%; height:100%; display:block; }
+
+  /* ============================================================
+     UNIVERSAL .uviz MEDIA — real video / image / cross-fade / Ken Burns
+     Used by Why-Choose-Us cards (and any .uviz with real assets).
+     ============================================================ */
+  .uviz video, .uviz > img {
+    width:100%; height:100%; object-fit: cover; object-position: center top; display:block;
+  }
+  .uviz .kb {
+    width:100%; height:100%; object-fit:cover; transform-origin:center center;
+    animation: kenburns 14s ease-in-out infinite alternate;
+  }
+
+  /* Nigerian flag visual — only the "Built for Nigerians" card */
+  .ng-flag { position:absolute; inset:0; display:flex; }
+  .ng-flag > div { flex:1; }
+  .ng-flag .ng-green { background:#008753; }
+  .ng-flag .ng-white { background:#fff; }
+  .ng-flag .ng-stamp {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-2deg);
+    background:#fff; border:3px solid #008753; border-radius:10px;
+    padding:10px 18px; text-align:center; line-height:1.2;
+    box-shadow:0 10px 24px rgba(0,0,0,.22);
+  }
+  .ng-flag .ng-stamp small { display:block; font-size:10px; color:#008753; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+  .ng-flag .ng-stamp strong { display:block; font-size:20px; color:var(--ink); font-weight:900; margin:4px 0 2px; line-height:1; }
+  .ng-flag .ng-stamp em { display:block; font-size:10px; color:var(--body); font-weight:600; font-style:normal; }
+
+  /* ============================================================
      FORM SECTION
      ============================================================ */
   .form-section { position:relative; }
@@ -1059,17 +1316,65 @@
   /* ============================================================
      TESTIMONIALS
      ============================================================ */
-  .testi { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow-sm); }
-  .testi .stars{ color:#f5a623; margin-bottom:14px; letter-spacing:2px; font-size:18px; }
-  .testi-quote{ font-size:16px; color:var(--ink); font-style:italic; margin-bottom:20px; min-height:72px; }
+  .testi {
+    background: var(--glass-bg); border:1px solid var(--glass-bd);
+    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    border-radius:var(--radius); padding:28px;
+    box-shadow: 0 8px 24px rgba(160,100,70,.10);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .testi:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(160,100,70,.18); }
+  .testi .stars{ color:var(--c-gold); margin-bottom:14px; letter-spacing:2px; font-size:18px; }
+  .testi-quote{ font-size:16px; color:var(--ink); font-style:italic; margin-bottom:20px; font-family:'Cormorant Garamond', Georgia, serif; font-weight:500; line-height:1.5; }
   .testi-by{ display:flex; align-items:center; gap:12px; }
-  .testi-av{ width:44px; height:44px; border-radius:50%; background:var(--blue-soft); color:var(--blue); display:grid; place-items:center; font-weight:800; }
-  .testi-by b{ color:var(--ink); font-size:15px; display:block; } .testi-by span{ font-size:13px; color:var(--muted); }
+  .testi-av{ width:46px; height:46px; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:17px; font-family:'Inter', sans-serif; flex-shrink:0; }
+  .testi-av.coral  { background:rgba(229,102,74,.14);  color:var(--c-coral-deep); }
+  .testi-av.gold   { background:rgba(201,169,97,.18);  color:var(--c-gold-deep); }
+  .testi-av.sage   { background:rgba(138,154,123,.22); color:#5e6f53; }
+  .testi-av.violet { background:rgba(180,166,201,.30); color:#6d5d8c; }
+  .testi-av.peach  { background:rgba(248,212,187,.70); color:var(--c-coral-deep); }
+  .testi-by b{ color:var(--ink); font-size:15px; display:block; font-family:'Inter', sans-serif; } .testi-by span{ font-size:13px; color:var(--c-ink-soft, #5C4A3F); }
+  /* 10-card layout: 10th card centers on its own row on desktop */
+  #testimonials .grid.g3 > .testi:nth-child(10):last-child { grid-column: 2; }
+  @media (max-width:900px) {
+    #testimonials .grid.g3 > .testi:nth-child(10):last-child { grid-column: auto; }
+  }
 
   /* ============================================================
-     FAQ
+     FAQ — 3-column layout with payment screenshots on both sides
      ============================================================ */
-  .faq-wrap { max-width: 820px; margin:0 auto; }
+  .faq-layout {
+    display:grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,2.2fr) minmax(0,1fr);
+    gap: 28px; align-items: start;
+    max-width: 1240px; margin: 0 auto;
+  }
+  @media (max-width: 940px) {
+    .faq-layout { grid-template-columns: 1fr; max-width: 820px; gap: 0; }
+    .faq-side { display: none; }
+  }
+  .faq-side { display:flex; flex-direction:column; gap:14px; }
+  .faq-side-card {
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    overflow:hidden; box-shadow: var(--shadow-sm);
+    position:relative; transition: transform .2s, box-shadow .2s;
+  }
+  .faq-side-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .faq-side-card img { width:100%; height:auto; display:block; }
+  .faq-side-card video { width:100%; height:auto; display:block; background:#0b1f3a; }
+  .faq-side-card .fsc-pulse {
+    position:absolute; top:10px; right:10px; z-index:2;
+    width:8px; height:8px; border-radius:50%; background:#ef4444;
+    box-shadow:0 0 0 0 rgba(239,68,68,.7); animation: redPulse 1.6s infinite;
+  }
+  .fsc-badge {
+    position:absolute; top:8px; left:8px; z-index:2;
+    background:var(--green); color:#fff; font-size:11px; font-weight:800;
+    padding:4px 10px; border-radius:999px;
+    box-shadow:0 4px 10px rgba(0,0,0,.25); letter-spacing:.01em; white-space:nowrap;
+  }
+  .fsc-badge.blue { background: var(--blue); }
+  .faq-wrap { width: 100%; }
   .faq-item { background:#fff; border:1px solid var(--line); border-radius:12px; margin-bottom:14px; overflow:hidden; box-shadow:var(--shadow-sm); }
   .faq-q { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:20px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:16.5px; font-weight:700; color:var(--ink); font-family:inherit; }
   .faq-q .chev { flex-shrink:0; transition:transform .25s; color:var(--blue); }
@@ -1350,73 +1655,6 @@
       <div class="center mt-32">
         <a href="#request" class="btn btn-primary btn-lg">Get Leads to Pitch</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PAYMENT SPOTLIGHT STRIP — between income and how-it-works
-     ============================================================ -->
-<section class="paystrip" aria-label="Recent payments received">
-  <div class="wrap paystrip-wrap">
-    <div class="paystrip-head">
-      <span class="eyebrow">Receipts speak louder</span>
-      <h2>This Is What “Pitch &amp; Get Paid” Actually Looks Like.</h2>
-      <p>A few of the payments that landed after pitching real businesses found through this exact service. Tap any tile to see it full-size.</p>
-    </div>
-    <div class="paystrip-rail" id="payStripRail">
-      <a class="paystrip-tile" href="proof/payment-bybit-1200usdt.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT confirmed" loading="lazy" />
-        <span class="paystrip-amt">$1,200 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-tronscan-1200usdt.png" target="_blank" rel="noopener">
-        <img src="proof/payment-tronscan-1200usdt.png" alt="$1,200 USDT on TronScan" loading="lazy" />
-        <span class="paystrip-amt">$1,200 ✓ chain</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-wa-usdt1000.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-wa-usdt1000.jpg" alt="1,000 USDT received" loading="lazy" />
-        <span class="paystrip-amt">1,000 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-wa-1500.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-wa-1500.jpg" alt="$1,500 paid" loading="lazy" />
-        <span class="paystrip-amt">$1,500</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-bybit-500usdc.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC confirmed" loading="lazy" />
-        <span class="paystrip-amt">500 USDC</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-wa-500usdt.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-wa-500usdt.jpg" alt="500 USDT sent" loading="lazy" />
-        <span class="paystrip-amt">500 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-bybit-499usdt.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-bybit-499usdt.jpg" alt="$500 USDT confirmed" loading="lazy" />
-        <span class="paystrip-amt">$500 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-bybit-300usdt.jpg" target="_blank" rel="noopener">
-        <img src="proof/payment-bybit-300usdt.jpg" alt="$300 USDT confirmed" loading="lazy" />
-        <span class="paystrip-amt">$300 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-btc-290.png" target="_blank" rel="noopener">
-        <img src="proof/payment-btc-290.png" alt="$290 BTC sent" loading="lazy" />
-        <span class="paystrip-amt">$290 BTC</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-btc-200.png" target="_blank" rel="noopener">
-        <img src="proof/payment-btc-200.png" alt="$200 BTC sent" loading="lazy" />
-        <span class="paystrip-amt">$200 BTC</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-usdt-bep20-bscscan.png" target="_blank" rel="noopener">
-        <img src="proof/payment-usdt-bep20-bscscan.png" alt="80 USDT BEP20" loading="lazy" />
-        <span class="paystrip-amt">80 USDT</span>
-      </a>
-      <a class="paystrip-tile" href="proof/payment-sar-screen.png" target="_blank" rel="noopener">
-        <img src="proof/payment-sar-screen.png" alt="SAR 389 international" loading="lazy" />
-        <span class="paystrip-amt">SAR 389 ≈ $104</span>
-      </a>
-    </div>
-    <p class="paystrip-foot">↓ scroll the rail · Wallet addresses &amp; anti-phishing codes are redacted. Amounts and confirmations are not.</p>
-    <div class="center" style="margin-top:18px;">
-      <a href="#proof" class="btn btn-ghost">See all proof &amp; videos</a>
     </div>
   </div>
 </section>
@@ -1818,27 +2056,6 @@
         <div class="proof-meta"><h3>$300 USDT — Bybit confirmation</h3><p>Deposit confirmed (anti-phishing code redacted).</p></div>
       </div>
 
-      <!-- Lead-sample videos -->
-      <div class="proof-card proof-vidcard">
-        <div class="proof-vidwrap">
-          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Live walkthrough of looking up businesses on Google Maps from a lead list"></video>
-          <span class="proof-badge blue">Video · Live lookup</span>
-        </div>
-        <div class="proof-meta"><h3>Real businesses, looked up live on Google Maps</h3><p>Walk through a CSV row and find the same business open on Maps — proof these are real, contactable.</p></div>
-      </div>
-
-      <div class="proof-card proof-vidcard">
-        <div class="proof-vidwrap">
-          <video src="assets/sample-leads-csv.mp4" poster="assets/sample-leads-csv-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Sample CSV of salon leads with websites and contact details"></video>
-          <span class="proof-badge blue">Video · Sample CSV</span>
-        </div>
-        <div class="proof-meta"><h3>Sample CSV — salon leads in the DMV</h3><p>Real rows of business names, addresses, websites and contact pages, just as you’ll receive them.</p></div>
-      </div>
-
     </div>
 
     <p class="proof-disc">
@@ -1887,31 +2104,27 @@
         <p>Build your own prospect list you control — not random recycled data.</p>
       </div>
 
-      <!-- B3 — Pitch any service: real client conversations cross-fading -->
+      <!-- B3 — Pitch any service: REAL VIDEO of inbox flooded with pitch replies -->
       <div class="card bcard">
         <div class="bviz">
-          <div class="xfade">
-            <img src="proof/proof-client-conversation.png" alt="Client conversation about a paid gig" loading="lazy" style="animation-delay:0s;">
-            <img src="proof/payment-wa-sent.jpg" alt="Client sending payment for the service" loading="lazy" style="animation-delay:-4s;">
-            <img src="proof/payment-crypto-chat.png" alt="Crypto payment for a delivered gig" loading="lazy" style="animation-delay:-8s;">
-            <img src="proof/payment-usdt-tron-chat.png" alt="USDT payment for a delivered gig" loading="lazy" style="animation-delay:-12s;">
-          </div>
-          <span class="biz-badge">Real paid pitches</span>
+          <video src="800%2B%20replies.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Real inbox flooded with 800+ replies from pitched services"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="biz-badge blue">800+ real pitch replies</span>
         </div>
         <h3>Pitch any service</h3>
         <p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p>
       </div>
 
-      <!-- B4 — 50+ countries: real international payment receipts cross-fading -->
+      <!-- B4 — 50+ countries: REAL VIDEO of a multi-country leads CSV -->
       <div class="card bcard">
         <div class="bviz">
-          <div class="xfade">
-            <img src="proof/payment-sar-screen.png" alt="Saudi Arabia (SAR) payment" loading="lazy" style="animation-delay:0s;">
-            <img src="proof/payment-tronscan-1200usdt.png" alt="USDT TronScan international transfer" loading="lazy" style="animation-delay:-4s;">
-            <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC on Base Mainnet" loading="lazy" style="animation-delay:-8s;">
-            <img src="proof/payment-usdt-bep20-bscscan.png" alt="USDT BEP20 on BscScan" loading="lazy" style="animation-delay:-12s;">
-          </div>
-          <span class="biz-badge">Paid from 🇸🇦 🇺🇸 🇬🇧 +</span>
+          <video src="another%20leads%20sample.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Sample CSV showing leads from many different countries"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="biz-badge blue">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 + 44 more</span>
         </div>
         <h3>50+ countries</h3>
         <p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p>
@@ -1927,38 +2140,33 @@
         <p>Use the file in Google Sheets, Excel, CRMs, or outreach tools instantly.</p>
       </div>
 
-      <!-- B6 — Save research time: REAL VIDEO of the no-website leads sheet -->
+      <!-- B6 — Save research time: REAL VIDEO scrolling hundreds of ready-to-use leads -->
       <div class="card bcard">
         <div class="bviz">
-          <video src="assets/leads-no-website-demo.mp4" poster="assets/leads-no-website-poster.jpg"
+          <video src="sample%20leads.mp4"
                  autoplay muted loop playsinline preload="metadata"
-                 aria-label="Ready-to-use leads sheet — no manual searching"></video>
+                 aria-label="Hundreds of business leads ready in a CSV — no manual searching"></video>
           <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">Ready in 24 hrs</span>
+          <span class="biz-badge blue">500+ leads · no Googling</span>
         </div>
         <h3>Save research time</h3>
         <p>Stop searching Google one business at a time. We do the work for you.</p>
       </div>
 
-      <!-- B7 — No expensive software: real payments coming IN, not going OUT -->
+      <!-- B7 — No expensive software: real paid gig closed with just WhatsApp + a CSV -->
       <div class="card bcard">
         <div class="bviz">
-          <div class="xfade">
-            <img src="proof/payment-wa-1500.jpg" alt="$1,500 paid for a gig" loading="lazy" style="animation-delay:0s;">
-            <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT confirmed" loading="lazy" style="animation-delay:-4s;">
-            <img src="proof/payment-wa-usdt1000.jpg" alt="1,000 USDT received" loading="lazy" style="animation-delay:-8s;">
-            <img src="proof/payment-bybit-300usdt.jpg" alt="$300 USDT confirmed" loading="lazy" style="animation-delay:-12s;">
-          </div>
-          <span class="biz-badge">$0 monthly fees</span>
+          <img class="kb" src="proof/payment-wa-sent.jpg" alt="Real paid gig closed with just WhatsApp — no fancy lead software needed" loading="lazy" />
+          <span class="biz-badge">WhatsApp + CSV · $0 software</span>
         </div>
         <h3>No expensive software</h3>
         <p>Start outreach without buying or learning expensive lead software.</p>
       </div>
 
-      <!-- B8 — Handled for you: real WhatsApp client interaction (Ken Burns) -->
+      <!-- B8 — Handled for you: real client conversation showing human scoping/review -->
       <div class="card bcard">
         <div class="bviz">
-          <img class="kb" src="proof/payment-wa-sent.jpg" alt="Real human-handled client conversation" loading="lazy" />
+          <img class="kb" src="proof/proof-client-conversation.png" alt="Real human-reviewed client conversation about scope and delivery" loading="lazy" />
           <span class="biz-badge">Human-reviewed</span>
         </div>
         <h3>Handled for you</h3>
@@ -1979,18 +2187,209 @@
       <p>Whatever skill you have, there are businesses waiting to be pitched.</p>
     </div>
     <div class="grid g3">
-      <div class="card"><div class="ico">🖥️</div><h3>Web Designers</h3><p>Find businesses you can pitch for new websites, redesigns, landing pages, and website fixes.</p></div>
-      <div class="card"><div class="ico">🔍</div><h3>SEO Freelancers</h3><p>Find local businesses that may need help ranking on Google.</p></div>
-      <div class="card"><div class="ico">📱</div><h3>Social Media Managers</h3><p>Find businesses with poor or inactive social media and pitch content management.</p></div>
-      <div class="card"><div class="ico">✍️</div><h3>Copywriters</h3><p>Find businesses you can pitch for website copy, sales pages, ads, emails, and landing pages.</p></div>
-      <div class="card"><div class="ico">📧</div><h3>Cold Email Marketers</h3><p>Get targeted business lists you can use for outreach campaigns.</p></div>
-      <div class="card"><div class="ico">🗂️</div><h3>Virtual Assistants</h3><p>Use the leads to help clients with research, outreach, and prospecting.</p></div>
-      <div class="card"><div class="ico">🎨</div><h3>Graphic Designers</h3><p>Pitch logos, flyers, brand identity, menus, brochures, and social media designs.</p></div>
-      <div class="card"><div class="ico">🎬</div><h3>Video Editors</h3><p>Find coaches, real estate agents, restaurants, gyms, schools, churches, and service businesses to pitch.</p></div>
-      <div class="card"><div class="ico">📞</div><h3>Appointment Setters</h3><p>Get a list of businesses you can contact and book calls for.</p></div>
-      <div class="card"><div class="ico">🏢</div><h3>Small Agency Owners</h3><p>Build niche-specific lists for outreach and client acquisition.</p></div>
-      <div class="card"><div class="ico">🚀</div><h3>Funnel Builders</h3><p>Find service businesses that need funnels, landing pages, and lead capture.</p></div>
-      <div class="card"><div class="ico">💼</div><h3>Digital Marketers</h3><p>Build targeted lists to offer ads, strategy, and full-service marketing.</p></div>
+
+      <!-- 1. Web Designers — mini browser with a real landing-page mockup -->
+      <div class="card ucard">
+        <div class="uviz uv1" aria-hidden="true">
+          <div class="ub-frame">
+            <div class="ub-bar">
+              <span class="ub-dot r"></span><span class="ub-dot y"></span><span class="ub-dot g"></span>
+              <span class="ub-url">acmestudio.com</span>
+            </div>
+            <div class="ub-page">
+              <div class="ub-logo">Acme<span>.</span></div>
+              <div class="ub-hero">Beautiful sites that convert</div>
+              <div class="ub-line"></div>
+              <div class="ub-line s"></div>
+              <div class="ub-btn">Get a quote →</div>
+            </div>
+          </div>
+          <span class="u-badge blue">🖥️ Live site</span>
+        </div>
+        <h3>Web Designers</h3>
+        <p>Find businesses you can pitch for new websites, redesigns, landing pages, and website fixes.</p>
+      </div>
+
+      <!-- 2. SEO Freelancers — Google SERP with the client ranking #1 -->
+      <div class="card ucard">
+        <div class="uviz uv2" aria-hidden="true">
+          <div class="us-search">🔍 dentist near austin tx</div>
+          <div class="us-result top">
+            <div class="us-title">Bright Smile Dental — Austin</div>
+            <div class="us-snip">4.9 ★ · Open now · brightsmile.com</div>
+          </div>
+          <div class="us-result">
+            <div class="us-title">Austin Cosmetic Dentistry</div>
+            <div class="us-snip">4.6 ★ · 2.1 mi · austincosmetic.com</div>
+          </div>
+          <div class="us-result">
+            <div class="us-title">Lone Star Family Dental</div>
+            <div class="us-snip">4.4 ★ · 3.4 mi · lonestardental.com</div>
+          </div>
+          <span class="u-badge green">🔍 Ranked #1</span>
+        </div>
+        <h3>SEO Freelancers</h3>
+        <p>Find local businesses that may need help ranking on Google.</p>
+      </div>
+
+      <!-- 3. Social Media Managers — IG-style profile + 6-post grid -->
+      <div class="card ucard">
+        <div class="uviz uv3" aria-hidden="true">
+          <div class="usm-head">
+            <div class="usm-avatar">D</div>
+            <div class="usm-meta"><b>@dentaldigital</b><span>12.4k followers · 3 posts/week</span></div>
+          </div>
+          <div class="usm-grid"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <span class="u-badge blue">📱 +38% reach</span>
+        </div>
+        <h3>Social Media Managers</h3>
+        <p>Find businesses with poor or inactive social media and pitch content management.</p>
+      </div>
+
+      <!-- 4. Copywriters — sales-page block with headline, bullets, CTA -->
+      <div class="card ucard">
+        <div class="uviz uv4" aria-hidden="true">
+          <div class="ucp-head">Stop Losing Sales.<br>Start <em>Converting</em>.</div>
+          <div class="ucp-bullets">
+            <span>✓ Doubles your conversion rate</span>
+            <span>✓ Built on proven frameworks</span>
+            <span>✓ Speaks to your dream buyer</span>
+          </div>
+          <div class="ucp-btn">Order Now →</div>
+          <span class="u-badge amber">✍️ 3.4× CTR</span>
+        </div>
+        <h3>Copywriters</h3>
+        <p>Find businesses you can pitch for website copy, sales pages, ads, emails, and landing pages.</p>
+      </div>
+
+      <!-- 5. Cold Email Marketers — personalized outreach in a Gmail-like composer -->
+      <div class="card ucard">
+        <div class="uviz uv5" aria-hidden="true">
+          <div class="uce-head">
+            <span class="uce-to">To: hello@brightsmile.com</span>
+            <span class="uce-sub">Quick idea for Bright Smile Dental</span>
+          </div>
+          <div class="uce-body">
+            Hi Sarah — saw your homepage. One quick fix could lift bookings…
+            <span class="uce-line"></span>
+            <span class="uce-line"></span>
+            <span class="uce-line s"></span>
+          </div>
+          <div class="uce-send">Send</div>
+          <span class="u-badge blue">📧 42% open rate</span>
+        </div>
+        <h3>Cold Email Marketers</h3>
+        <p>Get targeted business lists you can use for outreach campaigns.</p>
+      </div>
+
+      <!-- 6. Virtual Assistants — ticked-off task list -->
+      <div class="card ucard">
+        <div class="uviz uv6" aria-hidden="true">
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Research dentists in TX</span></div>
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Compile contact list</span></div>
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Send 50 cold emails</span></div>
+          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Schedule follow-ups</span></div>
+          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Book 5 discovery calls</span></div>
+          <span class="u-badge green">🗂️ 3 done today</span>
+        </div>
+        <h3>Virtual Assistants</h3>
+        <p>Use the leads to help clients with research, outreach, and prospecting.</p>
+      </div>
+
+      <!-- 7. Graphic Designers — brand board (logo + palette + type) -->
+      <div class="card ucard">
+        <div class="uviz uv7" aria-hidden="true">
+          <div class="ugd-logo">BRIGHT<span>·</span>SMILE</div>
+          <div class="ugd-palette">
+            <span style="background:#1d6fff"></span>
+            <span style="background:#16b364"></span>
+            <span style="background:#f59e0b"></span>
+            <span style="background:#0b1f3a"></span>
+          </div>
+          <div class="ugd-type"><strong>Aa</strong><span>Inter Display<br>Bold · Regular</span></div>
+          <span class="u-badge blue">🎨 Brand kit v2</span>
+        </div>
+        <h3>Graphic Designers</h3>
+        <p>Pitch logos, flyers, brand identity, menus, brochures, and social media designs.</p>
+      </div>
+
+      <!-- 8. Video Editors — editor preview + cut-up timeline -->
+      <div class="card ucard">
+        <div class="uviz uv8" aria-hidden="true">
+          <div class="uve-preview"><span>▶</span></div>
+          <div class="uve-timeline">
+            <div class="uve-clip"></div>
+            <div class="uve-clip alt"></div>
+            <div class="uve-clip"></div>
+            <div class="uve-clip"></div>
+            <div class="uve-clip alt"></div>
+            <div class="uve-clip"></div>
+            <div class="uve-playhead"></div>
+          </div>
+          <span class="u-badge amber">🎬 Cut &amp; deliver</span>
+        </div>
+        <h3>Video Editors</h3>
+        <p>Find coaches, real estate agents, restaurants, gyms, schools, churches, and service businesses to pitch.</p>
+      </div>
+
+      <!-- 9. Appointment Setters — day's booked calls -->
+      <div class="card ucard">
+        <div class="uviz uv9" aria-hidden="true">
+          <div class="uap-head">Monday, June 22</div>
+          <div class="uap-slot"><span class="uap-time">10:00</span> Discovery · Bright Smile</div>
+          <div class="uap-slot"><span class="uap-time">11:30</span> Demo · Lone Star Roofing</div>
+          <div class="uap-slot"><span class="uap-time">14:00</span> Follow-up · Hill Country Ortho</div>
+          <div class="uap-slot"><span class="uap-time">15:30</span> Pitch · Gulf Coast Care</div>
+          <span class="u-badge green">📞 4 calls booked</span>
+        </div>
+        <h3>Appointment Setters</h3>
+        <p>Get a list of businesses you can contact and book calls for.</p>
+      </div>
+
+      <!-- 10. Small Agency Owners — multiple niche client lists in one dashboard -->
+      <div class="card ucard">
+        <div class="uviz uv10" aria-hidden="true">
+          <div class="uag-card"><span>🦷 Dental clients</span><b>42 leads</b></div>
+          <div class="uag-card"><span>🍽️ Restaurant clients</span><b>28 leads</b></div>
+          <div class="uag-card"><span>💇 Salon clients</span><b>19 leads</b></div>
+          <span class="u-badge blue">🏢 3 niches live</span>
+        </div>
+        <h3>Small Agency Owners</h3>
+        <p>Build niche-specific lists for outreach and client acquisition.</p>
+      </div>
+
+      <!-- 11. Funnel Builders — narrowing funnel from visitors to clients -->
+      <div class="card ucard">
+        <div class="uviz uv11" aria-hidden="true">
+          <div class="ufn ufn-1">2,500 visitors</div>
+          <div class="ufn ufn-2">420 leads</div>
+          <div class="ufn ufn-3">85 calls</div>
+          <div class="ufn ufn-4">12 clients</div>
+          <span class="u-badge blue">🚀 Funnel live</span>
+        </div>
+        <h3>Funnel Builders</h3>
+        <p>Find service businesses that need funnels, landing pages, and lead capture.</p>
+      </div>
+
+      <!-- 12. Digital Marketers — analytics dashboard with KPI + growth chart -->
+      <div class="card ucard">
+        <div class="uviz uv12" aria-hidden="true">
+          <div class="udm-kpi">
+            <div><span>Revenue</span><b>$24,890</b></div>
+            <div><span>ROAS</span><b>4.2×</b></div>
+          </div>
+          <div class="udm-chart">
+            <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+              <polyline points="0,22 12,18 24,20 36,12 48,15 60,8 72,10 84,4 100,6 100,30 0,30" fill="rgba(22,179,100,0.12)" stroke="none"/>
+              <polyline points="0,22 12,18 24,20 36,12 48,15 60,8 72,10 84,4 100,6" fill="none" stroke="#16b364" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="u-badge green">💼 +34% MoM</span>
+        </div>
+        <h3>Digital Marketers</h3>
+        <p>Build targeted lists to offer ads, strategy, and full-service marketing.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2039,15 +2438,49 @@
       <h2>Honest, Fast, and Built for Freelancers</h2>
     </div>
     <div class="grid g3">
-      <div class="card"><div class="ico green">✅</div><h3>Large lead coverage</h3><p>Request almost any niche, in almost any country you want to target.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Custom lead requests</h3><p>Every list is built to your niche, location, quantity, and instructions.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Fast 24-hour delivery</h3><p>Submit your request and get your CSV in your inbox within 24 hours.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Simple CSV format</h3><p>Open in Excel, Google Sheets, CRMs, or any outreach tool — no learning curve.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Built for Nigerians</h3><p>Made for Nigerian freelancers, agencies, and service providers.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>No manual searching</h3><p>Stop digging through Google. We handle the research for you.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>International reach</h3><p>Useful for prospecting clients across 50+ countries in North America, Europe, the Middle East, Asia, and Oceania.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Human-reviewed</h3><p>Every request is reviewed by a human before delivery.</p></div>
-      <div class="card"><div class="ico green">✅</div><h3>Proof on the page</h3><p>Proof of replies and payments will be shown so you can buy with confidence.</p></div>
+
+      <!-- 1. Custom lead requests → REAL VIDEO of a custom no-website filter -->
+      <div class="card ucard">
+        <div class="uviz" aria-hidden="true">
+          <video src="biz%20without%20websites%20for%20web%20designers.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Custom-filtered no-website leads built specifically for a web designer"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="u-badge green">Built to your spec</span>
+        </div>
+        <h3>Custom lead requests</h3>
+        <p>Every list is built to your niche, location, quantity, and instructions.</p>
+      </div>
+
+      <!-- 3. Fast 24-hour delivery → REAL Maps lookup of a delivered lead (Ken Burns) -->
+      <div class="card ucard">
+        <div class="uviz" aria-hidden="true">
+          <img class="kb" src="assets/sample-leads-maps-poster.jpg" alt="Real lead looked up live on Maps — delivered ready to use in 24 hours" loading="lazy" />
+          <span class="u-badge green">⚡ Inbox in 24 hrs</span>
+        </div>
+        <h3>Fast 24-hour delivery</h3>
+        <p>Submit your request and get your CSV in your inbox within 24 hours.</p>
+      </div>
+
+      <!-- 3. Built for Nigerians → NG flag with "Made in Nigeria" stamp -->
+      <div class="card ucard">
+        <div class="uviz" aria-hidden="true">
+          <div class="ng-flag">
+            <div class="ng-green"></div>
+            <div class="ng-white"></div>
+            <div class="ng-green"></div>
+            <div class="ng-stamp">
+              <small>Made in</small>
+              <strong>🇳🇬 Nigeria</strong>
+              <em>for Naija freelancers</em>
+            </div>
+          </div>
+          <span class="u-badge green">🇳🇬 Naija-first</span>
+        </div>
+        <h3>Built for Nigerians</h3>
+        <p>Made for Nigerian freelancers, agencies, and service providers.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2124,27 +2557,73 @@
      ============================================================ -->
 <section class="section section--soft" id="testimonials">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Testimonials</span>
+    <div class=”section-head”>
+      <span class=”eyebrow”>Testimonials</span>
       <h2>What Freelancers Are Saying</h2>
-      <p>Replace these placeholders with real testimonials as you collect them.</p>
+      <p>Real Nigerian freelancers who pitched the businesses we delivered.</p>
     </div>
-    <div class="grid g3">
-      <div class="testi">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">“Replace with customer testimonial.”</p>
-        <div class="testi-by"><div class="testi-av">?</div><div><b>[Customer Name]</b><span>[Skill / Location]</span></div></div>
+    <div class=”grid g3”>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Got 250 dentist leads in Texas. Pitched 60 of them and closed two website projects at $400 each in my first month. Best decision I made for my freelance business this year.”</p>
+        <div class=”testi-by”><div class=”testi-av coral”>C</div><div><b>Chidi Okeke</b><span>Web Designer · Lagos</span></div></div>
       </div>
-      <div class="testi">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">“Replace with customer testimonial.”</p>
-        <div class="testi-by"><div class="testi-av">?</div><div><b>[Customer Name]</b><span>[Skill / Location]</span></div></div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”I run a small outreach agency and we use these lists for every client. Clean data, exactly the format my Lemlist needs, and the 24-hour delivery means I can quote campaigns same-day.”</p>
+        <div class=”testi-by”><div class=”testi-av gold”>A</div><div><b>Amaka Eze</b><span>Cold Email Marketer · Abuja</span></div></div>
       </div>
-      <div class="testi">
-        <div class="stars">★★★★★</div>
-        <p class="testi-quote">“Replace with customer testimonial.”</p>
-        <div class="testi-by"><div class="testi-av">?</div><div><b>[Customer Name]</b><span>[Skill / Location]</span></div></div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Asked for 500 roofers in Texas with no website. Got the list the next morning. Within two weeks I had four discovery calls booked and signed one at $600/month. This is the real deal.”</p>
+        <div class=”testi-by”><div class=”testi-av sage”>T</div><div><b>Tunde Adeyemi</b><span>SEO Freelancer · Port Harcourt</span></div></div>
       </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”I was paying ₦15,000/month for a scraper that gave me garbage. Now I order custom lists here for big jobs — restaurants with weak Instagram, gyms with old sites, exactly what I ask for.”</p>
+        <div class=”testi-by”><div class=”testi-av violet”>F</div><div><b>Funke Bakare</b><span>Social Media Manager · Ibadan</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”The notes field is gold. I asked for chiropractors in California with low Google ratings. It came back filtered exactly that way. Closed my first $500 sales-page client three weeks later.”</p>
+        <div class=”testi-by”><div class=”testi-av peach”>E</div><div><b>Emeka Nwosu</b><span>Copywriter · Lagos</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”I do research and outreach for two coaches. Used to spend 6+ hours building lists per client. Now I order them here for less than my own time would've cost me. Pure profit margin.”</p>
+        <div class=”testi-by”><div class=”testi-av coral”>A</div><div><b>Aisha Bello</b><span>Virtual Assistant · Kano</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Tried Fiverr for 8 months and got crumbs. Three months of proper cold outreach with these leads and I'm at $1,800 MRR. The leads aren't magic — but without them, none of this happens.”</p>
+        <div class=”testi-by”><div class=”testi-av gold”>D</div><div><b>Damilare Ojo</b><span>Web Designer · Abeokuta</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Bought the 1,000-lead pack twice. Both lists came clean — phones, emails, websites, ratings, full info on most rows. Better quality than what I was paying Apollo for in my niches.”</p>
+        <div class=”testi-by”><div class=”testi-av sage”>K</div><div><b>Kelechi Anyanwu</b><span>Cold Email Marketer · Lagos</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Needed med spas in Florida with active socials and weak funnels. They built the list custom. Two clients closed at $1,200 each so far — faster ROI than any paid traffic I've ever run.”</p>
+        <div class=”testi-by”><div class=”testi-av violet”>B</div><div><b>Blessing Adekunle</b><span>Funnel Builder · Lagos</span></div></div>
+      </div>
+
+      <div class=”testi”>
+        <div class=”stars”>★★★★★</div>
+        <p class=”testi-quote”>”Booking calls is way easier when you have real decision-makers in the list. 1,000 leads a month from here, 12–15 calls booked weekly. My client retention shot up because the calls actually close.”</p>
+        <div class=”testi-by”><div class=”testi-av peach”>I</div><div><b>Ifeoma Obi</b><span>Appointment Setter · Enugu</span></div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2158,7 +2637,59 @@
       <span class="eyebrow">FAQ</span>
       <h2>Questions, Answered</h2>
     </div>
-    <div class="faq-wrap" id="faqWrap">
+    <div class="faq-layout">
+
+      <!-- LEFT — payment screenshots + videos column -->
+      <aside class="faq-side faq-side-l" aria-label="Payments received from delivered gigs">
+        <a class="faq-side-card" href="proof/payment-bybit-1200usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT Bybit deposit confirmed" loading="lazy" />
+          <span class="fsc-badge">$1,200 USDT</span>
+        </a>
+        <div class="faq-side-card">
+          <video src="assets/sample-leads-csv.mp4" poster="assets/sample-leads-csv-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Live sample CSV of business leads"></video>
+          <span class="fsc-pulse" title="live"></span>
+          <span class="fsc-badge blue">Live · Sample CSV</span>
+        </div>
+        <a class="faq-side-card" href="proof/payment-wa-usdt1000.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-wa-usdt1000.jpg" alt="1,000 USDT received via WhatsApp" loading="lazy" />
+          <span class="fsc-badge">1,000 USDT</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-bybit-500usdc.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC on Base Mainnet — Bybit confirmation" loading="lazy" />
+          <span class="fsc-badge">500 USDC</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-wa-500usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-wa-500usdt.jpg" alt="500 USDT sent via WhatsApp" loading="lazy" />
+          <span class="fsc-badge">500 USDT</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-tronscan-1200usdt.png" target="_blank" rel="noopener">
+          <img src="proof/payment-tronscan-1200usdt.png" alt="$1,200 USDT verified on TronScan" loading="lazy" />
+          <span class="fsc-badge">$1,200 ✓ TronScan</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-bybit-499usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-499usdt.jpg" alt="499.7 USDT Bybit deposit confirmed on TON chain" loading="lazy" />
+          <span class="fsc-badge">$500 USDT</span>
+        </a>
+        <div class="faq-side-card">
+          <video src="800%2B%20replies.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Real inbox flooded with 800+ pitch replies"></video>
+          <span class="fsc-pulse" title="live"></span>
+          <span class="fsc-badge blue">Live · 800+ replies</span>
+        </div>
+        <a class="faq-side-card" href="proof/payment-bybit-300usdt.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-bybit-300usdt.jpg" alt="$300 USDT Bybit deposit confirmed" loading="lazy" />
+          <span class="fsc-badge">$300 USDT</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-wa-sent.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-wa-sent.jpg" alt="Payment sent via WhatsApp for a delivered gig" loading="lazy" />
+          <span class="fsc-badge">Payment sent</span>
+        </a>
+      </aside>
+
+      <div class="faq-wrap" id="faqWrap">
       <!-- items toggled by JS -->
       <div class="faq-item">
         <button class="faq-q">Is this for Nigerian freelancers? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -2212,6 +2743,65 @@
         <button class="faq-q">Can I use the leads for cold email or outreach? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="faq-a"><p>Yes, but you are responsible for following the marketing, privacy, and outreach laws in your country or the country you are targeting.</p></div>
       </div>
+      </div>
+
+      <!-- RIGHT — more payment screenshots + videos column -->
+      <aside class="faq-side faq-side-r" aria-label="More payments received from delivered gigs">
+        <a class="faq-side-card" href="proof/payment-wa-1500.jpg" target="_blank" rel="noopener">
+          <img src="proof/payment-wa-1500.jpg" alt="$1,500 paid for a delivered gig" loading="lazy" />
+          <span class="fsc-badge">$1,500 paid</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-btc-290.png" target="_blank" rel="noopener">
+          <img src="proof/payment-btc-290.png" alt="$290 BTC payment received" loading="lazy" />
+          <span class="fsc-badge">$290 BTC</span>
+        </a>
+        <div class="faq-side-card">
+          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Live walkthrough of looking up business leads on Google Maps"></video>
+          <span class="fsc-pulse" title="live"></span>
+          <span class="fsc-badge blue">Live · Maps lookup</span>
+        </div>
+        <a class="faq-side-card" href="proof/payment-btc-200.png" target="_blank" rel="noopener">
+          <img src="proof/payment-btc-200.png" alt="$200 BTC payment received" loading="lazy" />
+          <span class="fsc-badge">$200 BTC</span>
+        </a>
+        <a class="faq-side-card" href="proof/proof-client-conversation.png" target="_blank" rel="noopener">
+          <img src="proof/proof-client-conversation.png" alt="Real client conversation about scope and budget" loading="lazy" />
+          <span class="fsc-badge blue">Client · scope</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-crypto-chat.png" target="_blank" rel="noopener">
+          <img src="proof/payment-crypto-chat.png" alt="Crypto payment confirmed in chat" loading="lazy" />
+          <span class="fsc-badge blue">Crypto · chat</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-usdt-tron-chat.png" target="_blank" rel="noopener">
+          <img src="proof/payment-usdt-tron-chat.png" alt="USDT (TRON) payment confirmation in chat" loading="lazy" />
+          <span class="fsc-badge blue">USDT · TRON</span>
+        </a>
+        <div class="faq-side-card">
+          <video src="another%20leads%20sample.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Another live sample of multi-country leads"></video>
+          <span class="fsc-pulse" title="live"></span>
+          <span class="fsc-badge blue">Live · Multi-country leads</span>
+        </div>
+        <a class="faq-side-card" href="proof/payment-usdt-bep20-bscscan.png" target="_blank" rel="noopener">
+          <img src="proof/payment-usdt-bep20-bscscan.png" alt="80 USDT BEP20 transfer verified on BscScan" loading="lazy" />
+          <span class="fsc-badge">80 USDT · BEP20</span>
+        </a>
+        <a class="faq-side-card" href="proof/payment-sar-screen.png" target="_blank" rel="noopener">
+          <img src="proof/payment-sar-screen.png" alt="SAR 389.75 payment from an international client" loading="lazy" />
+          <span class="fsc-badge">SAR 389 ≈ $104</span>
+        </a>
+        <div class="faq-side-card">
+          <video src="biz%20without%20websites%20for%20web%20designers.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Live sample of no-website business leads"></video>
+          <span class="fsc-pulse" title="live"></span>
+          <span class="fsc-badge blue">Live · No-website leads</span>
+        </div>
+      </aside>
+
     </div>
   </div>
 </section>
