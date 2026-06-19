@@ -1758,6 +1758,40 @@
   /* ============================================================
      PRICING
      ============================================================ */
+  /* "Income math" mini-grid shown at top of pricing (light-theme overrides of .inc-card) */
+  .pricing-with-math .income-intro { color: var(--c-ink-soft, #5C4A3F); }
+  .pricing-with-math .income-grid { margin-bottom: 18px; }
+  .pricing-with-math .inc-card {
+    background:#fff; border:1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .pricing-with-math .inc-card:hover { border-color: rgba(229,102,74,.35); }
+  .pricing-with-math .inc-card--mid { background: rgba(229,102,74,.04); border-color: rgba(229,102,74,.25); }
+  .pricing-with-math .inc-card--top { background: rgba(201,169,97,.07);  border-color: rgba(201,169,97,.35); }
+  .pricing-with-math .inc-tier { background: rgba(229,102,74,.10); color: var(--c-coral-deep); }
+  .pricing-with-math .inc-card--mid .inc-tier { background: rgba(229,102,74,.22); color: var(--c-coral-deep); }
+  .pricing-with-math .inc-card--top .inc-tier { background: rgba(201,169,97,.22); color: var(--c-gold-deep); }
+  .pricing-with-math .inc-eq { color: var(--ink); }
+  .pricing-with-math .inc-eq .inc-n { color: var(--c-coral-deep); }
+  .pricing-with-math .inc-eq .inc-x { color: var(--c-ink-soft, #5C4A3F); }
+  .pricing-with-math .inc-eq .inc-total { background: var(--c-gold); box-shadow: 0 8px 20px rgba(201,169,97,.35); }
+  .pricing-with-math .inc-card--mid .inc-eq .inc-total { background: var(--c-coral-deep); box-shadow: 0 8px 20px rgba(229,102,74,.35); }
+  .pricing-with-math .inc-note { color: var(--c-ink-soft, #5C4A3F); }
+  .pricing-with-math .income-after { color: var(--ink); margin: 28px auto 4px; }
+  .pricing-with-math .income-after strong { color: var(--c-coral-deep); }
+  .pricing-with-math .pricing-divider {
+    display:flex; align-items:center; gap:12px;
+    max-width: 760px; margin: 14px auto 30px;
+    color: var(--c-ink-soft, #5C4A3F);
+    font-size: 13.5px; font-style: italic;
+    text-align:center; justify-content:center;
+  }
+  .pricing-with-math .pricing-divider::before,
+  .pricing-with-math .pricing-divider::after {
+    content:''; flex:1; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(42,31,26,.15), transparent);
+  }
+
   .pricing-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:24px; align-items:stretch; }
   @media (max-width:900px){ .pricing-grid{ grid-template-columns:1fr; max-width:440px; margin:0 auto;} }
   .price-card { background:#fff; border:1.5px solid var(--line); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; position:relative; transition:transform .2s, box-shadow .2s; }
@@ -2102,67 +2136,21 @@
         <span class="chip">📞 Appointment setting</span>
         <span class="chip">🗂️ Virtual assistant services</span>
       </div>
+
+      <p style="font-size:14px; color:var(--c-ink-soft,#5C4A3F); margin:26px 0 10px; font-style:italic;">Example searches you can request:</p>
+      <div class="chips">
+        <span class="chip">🦷 Dentists in Texas, USA</span>
+        <span class="chip">🛠️ Roofers in London, UK</span>
+        <span class="chip">🍽️ Restaurants in Toronto</span>
+        <span class="chip">🏠 Real estate in Sydney</span>
+        <span class="chip">💪 Gyms in Dubai</span>
+        <span class="chip">💇 Salons in Chicago</span>
+      </div>
+      <p class="chips-cap">…and almost any other local business category in 50+ countries.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     INCOME GOAL ANGLE
-     ============================================================ -->
-<section class="section section--navy" id="income">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">The math</span>
-      <h2>Want to Hit $1,000–$10,000 Monthly? You Need People to Pitch.</h2>
-      <p>Whether your goal is your first $1,000 or scaling to $10,000 a month, you need more than skill. You need a steady list of businesses to contact, follow up with, and convert.</p>
-    </div>
-
-    <div class="income-wrap">
-      <p class="income-intro">A few example targets at different price points — pick the one that fits where you are:</p>
-
-      <div class="income-grid">
-        <div class="inc-card">
-          <span class="inc-tier">Starter</span>
-          <div class="inc-eq">
-            <span class="inc-n">5</span> <span class="inc-x">clients ×</span>
-            <span class="inc-n">$200</span> <span class="inc-x">=</span>
-            <span class="inc-total">$1,000</span>
-          </div>
-          <p class="inc-note">A small website tweak, basic SEO audit, or short ad-copy gig.</p>
-        </div>
-
-        <div class="inc-card inc-card--mid">
-          <span class="inc-tier">Growth</span>
-          <div class="inc-eq">
-            <span class="inc-n">10</span> <span class="inc-x">clients ×</span>
-            <span class="inc-n">$500</span> <span class="inc-x">=</span>
-            <span class="inc-total">$5,000</span>
-          </div>
-          <p class="inc-note">A simple 4–6 page website, a month of social media, or a small ad campaign.</p>
-        </div>
-
-        <div class="inc-card inc-card--top">
-          <span class="inc-tier">Pro</span>
-          <div class="inc-eq">
-            <span class="inc-n">10</span> <span class="inc-x">clients ×</span>
-            <span class="inc-n">$1,000</span> <span class="inc-x">=</span>
-            <span class="inc-total">$10,000</span>
-          </div>
-          <p class="inc-note">A full website build, a retainer, or a full-funnel marketing package.</p>
-        </div>
-      </div>
-
-      <p class="income-after">But those clients will not appear by magic. You need <strong>more people to pitch</strong>, <strong>more control over your client search</strong>, and a clearer path to consistent outreach. This service helps you build that list faster.</p>
-
-      <p class="income-disclaim">
-        These are examples, not promises. Your results depend on your offer, pitch, follow-up, pricing, and sales skill.
-      </p>
-      <div class="center mt-32">
-        <a href="#request" class="btn btn-primary btn-lg">Get Leads to Pitch</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============================================================
      HOW IT WORKS
@@ -2244,146 +2232,6 @@
   </div>
 </section>
 
-<!-- ============================================================
-     REQUEST FORM SECTION  (most important)
-     ============================================================ -->
-<section class="section section--soft form-section" id="request">
-  <div class="wrap">
-   <div class="form-layout">
-    <div class="form-card">
-      <div class="form-card-top">
-        <h2>Tell Us the Businesses You Want to Pitch</h2>
-        <p>Enter your target niche and location. We’ll prepare the leads and send them to your email within 24 hours.</p>
-      </div>
-      <div class="form-body">
-
-        <!-- =========================================================
-             FORM (default view)
-             ========================================================= -->
-        <form id="leadForm" novalidate>
-          <div class="form-note">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            For US searches, select country and state. For other countries, select country only.
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="fullName">Full Name <span class="req">*</span></label>
-              <input type="text" id="fullName" name="fullName" placeholder="e.g. Chidi Okeke" autocomplete="name" />
-              <div class="err-msg" data-for="fullName">Please enter your full name.</div>
-            </div>
-            <div class="field">
-              <label for="email">Email Address <span class="req">*</span></label>
-              <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" />
-              <div class="err-msg" data-for="email">Please enter a valid email address.</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="niche">Business Keyword / Niche <span class="req">*</span></label>
-            <input type="text" id="niche" name="niche" placeholder='e.g. "roofers", "dentists", "restaurants", "law firms", "HVAC companies", "real estate agents", "gyms", "schools", "hotels"' />
-            <div class="err-msg" data-for="niche">Please tell us the type of business you want to target.</div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="country">Country <span class="req">*</span></label>
-              <!-- Countries injected by JS (see COUNTRIES array). African countries excluded. -->
-              <select id="country" name="country">
-                <option value="">Select a country…</option>
-              </select>
-              <div class="err-msg" data-for="country">Please select a country.</div>
-            </div>
-
-            <!-- STATE FIELD: shown only when country = United States (see JS) -->
-            <div class="field" id="stateField">
-              <label for="state">State <span class="req">*</span></label>
-              <select id="state" name="state">
-                <option value="">Select a state…</option>
-                <!-- US states injected by JS -->
-              </select>
-              <div class="err-msg" data-for="state">Please select a state for US searches.</div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="quantity">Number of Leads Needed <span class="req">*</span></label>
-            <select id="quantity" name="quantity">
-              <option value="">Select…</option>
-              <option value="100">100 leads</option>
-              <option value="250">250 leads</option>
-              <option value="500">500 leads</option>
-              <option value="1000">1,000 leads</option>
-              <option value="Custom">Custom (mention in notes)</option>
-            </select>
-            <div class="err-msg" data-for="quantity">Please choose how many leads you need.</div>
-          </div>
-
-          <div class="field">
-            <label for="notes">Special Instructions <span class="opt">(optional)</span></label>
-            <textarea id="notes" name="notes" placeholder="Example: I need businesses without websites, businesses with low ratings, or businesses in a specific city."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Submit My Lead Request</button>
-        </form>
-
-        <!-- =========================================================
-             SUCCESS MESSAGE (shown after submit)
-             ========================================================= -->
-        <div class="form-success" id="formSuccess">
-          <div class="success-ico">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
-          </div>
-          <h3>Your request has been received! 🎉</h3>
-          <p>A confirmation email has been sent to you. Your CSV file will be delivered within 24 hours. Check your inbox (and spam folder) for details.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Animated guide: shows how a lead request comes together -->
-    <aside class="form-guide">
-      <span class="guide-eyebrow">See how it works</span>
-      <h3 class="guide-title">Watch a request come together</h3>
-      <div class="mock" id="mock" aria-hidden="true">
-        <div class="mock-bar">
-          <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
-          <span class="mock-title">Lead Request — Live Preview</span>
-        </div>
-        <div class="mock-body">
-          <div class="mock-search" id="mockSearch">
-            <span class="s-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
-            <span class="s-text placeholder" id="mockText">Search a business type…</span><span class="mock-caret hide" id="mockCaret"></span>
-            <button class="mock-sbtn" id="mockBtn" type="button">Search</button>
-          </div>
-          <div class="mock-row" id="rowType">
-            <div><div class="mock-label">Business type</div><div class="mock-val" id="valType">Dentists</div></div>
-            <div class="mock-ico" id="icoType">🦷</div>
-          </div>
-          <div class="mock-row" id="rowCountry">
-            <div><div class="mock-label">Country</div><div class="mock-val" id="valCountry">United States</div></div>
-            <div class="mock-ico" id="icoCountry">🇺🇸</div>
-          </div>
-          <div class="mock-row" id="rowRegion">
-            <div><div class="mock-label" id="labRegion">State</div><div class="mock-val" id="valRegion">Texas</div></div>
-            <div class="mock-ico">📍</div>
-          </div>
-          <div class="mock-deliver" id="rowDeliver">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0c7a45" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-            <span class="pill">Delivery: CSV within 24 hours</span>
-          </div>
-        </div>
-        <div class="mock-float" id="mockToast">
-          <span class="t-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
-          <div><b>Request received</b><br><span>Confirmation email sent</span></div>
-        </div>
-      </div>
-      <p class="guide-cap">Type a niche, pick a country (add a state for the US), choose how many leads — then we email your CSV within 24 hours.</p>
-    </aside>
-
-   </div>
-  </div>
-</section>
 
 <!-- ============================================================
      WHAT YOU RECEIVE — CSV PREVIEW
@@ -2443,6 +2291,175 @@
   </div>
 </section>
 
+<!-- ============================================================
+     BENEFITS + WHO IT'S FOR (merged — 9 cards total: 4 benefits + 5 freelancer types)
+     ============================================================ -->
+<section class="section" id="benefits">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Built for the pitch</span>
+      <h2>Everything You Need to Start Pitching — Whoever You Are</h2>
+      <p>Whether you sell web design, SEO, social media, copy or cold email — this list works for your offer.</p>
+    </div>
+    <div class="grid g3">
+      <!-- BENEFIT 1 — Find clients faster: REAL VIDEO of Google Maps lookup -->
+      <div class="card bcard">
+        <div class="bviz">
+          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Looking up real businesses on Google Maps"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="biz-badge blue">LIVE · Maps lookup</span>
+        </div>
+        <h3>Find clients faster</h3>
+        <p>Find businesses to pitch faster and stop guessing who needs your service.</p>
+      </div>
+
+      <!-- BENEFIT 2 — Pitch any service: REAL VIDEO of inbox flooded with pitch replies -->
+      <div class="card bcard">
+        <div class="bviz">
+          <video src="800%2B%20replies.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Real inbox flooded with 800+ replies from pitched services"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="biz-badge blue">800+ real pitch replies</span>
+        </div>
+        <h3>Pitch any service</h3>
+        <p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p>
+      </div>
+
+      <!-- BENEFIT 3 — 50+ countries: REAL VIDEO of a multi-country leads CSV -->
+      <div class="card bcard">
+        <div class="bviz">
+          <video src="another%20leads%20sample.mp4"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Sample CSV showing leads from many different countries"></video>
+          <span class="vid-pulse" title="live"></span>
+          <span class="biz-badge blue">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 + 44 more</span>
+        </div>
+        <h3>50+ countries</h3>
+        <p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p>
+      </div>
+
+      <!-- B6 — Save research time: animated Google search of leads (the slow manual way) -->
+      <div class="card bcard">
+        <div class="bviz bv-gs" aria-hidden="true">
+          <div class="gs-bar">
+            <span class="gs-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span>
+            <div class="gs-input"><span class="gs-text" id="gsText">dentists in austin tx</span><span class="gs-caret"></span></div>
+          </div>
+          <div class="gs-results">
+            <div class="gs-result">
+              <div class="gs-rt" id="gsR1t">Bright Smile Dental — Austin</div>
+              <div class="gs-rs" id="gsR1s">brightsmile.com · ★ 4.9 · Open now</div>
+            </div>
+            <div class="gs-result">
+              <div class="gs-rt" id="gsR2t">Austin Cosmetic Dentistry</div>
+              <div class="gs-rs" id="gsR2s">austincosmetic.com · ★ 4.6 · 2.1 mi</div>
+            </div>
+            <div class="gs-result">
+              <div class="gs-rt" id="gsR3t">Lone Star Family Dental</div>
+              <div class="gs-rs" id="gsR3s">lonestardental.com · ★ 4.4 · 3.4 mi</div>
+            </div>
+          </div>
+          <span class="biz-badge">⏱️ Save hours of this</span>
+        </div>
+        <h3>Save research time</h3>
+        <p>Stop searching Google one business at a time. We do the work for you.</p>
+      </div>
+
+      <!-- WHO IT'S FOR — 5 most-common freelancer types (folded in from old Use Cases section) -->
+
+      <div class="card ucard">
+        <div class="uviz uv1" aria-hidden="true">
+          <div class="ub-frame">
+            <div class="ub-bar">
+              <span class="ub-dot r"></span><span class="ub-dot y"></span><span class="ub-dot g"></span>
+              <span class="ub-url">acmestudio.com</span>
+            </div>
+            <div class="ub-page">
+              <div class="ub-logo">Acme<span>.</span></div>
+              <div class="ub-hero">Beautiful sites that convert</div>
+              <div class="ub-line"></div>
+              <div class="ub-line s"></div>
+              <div class="ub-btn">Get a quote →</div>
+            </div>
+          </div>
+          <span class="u-badge blue">🖥️ Live site</span>
+        </div>
+        <h3>Web Designers</h3>
+        <p>Pitch new sites, redesigns, landing pages, and website fixes.</p>
+      </div>
+
+      <div class="card ucard">
+        <div class="uviz uv2" aria-hidden="true">
+          <div class="us-search">🔍 dentist near austin tx</div>
+          <div class="us-result top">
+            <div class="us-title">Bright Smile Dental — Austin</div>
+            <div class="us-snip">4.9 ★ · Open now · brightsmile.com</div>
+          </div>
+          <div class="us-result">
+            <div class="us-title">Austin Cosmetic Dentistry</div>
+            <div class="us-snip">4.6 ★ · 2.1 mi · austincosmetic.com</div>
+          </div>
+          <div class="us-result">
+            <div class="us-title">Lone Star Family Dental</div>
+            <div class="us-snip">4.4 ★ · 3.4 mi · lonestardental.com</div>
+          </div>
+          <span class="u-badge green">🔍 Ranked #1</span>
+        </div>
+        <h3>SEO Freelancers</h3>
+        <p>Find local businesses that need help ranking on Google.</p>
+      </div>
+
+      <div class="card ucard">
+        <div class="uviz uv3" aria-hidden="true">
+          <div class="usm-head">
+            <div class="usm-avatar">D</div>
+            <div class="usm-meta"><b>@dentaldigital</b><span>12.4k followers · 3 posts/week</span></div>
+          </div>
+          <div class="usm-grid"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <span class="u-badge blue">📱 +38% reach</span>
+        </div>
+        <h3>Social Media Managers</h3>
+        <p>Find businesses with weak or inactive social and pitch content management.</p>
+      </div>
+
+      <div class="card ucard">
+        <div class="uviz uv5" aria-hidden="true">
+          <div class="uce-head">
+            <span class="uce-to">To: hello@brightsmile.com</span>
+            <span class="uce-sub">Quick idea for Bright Smile Dental</span>
+          </div>
+          <div class="uce-body">
+            Hi Sarah — saw your homepage. One quick fix could lift bookings…
+            <span class="uce-line"></span>
+            <span class="uce-line"></span>
+            <span class="uce-line s"></span>
+          </div>
+          <div class="uce-send">Send</div>
+          <span class="u-badge blue">📧 42% open rate</span>
+        </div>
+        <h3>Cold Email Marketers</h3>
+        <p>Get targeted business lists you can use for outreach campaigns.</p>
+      </div>
+
+      <div class="card ucard">
+        <div class="uviz uv6" aria-hidden="true">
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Research dentists in TX</span></div>
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Compile contact list</span></div>
+          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Send 50 cold emails</span></div>
+          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Schedule follow-ups</span></div>
+          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Book 5 discovery calls</span></div>
+          <span class="u-badge green">🗂️ 3 done today</span>
+        </div>
+        <h3>Virtual Assistants</h3>
+        <p>Use the leads to help clients with research, outreach, and prospecting.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- ============================================================
      PROOF SECTION
      ============================================================ -->
@@ -2573,482 +2590,60 @@
   </div>
 </section>
 
-<!-- ============================================================
-     BENEFITS
-     ============================================================ -->
-<section class="section" id="benefits">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Why this works</span>
-      <h2>Everything You Need to Start Pitching — Nothing You Don’t</h2>
-    </div>
-    <div class="grid g3">
-      <!-- B1 — Find clients faster: REAL VIDEO of Google Maps lookup -->
-      <div class="card bcard">
-        <div class="bviz">
-          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Looking up real businesses on Google Maps"></video>
-          <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">LIVE · Maps lookup</span>
-        </div>
-        <h3>Find clients faster</h3>
-        <p>Find businesses to pitch faster and stop guessing who needs your service.</p>
-      </div>
 
-      <!-- B2 — Your own prospect list: REAL VIDEO of the CSV file -->
-      <div class="card bcard">
-        <div class="bviz">
-          <video src="assets/sample-leads-csv.mp4" poster="assets/sample-leads-csv-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Your own CSV list of business prospects"></video>
-          <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">Your CSV · real rows</span>
-        </div>
-        <h3>Your own prospect list</h3>
-        <p>Build your own prospect list you control — not random recycled data.</p>
-      </div>
 
-      <!-- B3 — Pitch any service: REAL VIDEO of inbox flooded with pitch replies -->
-      <div class="card bcard">
-        <div class="bviz">
-          <video src="800%2B%20replies.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Real inbox flooded with 800+ replies from pitched services"></video>
-          <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">800+ real pitch replies</span>
-        </div>
-        <h3>Pitch any service</h3>
-        <p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p>
-      </div>
-
-      <!-- B4 — 50+ countries: REAL VIDEO of a multi-country leads CSV -->
-      <div class="card bcard">
-        <div class="bviz">
-          <video src="another%20leads%20sample.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Sample CSV showing leads from many different countries"></video>
-          <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 + 44 more</span>
-        </div>
-        <h3>50+ countries</h3>
-        <p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p>
-      </div>
-
-      <!-- B5 — Simple CSV format: real CSV poster with Ken Burns zoom -->
-      <div class="card bcard">
-        <div class="bviz">
-          <img class="kb" src="assets/sample-leads-csv-poster.jpg" alt="Real CSV file with business rows" loading="lazy" />
-          <span class="biz-badge">.CSV · Excel · Sheets</span>
-        </div>
-        <h3>Simple CSV format</h3>
-        <p>Use the file in Google Sheets, Excel, CRMs, or outreach tools instantly.</p>
-      </div>
-
-      <!-- B6 — Save research time: animated Google search of leads (the slow manual way) -->
-      <div class="card bcard">
-        <div class="bviz bv-gs" aria-hidden="true">
-          <div class="gs-bar">
-            <span class="gs-logo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span>
-            <div class="gs-input"><span class="gs-text" id="gsText">dentists in austin tx</span><span class="gs-caret"></span></div>
-          </div>
-          <div class="gs-results">
-            <div class="gs-result">
-              <div class="gs-rt" id="gsR1t">Bright Smile Dental — Austin</div>
-              <div class="gs-rs" id="gsR1s">brightsmile.com · ★ 4.9 · Open now</div>
-            </div>
-            <div class="gs-result">
-              <div class="gs-rt" id="gsR2t">Austin Cosmetic Dentistry</div>
-              <div class="gs-rs" id="gsR2s">austincosmetic.com · ★ 4.6 · 2.1 mi</div>
-            </div>
-            <div class="gs-result">
-              <div class="gs-rt" id="gsR3t">Lone Star Family Dental</div>
-              <div class="gs-rs" id="gsR3s">lonestardental.com · ★ 4.4 · 3.4 mi</div>
-            </div>
-          </div>
-          <span class="biz-badge">⏱️ Save hours of this</span>
-        </div>
-        <h3>Save research time</h3>
-        <p>Stop searching Google one business at a time. We do the work for you.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     USE CASES
-     ============================================================ -->
-<section class="section section--soft" id="usecases">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Who it’s for</span>
-      <h2>Made for Every Kind of Freelancer</h2>
-      <p>Whatever skill you have, there are businesses waiting to be pitched.</p>
-    </div>
-    <div class="grid g3">
-
-      <!-- 1. Web Designers — mini browser with a real landing-page mockup -->
-      <div class="card ucard">
-        <div class="uviz uv1" aria-hidden="true">
-          <div class="ub-frame">
-            <div class="ub-bar">
-              <span class="ub-dot r"></span><span class="ub-dot y"></span><span class="ub-dot g"></span>
-              <span class="ub-url">acmestudio.com</span>
-            </div>
-            <div class="ub-page">
-              <div class="ub-logo">Acme<span>.</span></div>
-              <div class="ub-hero">Beautiful sites that convert</div>
-              <div class="ub-line"></div>
-              <div class="ub-line s"></div>
-              <div class="ub-btn">Get a quote →</div>
-            </div>
-          </div>
-          <span class="u-badge blue">🖥️ Live site</span>
-        </div>
-        <h3>Web Designers</h3>
-        <p>Find businesses you can pitch for new websites, redesigns, landing pages, and website fixes.</p>
-      </div>
-
-      <!-- 2. SEO Freelancers — Google SERP with the client ranking #1 -->
-      <div class="card ucard">
-        <div class="uviz uv2" aria-hidden="true">
-          <div class="us-search">🔍 dentist near austin tx</div>
-          <div class="us-result top">
-            <div class="us-title">Bright Smile Dental — Austin</div>
-            <div class="us-snip">4.9 ★ · Open now · brightsmile.com</div>
-          </div>
-          <div class="us-result">
-            <div class="us-title">Austin Cosmetic Dentistry</div>
-            <div class="us-snip">4.6 ★ · 2.1 mi · austincosmetic.com</div>
-          </div>
-          <div class="us-result">
-            <div class="us-title">Lone Star Family Dental</div>
-            <div class="us-snip">4.4 ★ · 3.4 mi · lonestardental.com</div>
-          </div>
-          <span class="u-badge green">🔍 Ranked #1</span>
-        </div>
-        <h3>SEO Freelancers</h3>
-        <p>Find local businesses that may need help ranking on Google.</p>
-      </div>
-
-      <!-- 3. Social Media Managers — IG-style profile + 6-post grid -->
-      <div class="card ucard">
-        <div class="uviz uv3" aria-hidden="true">
-          <div class="usm-head">
-            <div class="usm-avatar">D</div>
-            <div class="usm-meta"><b>@dentaldigital</b><span>12.4k followers · 3 posts/week</span></div>
-          </div>
-          <div class="usm-grid"><div></div><div></div><div></div><div></div><div></div><div></div></div>
-          <span class="u-badge blue">📱 +38% reach</span>
-        </div>
-        <h3>Social Media Managers</h3>
-        <p>Find businesses with poor or inactive social media and pitch content management.</p>
-      </div>
-
-      <!-- 4. Copywriters — sales-page block with headline, bullets, CTA -->
-      <div class="card ucard">
-        <div class="uviz uv4" aria-hidden="true">
-          <div class="ucp-head">Stop Losing Sales.<br>Start <em>Converting</em>.</div>
-          <div class="ucp-bullets">
-            <span>✓ Doubles your conversion rate</span>
-            <span>✓ Built on proven frameworks</span>
-            <span>✓ Speaks to your dream buyer</span>
-          </div>
-          <div class="ucp-btn">Order Now →</div>
-          <span class="u-badge amber">✍️ 3.4× CTR</span>
-        </div>
-        <h3>Copywriters</h3>
-        <p>Find businesses you can pitch for website copy, sales pages, ads, emails, and landing pages.</p>
-      </div>
-
-      <!-- 5. Cold Email Marketers — personalized outreach in a Gmail-like composer -->
-      <div class="card ucard">
-        <div class="uviz uv5" aria-hidden="true">
-          <div class="uce-head">
-            <span class="uce-to">To: hello@brightsmile.com</span>
-            <span class="uce-sub">Quick idea for Bright Smile Dental</span>
-          </div>
-          <div class="uce-body">
-            Hi Sarah — saw your homepage. One quick fix could lift bookings…
-            <span class="uce-line"></span>
-            <span class="uce-line"></span>
-            <span class="uce-line s"></span>
-          </div>
-          <div class="uce-send">Send</div>
-          <span class="u-badge blue">📧 42% open rate</span>
-        </div>
-        <h3>Cold Email Marketers</h3>
-        <p>Get targeted business lists you can use for outreach campaigns.</p>
-      </div>
-
-      <!-- 6. Virtual Assistants — ticked-off task list -->
-      <div class="card ucard">
-        <div class="uviz uv6" aria-hidden="true">
-          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Research dentists in TX</span></div>
-          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Compile contact list</span></div>
-          <div class="uva-row done"><span class="uva-box">✓</span><span class="uva-text">Send 50 cold emails</span></div>
-          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Schedule follow-ups</span></div>
-          <div class="uva-row"><span class="uva-box"></span><span class="uva-text">Book 5 discovery calls</span></div>
-          <span class="u-badge green">🗂️ 3 done today</span>
-        </div>
-        <h3>Virtual Assistants</h3>
-        <p>Use the leads to help clients with research, outreach, and prospecting.</p>
-      </div>
-
-      <!-- 7. Graphic Designers — animated portfolio reel cycling 5 design deliverables -->
-      <div class="card ucard">
-        <div class="uviz uv7" aria-hidden="true">
-          <div class="gd-stage">
-            <!-- D1 Logo / wordmark -->
-            <div class="gd-design gd-d1">
-              <div class="gd-logo">BRIGHT<span>·</span>SMILE</div>
-              <div class="gd-tag">Dental Studio</div>
-            </div>
-            <!-- D2 Poster / flyer -->
-            <div class="gd-design gd-d2">
-              <span class="gd-poster-tag">Grand Opening</span>
-              <div class="gd-poster-head">50% OFF<span>your first visit</span></div>
-              <span class="gd-poster-cta">Book Now →</span>
-            </div>
-            <!-- D3 Menu -->
-            <div class="gd-design gd-d3">
-              <div class="gd-menu-head">— Spring Menu —</div>
-              <div class="gd-menu-item">Tomato Bisque ........ $12</div>
-              <div class="gd-menu-item">Truffle Risotto ......... $24</div>
-              <div class="gd-menu-item">Wagyu Burger ......... $28</div>
-            </div>
-            <!-- D4 Social post -->
-            <div class="gd-design gd-d4">
-              <div class="gd-social">
-                <div class="gd-social-img"></div>
-                <div class="gd-social-cap">New collection drop<br><small>@dentaldigital</small></div>
-              </div>
-            </div>
-            <!-- D5 Business card -->
-            <div class="gd-design gd-d5">
-              <div class="gd-bc">
-                <div class="gd-bc-name">SARAH MILLER</div>
-                <div class="gd-bc-role">Brand Designer</div>
-                <div class="gd-bc-info">sarah@studio.co · (555) 0142</div>
-              </div>
-            </div>
-          </div>
-          <span class="u-badge blue">🎨 Portfolio reel</span>
-        </div>
-        <h3>Graphic Designers</h3>
-        <p>Pitch logos, flyers, brand identity, menus, brochures, and social media designs.</p>
-      </div>
-
-      <!-- 8. Video Editors — preview cycling client-industry videos + scrubbing playhead -->
-      <div class="card ucard">
-        <div class="uviz uv8" aria-hidden="true">
-          <span class="uve-now" id="ueNow"><span class="uve-rec"></span>Coach reel</span>
-          <div class="uve-preview">
-            <div class="uve-thumb"><span class="uve-thumb-ico">🎙️</span>Coach Reel</div>
-            <div class="uve-thumb"><span class="uve-thumb-ico">🏠</span>Property Tour</div>
-            <div class="uve-thumb"><span class="uve-thumb-ico">🍝</span>Restaurant Promo</div>
-            <div class="uve-thumb"><span class="uve-thumb-ico">💪</span>Gym Intro</div>
-            <div class="uve-play-icon">▶</div>
-          </div>
-          <div class="uve-timeline">
-            <div class="uve-clip"></div>
-            <div class="uve-clip alt"></div>
-            <div class="uve-clip"></div>
-            <div class="uve-clip"></div>
-            <div class="uve-clip alt"></div>
-            <div class="uve-clip"></div>
-            <div class="uve-playhead"></div>
-          </div>
-          <span class="u-badge amber">🎬 Cut &amp; deliver</span>
-        </div>
-        <h3>Video Editors</h3>
-        <p>Find coaches, real estate agents, restaurants, gyms, schools, churches, and service businesses to pitch.</p>
-      </div>
-
-      <!-- 9. Appointment Setters — day's booked calls -->
-      <div class="card ucard">
-        <div class="uviz uv9" aria-hidden="true">
-          <div class="uap-head">Monday, June 22</div>
-          <div class="uap-slot"><span class="uap-time">10:00</span> Discovery · Bright Smile</div>
-          <div class="uap-slot"><span class="uap-time">11:30</span> Demo · Lone Star Roofing</div>
-          <div class="uap-slot"><span class="uap-time">14:00</span> Follow-up · Hill Country Ortho</div>
-          <div class="uap-slot"><span class="uap-time">15:30</span> Pitch · Gulf Coast Care</div>
-          <span class="u-badge green">📞 4 calls booked</span>
-        </div>
-        <h3>Appointment Setters</h3>
-        <p>Get a list of businesses you can contact and book calls for.</p>
-      </div>
-
-      <!-- 10. Small Agency Owners — multiple niche client lists in one dashboard -->
-      <div class="card ucard">
-        <div class="uviz uv10" aria-hidden="true">
-          <div class="uag-card"><span>🦷 Dental clients</span><b>42 leads</b></div>
-          <div class="uag-card"><span>🍽️ Restaurant clients</span><b>28 leads</b></div>
-          <div class="uag-card"><span>💇 Salon clients</span><b>19 leads</b></div>
-          <span class="u-badge blue">🏢 3 niches live</span>
-        </div>
-        <h3>Small Agency Owners</h3>
-        <p>Build niche-specific lists for outreach and client acquisition.</p>
-      </div>
-
-      <!-- 11. Funnel Builders — narrowing funnel from visitors to clients -->
-      <div class="card ucard">
-        <div class="uviz uv11" aria-hidden="true">
-          <div class="ufn ufn-1">2,500 visitors</div>
-          <div class="ufn ufn-2">420 leads</div>
-          <div class="ufn ufn-3">85 calls</div>
-          <div class="ufn ufn-4">12 clients</div>
-          <span class="u-badge blue">🚀 Funnel live</span>
-        </div>
-        <h3>Funnel Builders</h3>
-        <p>Find service businesses that need funnels, landing pages, and lead capture.</p>
-      </div>
-
-      <!-- 12. Digital Marketers — analytics dashboard with KPI + growth chart -->
-      <div class="card ucard">
-        <div class="uviz uv12" aria-hidden="true">
-          <div class="udm-kpi">
-            <div><span>Revenue</span><b>$24,890</b></div>
-            <div><span>ROAS</span><b>4.2×</b></div>
-          </div>
-          <div class="udm-chart">
-            <svg viewBox="0 0 100 30" preserveAspectRatio="none">
-              <polyline points="0,22 12,18 24,20 36,12 48,15 60,8 72,10 84,4 100,6 100,30 0,30" fill="rgba(22,179,100,0.12)" stroke="none"/>
-              <polyline points="0,22 12,18 24,20 36,12 48,15 60,8 72,10 84,4 100,6" fill="none" stroke="#16b364" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <span class="u-badge green">💼 +34% MoM</span>
-        </div>
-        <h3>Digital Marketers</h3>
-        <p>Build targeted lists to offer ads, strategy, and full-service marketing.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SEARCH EXAMPLES (chips)
-     ============================================================ -->
-<section class="section" id="examples">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Search examples</span>
-      <h2>Almost Any Local Business Category You Can Imagine</h2>
-      <p>Here are just a few examples of searches you can request.</p>
-    </div>
-    <div class="chips">
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Dentists in Texas, USA</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Roofers in Florida, USA</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Restaurants in Canada</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Law firms in Australia</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Real estate agents in United Kingdom</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Cleaning companies in UAE</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hotels in Spain</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Schools in Singapore</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Clinics in Germany</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Gyms in Canada</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Salons in United States</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Auto repair shops in Germany</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Churches in United States</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Event planners in Sydney, Australia</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Interior designers in Dubai, UAE</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Accountants in London, UK</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> HVAC companies in California, USA</span>
-      <span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Restaurants in Toronto, Canada</span>
-    </div>
-    <p class="chips-cap">…and almost any other local business category. If you can name it, you can request it.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     WHY CHOOSE US
-     ============================================================ -->
-<section class="section section--soft" id="why">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Why choose us</span>
-      <h2>Honest, Fast, and Built for Freelancers</h2>
-    </div>
-    <div class="grid g3">
-
-      <!-- 1. Custom lead requests → animated request form cycling through niche/country/qty/notes -->
-      <div class="card ucard">
-        <div class="uviz cust-req" aria-hidden="true">
-          <div class="cr-form">
-            <div class="cr-row"><span class="cr-label">Niche</span><span class="cr-val" id="crNiche">Dentists</span></div>
-            <div class="cr-row"><span class="cr-label">Country</span><span class="cr-val" id="crCountry">🇺🇸 United States</span></div>
-            <div class="cr-row"><span class="cr-label">Quantity</span><span class="cr-val" id="crQty">500 leads</span></div>
-            <div class="cr-row"><span class="cr-label">Notes</span><span class="cr-val" id="crNotes">No-website only</span></div>
-            <div class="cr-btn">Submit request</div>
-          </div>
-          <span class="u-badge green">Built to your spec</span>
-        </div>
-        <h3>Custom lead requests</h3>
-        <p>Every list is built to your niche, location, quantity, and instructions.</p>
-      </div>
-
-      <!-- 2. Fast 24-hour delivery → animated 24h ring + envelope arriving + delivered ping -->
-      <div class="card ucard">
-        <div class="uviz fast-24" aria-hidden="true">
-          <div class="f24-clock">
-            <svg viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(229,102,74,.18)" stroke-width="6"/>
-              <circle class="f24-ring" cx="50" cy="50" r="44" fill="none"
-                      stroke="#E5664A" stroke-width="6" stroke-linecap="round"
-                      transform="rotate(-90 50 50)"/>
-            </svg>
-            <div class="f24-time"><b>24</b><span>hours</span></div>
-          </div>
-          <div class="f24-envelope">📧</div>
-          <div class="f24-notif">✓ CSV in inbox</div>
-          <span class="u-badge green">⚡ Inbox in 24 hrs</span>
-        </div>
-        <h3>Fast 24-hour delivery</h3>
-        <p>Submit your request and get your CSV in your inbox within 24 hours.</p>
-      </div>
-
-      <!-- 3. Built for Nigerians → flag + pulsing Naija city chips + pulsing stamp -->
-      <div class="card ucard">
-        <div class="uviz ng-anim" aria-hidden="true">
-          <div class="ng-flag-bg">
-            <div class="green"></div>
-            <div class="white"></div>
-            <div class="green"></div>
-          </div>
-          <div class="ng-stamp">
-            <small>Made in</small>
-            <strong>🇳🇬 Nigeria</strong>
-            <em>for Naija freelancers</em>
-          </div>
-          <div class="ng-cities">
-            <span>Lagos</span>
-            <span>Abuja</span>
-            <span>P. Harcourt</span>
-            <span>Ibadan</span>
-            <span>Kano</span>
-            <span>Enugu</span>
-          </div>
-          <span class="u-badge green">🇳🇬 Naija-first</span>
-        </div>
-        <h3>Built for Nigerians</h3>
-        <p>Made for Nigerian freelancers, agencies, and service providers.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
+<!-- Search Examples + Why-Choose-Us sections deleted — their content lives elsewhere now
+     (example searches folded into Solution; trust signals already in trust strip + hero). -->
 
 <!-- ============================================================
      PRICING
      ============================================================ -->
 <section class="section" id="pricing">
-  <div class="wrap">
+  <div class="wrap pricing-with-math">
     <div class="section-head">
-      <span class="eyebrow">Pricing</span>
-      <h2>Choose the Number of Leads You Need</h2>
-      <p>Simple, one-time pricing. No monthly software. No subscriptions.</p>
+      <span class="eyebrow">The math + the offer</span>
+      <h2>From Your First $1,000 to $10,000/Month</h2>
+      <p>The math first — then the lead packs that put it within reach.</p>
     </div>
+
+    <!-- Income math (3 example targets) merged in from old standalone Income section -->
+    <p class="income-intro" style="text-align:center;margin-bottom:20px;">A few example targets at different price points — pick the one that fits where you are:</p>
+    <div class="income-grid">
+      <div class="inc-card">
+        <span class="inc-tier">Starter</span>
+        <div class="inc-eq">
+          <span class="inc-n">5</span> <span class="inc-x">clients ×</span>
+          <span class="inc-n">$200</span> <span class="inc-x">=</span>
+          <span class="inc-total">$1,000</span>
+        </div>
+        <p class="inc-note">A small website tweak, basic SEO audit, or short ad-copy gig.</p>
+      </div>
+
+      <div class="inc-card inc-card--mid">
+        <span class="inc-tier">Growth</span>
+        <div class="inc-eq">
+          <span class="inc-n">10</span> <span class="inc-x">clients ×</span>
+          <span class="inc-n">$500</span> <span class="inc-x">=</span>
+          <span class="inc-total">$5,000</span>
+        </div>
+        <p class="inc-note">A simple 4–6 page website, a month of social media, or a small ad campaign.</p>
+      </div>
+
+      <div class="inc-card inc-card--top">
+        <span class="inc-tier">Pro</span>
+        <div class="inc-eq">
+          <span class="inc-n">10</span> <span class="inc-x">clients ×</span>
+          <span class="inc-n">$1,000</span> <span class="inc-x">=</span>
+          <span class="inc-total">$10,000</span>
+        </div>
+        <p class="inc-note">A full website build, a retainer, or a full-funnel marketing package.</p>
+      </div>
+    </div>
+
+    <p class="income-after" style="text-align:center;max-width:760px;margin:28px auto 0;">But those clients won't appear by magic. You need <strong>more people to pitch</strong>. Pick a lead pack below.</p>
+
+    <p class="pricing-divider">— Now pick the lead pack —</p>
+
     <div class="pricing-grid">
       <!-- STARTER — ₦20k @ ₦2.35/lead -->
       <div class="price-card">
@@ -3194,64 +2789,12 @@
       <p>Every receipt flanking these questions is a real payment that landed <em>after</em> a Nigerian freelancer pitched a business from one of these lead lists.</p>
     </div>
 
-    <!-- Convincing band: ties the side proof columns directly to the lead-pitching playbook -->
+    <!-- Convincing band: ties the proof images shown earlier on the page to the lead-pitching playbook -->
     <div class="faq-proof-band">
       <span class="fpb-eyebrow"><span class="fpb-pulse"></span> Real outcomes · not stock images</span>
-      <p>Different niches — <strong>dentists, roofers, restaurants, gyms, salons, real estate</strong>. Different countries — <strong>🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 🇸🇦</strong>. Same playbook: <strong>right lead from your CSV → relevant offer → consistent follow-up → paid</strong>. The screenshots on both sides aren't decoration — each one is a wallet/inbox snap from a freelancer who pitched a business they found in a list just like yours.</p>
+      <p>Different niches — <strong>dentists, roofers, restaurants, gyms, salons, real estate</strong>. Different countries — <strong>🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 🇸🇦</strong>. Same playbook: <strong>right lead from your CSV → relevant offer → consistent follow-up → paid</strong>. Every receipt and chat in the Proof section above is a real wallet/inbox snap from a freelancer who pitched a business they found in a list just like yours.</p>
       <p class="fpb-fine">Your results depend on your offer, pitch, pricing and follow-through. Leads put the right people in front of you — closing them is still on you.</p>
     </div>
-
-    <div class="faq-layout">
-
-      <!-- LEFT — payment screenshots + videos column -->
-      <aside class="faq-side faq-side-l" aria-label="Payments received from delivered gigs">
-        <a class="faq-side-card" href="proof/payment-bybit-1200usdt.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-bybit-1200usdt.jpg" alt="$1,200 USDT Bybit deposit confirmed" loading="lazy" />
-          <span class="fsc-badge">$1,200 USDT</span>
-        </a>
-        <div class="faq-side-card">
-          <video src="assets/sample-leads-csv.mp4" poster="assets/sample-leads-csv-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Live sample CSV of business leads"></video>
-          <span class="fsc-pulse" title="live"></span>
-          <span class="fsc-badge blue">Live · Sample CSV</span>
-        </div>
-        <a class="faq-side-card" href="proof/payment-wa-usdt1000.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-wa-usdt1000.jpg" alt="1,000 USDT received via WhatsApp" loading="lazy" />
-          <span class="fsc-badge">1,000 USDT</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-bybit-500usdc.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-bybit-500usdc.jpg" alt="500 USDC on Base Mainnet — Bybit confirmation" loading="lazy" />
-          <span class="fsc-badge">500 USDC</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-wa-500usdt.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-wa-500usdt.jpg" alt="500 USDT sent via WhatsApp" loading="lazy" />
-          <span class="fsc-badge">500 USDT</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-tronscan-1200usdt.png" target="_blank" rel="noopener">
-          <img src="proof/payment-tronscan-1200usdt.png" alt="$1,200 USDT verified on TronScan" loading="lazy" />
-          <span class="fsc-badge">$1,200 ✓ TronScan</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-bybit-499usdt.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-bybit-499usdt.jpg" alt="499.7 USDT Bybit deposit confirmed on TON chain" loading="lazy" />
-          <span class="fsc-badge">$500 USDT</span>
-        </a>
-        <div class="faq-side-card">
-          <video src="800%2B%20replies.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Real inbox flooded with 800+ pitch replies"></video>
-          <span class="fsc-pulse" title="live"></span>
-          <span class="fsc-badge blue">Live · 800+ replies</span>
-        </div>
-        <a class="faq-side-card" href="proof/payment-bybit-300usdt.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-bybit-300usdt.jpg" alt="$300 USDT Bybit deposit confirmed" loading="lazy" />
-          <span class="fsc-badge">$300 USDT</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-wa-sent.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-wa-sent.jpg" alt="Payment sent via WhatsApp for a delivered gig" loading="lazy" />
-          <span class="fsc-badge">Payment sent</span>
-        </a>
-      </aside>
 
       <div class="faq-wrap" id="faqWrap">
       <!-- items toggled by JS -->
@@ -3296,65 +2839,147 @@
         <div class="faq-a"><p>Yes. You can mention this in the notes field, and the request will be prepared based on your instructions where possible.</p></div>
       </div>
       </div>
+  </div>
+</section>
 
-      <!-- RIGHT — more payment screenshots + videos column -->
-      <aside class="faq-side faq-side-r" aria-label="More payments received from delivered gigs">
-        <a class="faq-side-card" href="proof/payment-wa-1500.jpg" target="_blank" rel="noopener">
-          <img src="proof/payment-wa-1500.jpg" alt="$1,500 paid for a delivered gig" loading="lazy" />
-          <span class="fsc-badge">$1,500 paid</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-btc-290.png" target="_blank" rel="noopener">
-          <img src="proof/payment-btc-290.png" alt="$290 BTC payment received" loading="lazy" />
-          <span class="fsc-badge">$290 BTC</span>
-        </a>
-        <div class="faq-side-card">
-          <video src="assets/sample-leads-maps.mp4" poster="assets/sample-leads-maps-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Live walkthrough of looking up business leads on Google Maps"></video>
-          <span class="fsc-pulse" title="live"></span>
-          <span class="fsc-badge blue">Live · Maps lookup</span>
-        </div>
-        <a class="faq-side-card" href="proof/payment-btc-200.png" target="_blank" rel="noopener">
-          <img src="proof/payment-btc-200.png" alt="$200 BTC payment received" loading="lazy" />
-          <span class="fsc-badge">$200 BTC</span>
-        </a>
-        <a class="faq-side-card" href="proof/proof-client-conversation.png" target="_blank" rel="noopener">
-          <img src="proof/proof-client-conversation.png" alt="Real client conversation about scope and budget" loading="lazy" />
-          <span class="fsc-badge blue">Client · scope</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-crypto-chat.png" target="_blank" rel="noopener">
-          <img src="proof/payment-crypto-chat.png" alt="Crypto payment confirmed in chat" loading="lazy" />
-          <span class="fsc-badge blue">Crypto · chat</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-usdt-tron-chat.png" target="_blank" rel="noopener">
-          <img src="proof/payment-usdt-tron-chat.png" alt="USDT (TRON) payment confirmation in chat" loading="lazy" />
-          <span class="fsc-badge blue">USDT · TRON</span>
-        </a>
-        <div class="faq-side-card">
-          <video src="another%20leads%20sample.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Another live sample of multi-country leads"></video>
-          <span class="fsc-pulse" title="live"></span>
-          <span class="fsc-badge blue">Live · Multi-country leads</span>
-        </div>
-        <a class="faq-side-card" href="proof/payment-usdt-bep20-bscscan.png" target="_blank" rel="noopener">
-          <img src="proof/payment-usdt-bep20-bscscan.png" alt="80 USDT BEP20 transfer verified on BscScan" loading="lazy" />
-          <span class="fsc-badge">80 USDT · BEP20</span>
-        </a>
-        <a class="faq-side-card" href="proof/payment-sar-screen.png" target="_blank" rel="noopener">
-          <img src="proof/payment-sar-screen.png" alt="SAR 389.75 payment from an international client" loading="lazy" />
-          <span class="fsc-badge">SAR 389 ≈ $104</span>
-        </a>
-        <div class="faq-side-card">
-          <video src="biz%20without%20websites%20for%20web%20designers.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Live sample of no-website business leads"></video>
-          <span class="fsc-pulse" title="live"></span>
-          <span class="fsc-badge blue">Live · No-website leads</span>
-        </div>
-      </aside>
+<!-- ============================================================
+     REQUEST FORM SECTION  (moved to the bottom — single ask after all proof)
+     ============================================================ -->
+<section class="section section--soft form-section" id="request">
+  <div class="wrap">
+   <div class="form-layout">
+    <div class="form-card">
+      <div class="form-card-top">
+        <h2>Tell Us the Businesses You Want to Pitch</h2>
+        <p>Enter your target niche and location. We’ll prepare the leads and send them to your email within 24 hours.</p>
+      </div>
+      <div class="form-body">
 
+        <!-- =========================================================
+             FORM (default view)
+             ========================================================= -->
+        <form id="leadForm" novalidate>
+          <div class="form-note">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            For US searches, select country and state. For other countries, select country only.
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="fullName">Full Name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" placeholder="e.g. Chidi Okeke" autocomplete="name" />
+              <div class="err-msg" data-for="fullName">Please enter your full name.</div>
+            </div>
+            <div class="field">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" />
+              <div class="err-msg" data-for="email">Please enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="niche">Business Keyword / Niche <span class="req">*</span></label>
+            <input type="text" id="niche" name="niche" placeholder='e.g. "roofers", "dentists", "restaurants", "law firms", "HVAC companies", "real estate agents", "gyms", "schools", "hotels"' />
+            <div class="err-msg" data-for="niche">Please tell us the type of business you want to target.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="country">Country <span class="req">*</span></label>
+              <!-- Countries injected by JS (see COUNTRIES array). African countries excluded. -->
+              <select id="country" name="country">
+                <option value="">Select a country…</option>
+              </select>
+              <div class="err-msg" data-for="country">Please select a country.</div>
+            </div>
+
+            <!-- STATE FIELD: shown only when country = United States (see JS) -->
+            <div class="field" id="stateField">
+              <label for="state">State <span class="req">*</span></label>
+              <select id="state" name="state">
+                <option value="">Select a state…</option>
+                <!-- US states injected by JS -->
+              </select>
+              <div class="err-msg" data-for="state">Please select a state for US searches.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="quantity">Number of Leads Needed <span class="req">*</span></label>
+            <select id="quantity" name="quantity">
+              <option value="">Select…</option>
+              <option value="100">100 leads</option>
+              <option value="250">250 leads</option>
+              <option value="500">500 leads</option>
+              <option value="1000">1,000 leads</option>
+              <option value="Custom">Custom (mention in notes)</option>
+            </select>
+            <div class="err-msg" data-for="quantity">Please choose how many leads you need.</div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Special Instructions <span class="opt">(optional)</span></label>
+            <textarea id="notes" name="notes" placeholder="Example: I need businesses without websites, businesses with low ratings, or businesses in a specific city."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Submit My Lead Request</button>
+        </form>
+
+        <!-- =========================================================
+             SUCCESS MESSAGE (shown after submit)
+             ========================================================= -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-ico">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h3>Your request has been received! 🎉</h3>
+          <p>A confirmation email has been sent to you. Your CSV file will be delivered within 24 hours. Check your inbox (and spam folder) for details.</p>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Animated guide: shows how a lead request comes together -->
+    <aside class="form-guide">
+      <span class="guide-eyebrow">See how it works</span>
+      <h3 class="guide-title">Watch a request come together</h3>
+      <div class="mock" id="mock" aria-hidden="true">
+        <div class="mock-bar">
+          <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+          <span class="mock-title">Lead Request — Live Preview</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-search" id="mockSearch">
+            <span class="s-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+            <span class="s-text placeholder" id="mockText">Search a business type…</span><span class="mock-caret hide" id="mockCaret"></span>
+            <button class="mock-sbtn" id="mockBtn" type="button">Search</button>
+          </div>
+          <div class="mock-row" id="rowType">
+            <div><div class="mock-label">Business type</div><div class="mock-val" id="valType">Dentists</div></div>
+            <div class="mock-ico" id="icoType">🦷</div>
+          </div>
+          <div class="mock-row" id="rowCountry">
+            <div><div class="mock-label">Country</div><div class="mock-val" id="valCountry">United States</div></div>
+            <div class="mock-ico" id="icoCountry">🇺🇸</div>
+          </div>
+          <div class="mock-row" id="rowRegion">
+            <div><div class="mock-label" id="labRegion">State</div><div class="mock-val" id="valRegion">Texas</div></div>
+            <div class="mock-ico">📍</div>
+          </div>
+          <div class="mock-deliver" id="rowDeliver">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0c7a45" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <span class="pill">Delivery: CSV within 24 hours</span>
+          </div>
+        </div>
+        <div class="mock-float" id="mockToast">
+          <span class="t-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div><b>Request received</b><br><span>Confirmation email sent</span></div>
+        </div>
+      </div>
+      <p class="guide-cap">Type a niche, pick a country (add a state for the US), choose how many leads — then we email your CSV within 24 hours.</p>
+    </aside>
+
+   </div>
   </div>
 </section>
 
