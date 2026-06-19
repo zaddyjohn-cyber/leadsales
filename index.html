@@ -1808,6 +1808,46 @@
   /* ============================================================
      FAQ — 3-column layout with payment screenshots on both sides
      ============================================================ */
+  /* Convincing band that frames the side payment columns */
+  .faq-proof-band {
+    max-width: 1100px; margin: 0 auto 30px;
+    background: linear-gradient(135deg, rgba(229,102,74,.06) 0%, rgba(201,169,97,.06) 100%);
+    border: 1px solid rgba(229,102,74,.16);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(160,100,70,.06);
+  }
+  .faq-proof-band .fpb-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--c-coral-deep);
+    background: rgba(229,102,74,.10); border: 1px solid rgba(229,102,74,.18);
+    padding: 6px 13px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .faq-proof-band .fpb-pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--c-sage); box-shadow: 0 0 0 0 rgba(138,154,123,.6);
+    animation: pulse 2s infinite;
+  }
+  .faq-proof-band p {
+    font-size: 16px; color: var(--ink); line-height: 1.6;
+    max-width: 820px; margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+  }
+  .faq-proof-band p strong { color: var(--c-coral-deep); font-weight: 700; }
+  .faq-proof-band .fpb-fine {
+    margin-top: 10px; font-size: 13.5px; color: var(--c-ink-soft, #5C4A3F);
+    font-style: italic;
+  }
+  @media (max-width: 640px) {
+    .faq-proof-band { padding: 18px 18px; }
+    .faq-proof-band p { font-size: 14.5px; }
+    .faq-proof-band .fpb-fine { font-size: 12.5px; }
+  }
+
   .faq-layout {
     display:grid;
     grid-template-columns: minmax(0,1fr) minmax(0,2.2fr) minmax(0,1fr);
@@ -3151,7 +3191,16 @@
     <div class="section-head">
       <span class="eyebrow">FAQ</span>
       <h2>Questions, Answered</h2>
+      <p>Every receipt flanking these questions is a real payment that landed <em>after</em> a Nigerian freelancer pitched a business from one of these lead lists.</p>
     </div>
+
+    <!-- Convincing band: ties the side proof columns directly to the lead-pitching playbook -->
+    <div class="faq-proof-band">
+      <span class="fpb-eyebrow"><span class="fpb-pulse"></span> Real outcomes · not stock images</span>
+      <p>Different niches — <strong>dentists, roofers, restaurants, gyms, salons, real estate</strong>. Different countries — <strong>🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 🇸🇦</strong>. Same playbook: <strong>right lead from your CSV → relevant offer → consistent follow-up → paid</strong>. The screenshots on both sides aren't decoration — each one is a wallet/inbox snap from a freelancer who pitched a business they found in a list just like yours.</p>
+      <p class="fpb-fine">Your results depend on your offer, pitch, pricing and follow-through. Leads put the right people in front of you — closing them is still on you.</p>
+    </div>
+
     <div class="faq-layout">
 
       <!-- LEFT — payment screenshots + videos column -->
@@ -3239,24 +3288,12 @@
         <div class="faq-a"><p>You can request almost any local business category, such as restaurants, dentists, lawyers, roofers, gyms, salons, real estate agents, accountants, hotels, schools, clinics, churches, and more.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Will every lead have an email? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Not always. Some businesses may have emails, while others may only have phone numbers, websites, addresses, ratings, and other public details.</p></div>
-      </div>
-      <div class="faq-item">
         <button class="faq-q">What format will I receive? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="faq-a"><p>You will receive a CSV file that can be opened in Excel, Google Sheets, CRMs, or outreach tools.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Can I request businesses without websites? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="faq-a"><p>Yes. You can mention this in the notes field, and the request will be prepared based on your instructions where possible.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I order more than 1,000 leads? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Yes. For larger or custom requests, select custom quantity or contact us.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I use the leads for cold email or outreach? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Yes, but you are responsible for following the marketing, privacy, and outreach laws in your country or the country you are targeting.</p></div>
       </div>
       </div>
 
