@@ -1107,6 +1107,149 @@
   .uv12 .udm-chart svg { width:100%; height:100%; display:block; }
 
   /* ============================================================
+     USE CASES — bring each mockup to life (motion that matches each role)
+     ============================================================ */
+  /* Shared button-pulse used by several cards */
+  @keyframes uvBtnPulse {
+    0%, 85%, 100% { transform: scale(1); box-shadow: 0 4px 10px rgba(229,102,74,.30); }
+    92%           { transform: scale(1.06); box-shadow: 0 6px 14px rgba(229,102,74,.45); }
+    96%           { transform: scale(1); }
+  }
+
+  /* UV1 Web Designers — URL blink + CTA pulse + page lines fade in on first paint */
+  .uv1 .ub-url::after { content:'|'; margin-left:1px; color:var(--c-coral-deep); animation: uvBlink 1.1s step-end infinite; }
+  @keyframes uvBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .uv1 .ub-btn { animation: uvBtnPulse 3.5s ease-in-out infinite; box-shadow: 0 4px 10px rgba(229,102,74,.30); }
+
+  /* UV2 SEO — top result pulses to show it's ranking #1 + search cursor */
+  .uv2 .us-search::after { content:'|'; margin-left:3px; color:var(--c-coral-deep); animation: uvBlink 1.1s step-end infinite; font-weight:700; }
+  .uv2 .us-result.top { animation: uvTopPulse 3.5s ease-in-out infinite; }
+  @keyframes uvTopPulse {
+    0%, 70%, 100% { background: rgba(22,179,100,.07); transform: translateX(0); }
+    82%           { background: rgba(22,179,100,.22); transform: translateX(2px); }
+    90%           { background: rgba(22,179,100,.07); transform: translateX(0); }
+  }
+
+  /* UV3 Social Media — grid cells "light up" in sequence (new posts going live) */
+  .uv3 .usm-grid div { animation: uvGridLight 6s ease-in-out infinite; transform-origin: center; }
+  .uv3 .usm-grid div:nth-child(1){ animation-delay: 0s;    }
+  .uv3 .usm-grid div:nth-child(2){ animation-delay: 0.45s; }
+  .uv3 .usm-grid div:nth-child(3){ animation-delay: 0.90s; }
+  .uv3 .usm-grid div:nth-child(4){ animation-delay: 1.35s; }
+  .uv3 .usm-grid div:nth-child(5){ animation-delay: 1.80s; }
+  .uv3 .usm-grid div:nth-child(6){ animation-delay: 2.25s; }
+  @keyframes uvGridLight {
+    0%, 100% { transform: scale(1); filter: brightness(1) saturate(1); }
+    6%, 10%  { transform: scale(1.10); filter: brightness(1.18) saturate(1.2); }
+  }
+
+  /* UV4 Copywriters — headline accent glow + CTA pulse */
+  .uv4 .ucp-head em { animation: uvHeadGlow 2.8s ease-in-out infinite; }
+  @keyframes uvHeadGlow {
+    0%, 100% { color:#dc2626; text-shadow: 0 0 0 transparent; }
+    50%      { color:#ef4444; text-shadow: 0 0 12px rgba(239,68,68,.45); }
+  }
+  .uv4 .ucp-btn { animation: uvBtnPulse 3s ease-in-out infinite; }
+
+  /* UV5 Cold Email — typing dots + send button glow */
+  .uv5 .uce-body::after {
+    content:''; display:inline-block; width:6px; height:6px; border-radius:50%;
+    background: var(--c-ink-soft, #8B7A6D); margin-left:6px; vertical-align:middle;
+    animation: uvTypingDot 1.4s ease-in-out infinite;
+  }
+  @keyframes uvTypingDot {
+    0%, 80%, 100% { transform: scale(.7); opacity:.4; }
+    40%           { transform: scale(1.3); opacity:1; }
+  }
+  .uv5 .uce-send { animation: uvBtnPulse 2.5s ease-in-out infinite; box-shadow: 0 4px 10px rgba(229,102,74,.30); }
+
+  /* UV6 VAs — done-task checkboxes pulse in sequence (showing tasks completing) */
+  .uv6 .uva-row.done .uva-box { animation: uvCheckPulse 4s ease-in-out infinite; }
+  .uv6 .uva-row.done:nth-of-type(1) .uva-box { animation-delay: 0s;   }
+  .uv6 .uva-row.done:nth-of-type(2) .uva-box { animation-delay: 0.4s; }
+  .uv6 .uva-row.done:nth-of-type(3) .uva-box { animation-delay: 0.8s; }
+  @keyframes uvCheckPulse {
+    0%, 90%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(138,154,123,.0); }
+    95%           { transform: scale(1.45); box-shadow: 0 0 0 4px rgba(138,154,123,.35); }
+  }
+
+  /* UV7 Graphic Designers — color palette swatches pulse one by one */
+  .uv7 .ugd-palette span { animation: uvSwatchPulse 4s ease-in-out infinite; transform-origin: center; }
+  .uv7 .ugd-palette span:nth-child(1){ animation-delay: 0s;   }
+  .uv7 .ugd-palette span:nth-child(2){ animation-delay: 0.3s; }
+  .uv7 .ugd-palette span:nth-child(3){ animation-delay: 0.6s; }
+  .uv7 .ugd-palette span:nth-child(4){ animation-delay: 0.9s; }
+  @keyframes uvSwatchPulse {
+    0%, 80%, 100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+    85%           { transform: scale(1.18) rotate(-2deg); box-shadow: 0 8px 18px rgba(0,0,0,.18); }
+  }
+
+  /* UV8 Video Editors — playhead scrubs across the timeline */
+  .uv8 .uve-playhead { animation: uvPlayhead 4s linear infinite; }
+  @keyframes uvPlayhead {
+    0%   { left: 4%; }
+    100% { left: 96%; }
+  }
+
+  /* UV9 Appointment Setters — slots populate left-to-right, then loop */
+  .uv9 .uap-slot { animation: uvSlotIn 7s ease-in-out infinite; opacity:0; }
+  .uv9 .uap-slot:nth-child(2){ animation-delay: 0.2s; }
+  .uv9 .uap-slot:nth-child(3){ animation-delay: 0.5s; }
+  .uv9 .uap-slot:nth-child(4){ animation-delay: 0.8s; }
+  .uv9 .uap-slot:nth-child(5){ animation-delay: 1.1s; }
+  @keyframes uvSlotIn {
+    0%, 6%   { opacity: 0; transform: translateX(-8px); }
+    14%, 92% { opacity: 1; transform: translateX(0); }
+    100%     { opacity: 1; transform: translateX(0); }
+  }
+
+  /* UV10 Agency Owners — niche cards gentle float (dashboard "alive") */
+  .uv10 .uag-card { animation: uvCardFloat 4s ease-in-out infinite; }
+  .uv10 .uag-card:nth-child(1){ animation-delay: 0s;   }
+  .uv10 .uag-card:nth-child(2){ animation-delay: 0.5s; }
+  .uv10 .uag-card:nth-child(3){ animation-delay: 1.0s; }
+  @keyframes uvCardFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+
+  /* UV11 Funnel Builders — stages drop in top-to-bottom, looping */
+  .uv11 .ufn { animation: uvFunnelDrop 5s ease-in-out infinite; opacity:0; }
+  .uv11 .ufn-1 { animation-delay: 0s;   }
+  .uv11 .ufn-2 { animation-delay: 0.35s; }
+  .uv11 .ufn-3 { animation-delay: 0.70s; }
+  .uv11 .ufn-4 { animation-delay: 1.05s; }
+  @keyframes uvFunnelDrop {
+    0%, 8%   { opacity: 0; transform: translateY(-6px); }
+    18%, 92% { opacity: 1; transform: translateY(0); }
+    100%     { opacity: 1; transform: translateY(0); }
+  }
+
+  /* UV12 Digital Marketers — chart line draws in, loops */
+  .uv12 .udm-chart polyline:nth-of-type(2) {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: uvDraw 4.5s ease-in-out infinite;
+  }
+  @keyframes uvDraw {
+    0%, 5%   { stroke-dashoffset: 220; }
+    65%, 95% { stroke-dashoffset: 0; }
+    100%     { stroke-dashoffset: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .uv1 .ub-url::after, .uv1 .ub-btn, .uv2 .us-search::after, .uv2 .us-result.top,
+    .uv3 .usm-grid div, .uv4 .ucp-head em, .uv4 .ucp-btn,
+    .uv5 .uce-body::after, .uv5 .uce-send, .uv6 .uva-row.done .uva-box,
+    .uv7 .ugd-palette span, .uv8 .uve-playhead, .uv9 .uap-slot,
+    .uv10 .uag-card, .uv11 .ufn, .uv12 .udm-chart polyline:nth-of-type(2) {
+      animation: none !important;
+    }
+    .uv9 .uap-slot, .uv11 .ufn { opacity: 1; transform: none; }
+    .uv12 .udm-chart polyline:nth-of-type(2) { stroke-dashoffset: 0; }
+  }
+
+  /* ============================================================
      UNIVERSAL .uviz MEDIA — real video / image / cross-fade / Ken Burns
      Used by Why-Choose-Us cards (and any .uviz with real assets).
      ============================================================ */
@@ -1132,6 +1275,182 @@
   .ng-flag .ng-stamp small { display:block; font-size:10px; color:#008753; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
   .ng-flag .ng-stamp strong { display:block; font-size:20px; color:var(--ink); font-weight:900; margin:4px 0 2px; line-height:1; }
   .ng-flag .ng-stamp em { display:block; font-size:10px; color:var(--body); font-weight:600; font-style:normal; }
+
+  /* ============================================================
+     WHY-CHOOSE-US — animated visuals that literally show the promise
+     ============================================================ */
+
+  /* WV-CUST — "Custom lead requests": form cycling through scenarios */
+  .cust-req {
+    background: linear-gradient(160deg, #FDF4E8 0%, #F8E1CB 100%);
+    display:flex; align-items:center; justify-content:center; padding:14px;
+  }
+  .cust-req .cr-form {
+    width:92%;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius:12px; padding:10px;
+    box-shadow: 0 10px 24px rgba(160,100,70,.18);
+    display:flex; flex-direction:column; gap:5px;
+  }
+  .cust-req .cr-row {
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    background:#fff; border:1px solid rgba(42,31,26,.10); border-radius:6px;
+    padding:5px 9px; font-size:10.5px;
+  }
+  .cust-req .cr-label {
+    color:#8B7A6D; font-weight:700;
+    font-size:8.5px; text-transform:uppercase; letter-spacing:.06em;
+    font-family:'Inter',sans-serif;
+  }
+  .cust-req .cr-val {
+    color:var(--ink); font-weight:800;
+    font-family:'Inter',sans-serif;
+    transition: opacity .26s ease, transform .26s ease;
+  }
+  .cust-req .cr-val.swap-out { opacity:0; transform: translateY(-4px); }
+  .cust-req .cr-btn {
+    margin-top:4px; text-align:center;
+    background: linear-gradient(135deg, var(--c-coral), var(--c-coral-deep));
+    color:#fff; font-family:'Inter',sans-serif;
+    font-weight:800; font-size:11px; padding:6px; border-radius:6px;
+    box-shadow: 0 4px 10px rgba(229,102,74,.4);
+    animation: crBtnPulse 2.8s ease-in-out infinite;
+  }
+  @keyframes crBtnPulse {
+    0%, 88%, 100% { transform: scale(1); box-shadow: 0 4px 10px rgba(229,102,74,.4); }
+    92%           { transform: scale(.96); box-shadow: 0 2px 6px rgba(229,102,74,.5); }
+    96%           { transform: scale(1.04); box-shadow: 0 8px 18px rgba(229,102,74,.55); }
+  }
+
+  /* WV-F24 — "Fast 24-hour delivery": ring fills + envelope flies in + delivered ping */
+  .fast-24 {
+    background: linear-gradient(160deg, #FDF4E8 0%, #F8D4BB 100%);
+    display:grid; place-items:center; padding:14px;
+    position:relative; overflow:hidden;
+  }
+  .fast-24 .f24-clock { position:relative; width:72%; aspect-ratio:1; max-height:100%; }
+  .fast-24 .f24-clock svg { width:100%; height:100%; display:block; }
+  .fast-24 .f24-ring {
+    stroke-dasharray: 276.46;
+    stroke-dashoffset: 276.46;
+    animation: ringFill 4.5s ease-in-out infinite;
+  }
+  @keyframes ringFill {
+    0%   { stroke-dashoffset: 276.46; }
+    55%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+  }
+  .fast-24 .f24-time {
+    position:absolute; inset:0;
+    display:grid; place-items:center; text-align:center; line-height:1;
+    font-family:'Inter',sans-serif;
+  }
+  .fast-24 .f24-time b { display:block; font-size:30px; font-weight:900; color:var(--ink); }
+  .fast-24 .f24-time span {
+    font-size:10px; color:var(--c-coral-deep);
+    font-weight:800; text-transform:uppercase; letter-spacing:.08em;
+    margin-top:2px; display:block;
+  }
+  .fast-24 .f24-envelope {
+    position:absolute; top:10px; right:10px;
+    width:36px; height:36px; border-radius:8px;
+    background:#fff; border:1.5px solid var(--c-coral);
+    display:grid; place-items:center;
+    font-size:17px;
+    box-shadow: 0 6px 14px rgba(229,102,74,.35);
+    opacity:0;
+    animation: envIn 4.5s ease-in-out infinite;
+  }
+  @keyframes envIn {
+    0%, 60%   { opacity:0; transform: translate(24px,-12px) scale(.55) rotate(-12deg); }
+    72%       { opacity:1; transform: translate(0,0) scale(1.15) rotate(0deg); }
+    82%, 100% { opacity:1; transform: translate(0,0) scale(1) rotate(0deg); }
+  }
+  .fast-24 .f24-notif {
+    position:absolute; bottom:12px; left:50%; transform: translateX(-50%);
+    background: var(--c-sage); color:#fff;
+    font-size:10.5px; font-weight:800; padding:5px 12px; border-radius:999px;
+    font-family:'Inter',sans-serif;
+    opacity:0;
+    animation: notifIn 4.5s ease-in-out infinite;
+    white-space:nowrap;
+    box-shadow: 0 4px 12px rgba(138,154,123,.5);
+  }
+  @keyframes notifIn {
+    0%, 75%   { opacity:0; transform: translate(-50%, 10px) scale(.7); }
+    85%       { opacity:1; transform: translate(-50%, 0) scale(1.12); }
+    92%, 100% { opacity:1; transform: translate(-50%, 0) scale(1); }
+  }
+
+  /* WV-NG — "Built for Nigerians": animated flag + city pulse + pulsing stamp */
+  .ng-anim { background:#fff; position:relative; padding:0; overflow:hidden; }
+  .ng-anim .ng-flag-bg { position:absolute; inset:0; display:flex; }
+  .ng-anim .ng-flag-bg > div { flex:1; }
+  .ng-anim .ng-flag-bg .green { background:#008753; }
+  .ng-anim .ng-flag-bg .white { background:#fff; }
+  .ng-anim .ng-stamp {
+    position:absolute; top:36%; left:50%;
+    transform: translate(-50%,-50%) rotate(-2deg);
+    background:#fff; border:3px solid #008753;
+    border-radius:10px; padding:8px 16px;
+    text-align:center; line-height:1.15;
+    box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    animation: stampPulse 3.5s ease-in-out infinite;
+    z-index:2;
+  }
+  @keyframes stampPulse {
+    0%, 100% { transform: translate(-50%,-50%) rotate(-2deg) scale(1); }
+    50%      { transform: translate(-50%,-50%) rotate(-2deg) scale(1.05); }
+  }
+  .ng-anim .ng-stamp small {
+    display:block; font-size:9px; color:#008753; font-weight:800;
+    text-transform:uppercase; letter-spacing:.08em;
+    font-family:'Inter',sans-serif;
+  }
+  .ng-anim .ng-stamp strong {
+    display:block; font-size:18px; color:var(--ink); font-weight:900;
+    margin:3px 0 2px; line-height:1;
+    font-family:'Inter',sans-serif;
+  }
+  .ng-anim .ng-stamp em {
+    display:block; font-size:9.5px; color:var(--body); font-weight:600;
+    font-style:normal; font-family:'Inter',sans-serif;
+  }
+  .ng-anim .ng-cities {
+    position:absolute; bottom:10px; left:0; right:0;
+    display:flex; flex-wrap:wrap; gap:4px;
+    justify-content:center; padding:0 10px; z-index:2;
+  }
+  .ng-anim .ng-cities span {
+    background: rgba(255,255,255,.95);
+    border:1px solid rgba(0,135,83,.35);
+    color:#006640;
+    font-family:'Inter',sans-serif;
+    font-size:9px; font-weight:700;
+    padding:2px 7px; border-radius:999px;
+    animation: cityPulse 5s ease-in-out infinite;
+  }
+  .ng-anim .ng-cities span:nth-child(1){ animation-delay:0s; }
+  .ng-anim .ng-cities span:nth-child(2){ animation-delay:.6s; }
+  .ng-anim .ng-cities span:nth-child(3){ animation-delay:1.2s; }
+  .ng-anim .ng-cities span:nth-child(4){ animation-delay:1.8s; }
+  .ng-anim .ng-cities span:nth-child(5){ animation-delay:2.4s; }
+  .ng-anim .ng-cities span:nth-child(6){ animation-delay:3s; }
+  @keyframes cityPulse {
+    0%, 100%   { transform: scale(1); box-shadow: 0 2px 6px rgba(0,135,83,.15); }
+    8%, 14%    { transform: scale(1.12); box-shadow: 0 4px 12px rgba(0,135,83,.45); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cust-req .cr-btn, .fast-24 .f24-ring, .fast-24 .f24-envelope,
+    .fast-24 .f24-notif, .ng-anim .ng-stamp, .ng-anim .ng-cities span {
+      animation: none !important;
+    }
+    .fast-24 .f24-ring { stroke-dashoffset: 0; }
+    .fast-24 .f24-envelope, .fast-24 .f24-notif { opacity: 1; transform: none; }
+  }
 
   /* ============================================================
      FORM SECTION
@@ -2439,41 +2758,62 @@
     </div>
     <div class="grid g3">
 
-      <!-- 1. Custom lead requests → REAL VIDEO of a custom no-website filter -->
+      <!-- 1. Custom lead requests → animated request form cycling through niche/country/qty/notes -->
       <div class="card ucard">
-        <div class="uviz" aria-hidden="true">
-          <video src="biz%20without%20websites%20for%20web%20designers.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Custom-filtered no-website leads built specifically for a web designer"></video>
-          <span class="vid-pulse" title="live"></span>
+        <div class="uviz cust-req" aria-hidden="true">
+          <div class="cr-form">
+            <div class="cr-row"><span class="cr-label">Niche</span><span class="cr-val" id="crNiche">Dentists</span></div>
+            <div class="cr-row"><span class="cr-label">Country</span><span class="cr-val" id="crCountry">🇺🇸 United States</span></div>
+            <div class="cr-row"><span class="cr-label">Quantity</span><span class="cr-val" id="crQty">500 leads</span></div>
+            <div class="cr-row"><span class="cr-label">Notes</span><span class="cr-val" id="crNotes">No-website only</span></div>
+            <div class="cr-btn">Submit request</div>
+          </div>
           <span class="u-badge green">Built to your spec</span>
         </div>
         <h3>Custom lead requests</h3>
         <p>Every list is built to your niche, location, quantity, and instructions.</p>
       </div>
 
-      <!-- 3. Fast 24-hour delivery → REAL Maps lookup of a delivered lead (Ken Burns) -->
+      <!-- 2. Fast 24-hour delivery → animated 24h ring + envelope arriving + delivered ping -->
       <div class="card ucard">
-        <div class="uviz" aria-hidden="true">
-          <img class="kb" src="assets/sample-leads-maps-poster.jpg" alt="Real lead looked up live on Maps — delivered ready to use in 24 hours" loading="lazy" />
+        <div class="uviz fast-24" aria-hidden="true">
+          <div class="f24-clock">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(229,102,74,.18)" stroke-width="6"/>
+              <circle class="f24-ring" cx="50" cy="50" r="44" fill="none"
+                      stroke="#E5664A" stroke-width="6" stroke-linecap="round"
+                      transform="rotate(-90 50 50)"/>
+            </svg>
+            <div class="f24-time"><b>24</b><span>hours</span></div>
+          </div>
+          <div class="f24-envelope">📧</div>
+          <div class="f24-notif">✓ CSV in inbox</div>
           <span class="u-badge green">⚡ Inbox in 24 hrs</span>
         </div>
         <h3>Fast 24-hour delivery</h3>
         <p>Submit your request and get your CSV in your inbox within 24 hours.</p>
       </div>
 
-      <!-- 3. Built for Nigerians → NG flag with "Made in Nigeria" stamp -->
+      <!-- 3. Built for Nigerians → flag + pulsing Naija city chips + pulsing stamp -->
       <div class="card ucard">
-        <div class="uviz" aria-hidden="true">
-          <div class="ng-flag">
-            <div class="ng-green"></div>
-            <div class="ng-white"></div>
-            <div class="ng-green"></div>
-            <div class="ng-stamp">
-              <small>Made in</small>
-              <strong>🇳🇬 Nigeria</strong>
-              <em>for Naija freelancers</em>
-            </div>
+        <div class="uviz ng-anim" aria-hidden="true">
+          <div class="ng-flag-bg">
+            <div class="green"></div>
+            <div class="white"></div>
+            <div class="green"></div>
+          </div>
+          <div class="ng-stamp">
+            <small>Made in</small>
+            <strong>🇳🇬 Nigeria</strong>
+            <em>for Naija freelancers</em>
+          </div>
+          <div class="ng-cities">
+            <span>Lagos</span>
+            <span>Abuja</span>
+            <span>P. Harcourt</span>
+            <span>Ibadan</span>
+            <span>Kano</span>
+            <span>Enugu</span>
           </div>
           <span class="u-badge green">🇳🇬 Naija-first</span>
         </div>
@@ -3321,6 +3661,45 @@ form.addEventListener('submit', function (e) {
     new IntersectionObserver((e) => { visible = e[0].isIntersecting; }, { threshold: 0.15 }).observe(mock);
   }
   loop();
+})();
+
+/* ================================================================
+   "Custom lead requests" card — cycle through realistic request scenarios
+   so the form visually rewrites itself every few seconds.
+   ================================================================ */
+(function () {
+  const niche = document.getElementById('crNiche');
+  if (!niche) return;
+  const country = document.getElementById('crCountry');
+  const qty     = document.getElementById('crQty');
+  const notes   = document.getElementById('crNotes');
+
+  const SCENARIOS = [
+    { niche:'Dentists',          country:'🇺🇸 United States',  qty:'500 leads',   notes:'No-website only' },
+    { niche:'Roofers',           country:'🇬🇧 United Kingdom', qty:'250 leads',   notes:'Low Google ratings' },
+    { niche:'Restaurants',       country:'🇨🇦 Canada',         qty:'1,000 leads', notes:'Active on Instagram' },
+    { niche:'Real estate',       country:'🇦🇺 Australia',      qty:'500 leads',   notes:'Top-rated firms' },
+    { niche:'Gyms',              country:'🇦🇪 UAE',            qty:'300 leads',   notes:'In Dubai only' },
+    { niche:'Salons',            country:'🇺🇸 United States',  qty:'750 leads',   notes:'Old/no website' },
+  ];
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  function swap(el, val) {
+    el.classList.add('swap-out');
+    setTimeout(() => { el.textContent = val; el.classList.remove('swap-out'); }, 260);
+  }
+
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % SCENARIOS.length;
+    const s = SCENARIOS[i];
+    swap(niche, s.niche);
+    setTimeout(() => swap(country, s.country),  80);
+    setTimeout(() => swap(qty,     s.qty),     160);
+    setTimeout(() => swap(notes,   s.notes),   240);
+  }, 2800);
 })();
 
 /* ================================================================
