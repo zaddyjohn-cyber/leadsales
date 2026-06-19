@@ -27,3 +27,4 @@ WhatsApp Image *.jpg
 # ...except web-optimised demo clips published in /assets
 !assets/*.mp4
 _censor_bybit.py
+_censor_stripe.py
