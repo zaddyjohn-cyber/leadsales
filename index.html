@@ -1044,29 +1044,110 @@
     display:grid; place-items:center; font-size:8px; color:#fff; font-weight:900; line-height:1; }
   .uv6 .uva-row.done .uva-box { background:var(--green); border-color:var(--green); }
 
-  /* UV7 — Graphic Designers: brand board */
-  .uv7 { background:#fff; padding:14px; display:flex; flex-direction:column; gap:10px; }
-  .uv7 .ugd-logo { font-size:18px; font-weight:900; color:var(--ink); letter-spacing:-.02em; line-height:1; }
-  .uv7 .ugd-logo span { color:var(--blue); font-weight:300; }
-  .uv7 .ugd-palette { display:flex; gap:5px; }
-  .uv7 .ugd-palette span { width:30px; height:30px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,.08); }
-  .uv7 .ugd-type { font-size:9.5px; color:var(--muted); display:flex; align-items:center; gap:8px; margin-top:auto; line-height:1.3; }
-  .uv7 .ugd-type strong { font-size:22px; color:var(--ink); font-weight:900; line-height:1; }
+  /* UV7 — Graphic Designers: cycling portfolio of design deliverables */
+  .uv7 { background: linear-gradient(160deg,#FDF4E8,#F6E9D5); padding:0; position:relative; overflow:hidden; }
+  .uv7 .gd-stage { position:absolute; inset:0; }
+  .uv7 .gd-design {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:14px; gap:5px; text-align:center;
+    opacity:0; animation: gdShow 12.5s ease-in-out infinite;
+  }
+  .uv7 .gd-design:nth-of-type(1){ animation-delay: 0s;   }
+  .uv7 .gd-design:nth-of-type(2){ animation-delay: 2.5s; }
+  .uv7 .gd-design:nth-of-type(3){ animation-delay: 5s;   }
+  .uv7 .gd-design:nth-of-type(4){ animation-delay: 7.5s; }
+  .uv7 .gd-design:nth-of-type(5){ animation-delay: 10s;  }
+  @keyframes gdShow {
+    0%, 100% { opacity:0; transform: scale(.94); }
+    4%, 18%  { opacity:1; transform: scale(1); }
+    22%      { opacity:0; transform: scale(.94); }
+  }
+  /* D1 Logo / wordmark */
+  .uv7 .gd-d1 { background: linear-gradient(135deg,#fef3c7,#fff); }
+  .uv7 .gd-d1 .gd-logo { font-size:22px; font-weight:900; letter-spacing:-.02em; color:var(--ink); font-family:'Inter',sans-serif; line-height:1; }
+  .uv7 .gd-d1 .gd-logo span { color:#dc2626; font-weight:300; padding:0 2px; }
+  .uv7 .gd-d1 .gd-tag { font-size:9px; color:#666; letter-spacing:.3em; text-transform:uppercase; font-family:'Inter',sans-serif; font-weight:600; margin-top:4px; }
+  /* D2 Poster / flyer */
+  .uv7 .gd-d2 { background: linear-gradient(135deg,#1d6fff 0%, #0a4fd4 100%); color:#fff; }
+  .uv7 .gd-d2 .gd-poster-tag { font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; background:#fff; color:#1d6fff; padding:3px 9px; border-radius:3px; font-family:'Inter',sans-serif; font-weight:900; }
+  .uv7 .gd-d2 .gd-poster-head { font-size:22px; font-weight:900; line-height:1.05; font-family:'Inter',sans-serif; margin:4px 0; }
+  .uv7 .gd-d2 .gd-poster-head span { display:block; font-size:10px; font-weight:500; opacity:.85; letter-spacing:.04em; text-transform:none; }
+  .uv7 .gd-d2 .gd-poster-cta { font-size:9.5px; padding:4px 12px; border:1.5px solid #fff; border-radius:999px; font-family:'Inter',sans-serif; font-weight:700; }
+  /* D3 Menu */
+  .uv7 .gd-d3 { background: linear-gradient(160deg,#FDF4E8,#F8E1CB); padding:16px 22px; align-items:stretch; }
+  .uv7 .gd-d3 .gd-menu-head { font-family:'Cormorant Garamond',serif; font-size:14px; font-style:italic; color:var(--ink); margin-bottom:6px; text-align:center; }
+  .uv7 .gd-d3 .gd-menu-item { font-family:'Cormorant Garamond',serif; font-size:12px; color:var(--ink); width:100%; text-align:left; border-bottom:1px dotted rgba(0,0,0,.22); padding:3px 0; }
+  /* D4 Social post */
+  .uv7 .gd-d4 { background:#fff; padding:0; align-items:stretch; justify-content:flex-start; }
+  .uv7 .gd-d4 .gd-social { width:100%; height:100%; display:flex; flex-direction:column; }
+  .uv7 .gd-d4 .gd-social-img { flex:1; background: linear-gradient(135deg,#f43f5e 0%,#a855f7 100%); position:relative; }
+  .uv7 .gd-d4 .gd-social-img::after { content:'✨'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:30px; }
+  .uv7 .gd-d4 .gd-social-cap { padding:7px 12px; font-family:'Inter',sans-serif; font-size:11px; font-weight:700; color:var(--ink); text-align:left; }
+  .uv7 .gd-d4 .gd-social-cap small { display:block; color:#999; font-weight:500; font-size:9.5px; margin-top:1px; }
+  /* D5 Business card */
+  .uv7 .gd-d5 { background:#f5f5f4; }
+  .uv7 .gd-d5 .gd-bc { background:#fff; padding:12px 16px; border-radius:6px; box-shadow:0 10px 24px rgba(0,0,0,.18); text-align:left; min-width:60%; }
+  .uv7 .gd-d5 .gd-bc-name { font-family:'Inter',sans-serif; font-size:13px; font-weight:900; color:var(--ink); letter-spacing:.04em; }
+  .uv7 .gd-d5 .gd-bc-role { font-family:'Inter',sans-serif; font-size:9px; color:var(--c-coral-deep); font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin:2px 0 8px; }
+  .uv7 .gd-d5 .gd-bc-info { font-family:'Inter',sans-serif; font-size:8.5px; color:#666; }
 
-  /* UV8 — Video Editors: timeline */
-  .uv8 { background:linear-gradient(160deg,#0f172a 0%,#1e293b 100%); padding:12px; display:flex; flex-direction:column; gap:6px; }
-  .uv8 .uve-preview { background:#000; border-radius:6px; height:55%; position:relative;
-    display:grid; place-items:center; color:#fff; font-size:18px;
-    border:1px solid rgba(255,255,255,.1); overflow:hidden; }
-  .uv8 .uve-preview::before { content:""; position:absolute; inset:0;
-    background:linear-gradient(135deg,#1d6fff 0%,transparent 50%,#f43f5e 100%);
-    opacity:.55; }
-  .uv8 .uve-preview span { position:relative; z-index:1; }
+  /* UV8 — Video Editors: preview cycling industry videos + scrubbing playhead + "Now editing" pill */
+  .uv8 { background:linear-gradient(160deg,#0f172a 0%,#1e293b 100%); padding:10px; display:flex; flex-direction:column; gap:6px; position:relative; }
+  .uv8 .uve-now {
+    position:absolute; top:10px; left:10px; z-index:4;
+    background:rgba(0,0,0,.65); color:#fff;
+    font-family:'Inter',sans-serif; font-size:9.5px; font-weight:700;
+    padding:3px 9px; border-radius:999px; letter-spacing:.03em;
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  }
+  .uv8 .uve-now .uve-rec {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:#ef4444; margin-right:5px; vertical-align:middle;
+    animation: ueRec 1.4s ease-in-out infinite;
+  }
+  @keyframes ueRec { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .uv8 .uve-preview {
+    background:#000; border-radius:6px; height:62%; position:relative;
+    border:1px solid rgba(255,255,255,.1); overflow:hidden;
+  }
+  .uv8 .uve-thumb {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; color:#fff;
+    font-family:'Inter',sans-serif; font-size:10.5px; font-weight:900;
+    letter-spacing:.05em; text-transform:uppercase;
+    opacity:0;
+    animation: veThumb 12s ease-in-out infinite;
+  }
+  .uv8 .uve-thumb:nth-of-type(1){ background:linear-gradient(135deg,#1d6fff,#7c3aed); animation-delay:0s; }
+  .uv8 .uve-thumb:nth-of-type(2){ background:linear-gradient(135deg,#16b364,#0a4fd4); animation-delay:3s; }
+  .uv8 .uve-thumb:nth-of-type(3){ background:linear-gradient(135deg,#f59e0b,#dc2626); animation-delay:6s; }
+  .uv8 .uve-thumb:nth-of-type(4){ background:linear-gradient(135deg,#ec4899,#8b5cf6); animation-delay:9s; }
+  @keyframes veThumb {
+    0%, 100% { opacity:0; transform: scale(.98); }
+    4%, 22%  { opacity:1; transform: scale(1); }
+    26%      { opacity:0; transform: scale(.98); }
+  }
+  .uv8 .uve-thumb-ico { font-size:28px; margin-bottom:6px; line-height:1; }
+  .uv8 .uve-play-icon {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    z-index:3; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,.95); color:var(--c-coral-deep);
+    display:grid; place-items:center; font-size:13px;
+    box-shadow:0 8px 20px rgba(0,0,0,.5);
+  }
   .uv8 .uve-timeline { position:relative; flex:1; background:rgba(255,255,255,.05);
     border-radius:4px; padding:4px; display:flex; gap:2px; align-items:stretch; }
   .uv8 .uve-clip { flex:1; background:linear-gradient(180deg,#1d6fff,#0a4fd4); border-radius:2px; }
   .uv8 .uve-clip.alt { background:linear-gradient(180deg,#f59e0b,#d97706); }
-  .uv8 .uve-playhead { position:absolute; top:0; bottom:0; left:55%; width:2px; background:#fff; box-shadow:0 0 8px rgba(255,255,255,.6); }
+  .uv8 .uve-playhead { position:absolute; top:0; bottom:0; left:4%; width:2px; background:#fff; box-shadow:0 0 8px rgba(255,255,255,.6); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .uv7 .gd-design, .uv8 .uve-thumb, .uv8 .uve-now .uve-rec { animation: none !important; }
+    .uv7 .gd-design:nth-of-type(1), .uv8 .uve-thumb:nth-of-type(1) { opacity: 1 !important; transform: none !important; }
+  }
 
   /* UV9 — Appointment Setters: day schedule */
   .uv9 { background:linear-gradient(160deg,#eff6ff 0%,#f0fdf4 100%); padding:12px; display:flex; flex-direction:column; gap:4px; }
@@ -2674,27 +2755,61 @@
         <p>Use the leads to help clients with research, outreach, and prospecting.</p>
       </div>
 
-      <!-- 7. Graphic Designers — brand board (logo + palette + type) -->
+      <!-- 7. Graphic Designers — animated portfolio reel cycling 5 design deliverables -->
       <div class="card ucard">
         <div class="uviz uv7" aria-hidden="true">
-          <div class="ugd-logo">BRIGHT<span>·</span>SMILE</div>
-          <div class="ugd-palette">
-            <span style="background:#1d6fff"></span>
-            <span style="background:#16b364"></span>
-            <span style="background:#f59e0b"></span>
-            <span style="background:#0b1f3a"></span>
+          <div class="gd-stage">
+            <!-- D1 Logo / wordmark -->
+            <div class="gd-design gd-d1">
+              <div class="gd-logo">BRIGHT<span>·</span>SMILE</div>
+              <div class="gd-tag">Dental Studio</div>
+            </div>
+            <!-- D2 Poster / flyer -->
+            <div class="gd-design gd-d2">
+              <span class="gd-poster-tag">Grand Opening</span>
+              <div class="gd-poster-head">50% OFF<span>your first visit</span></div>
+              <span class="gd-poster-cta">Book Now →</span>
+            </div>
+            <!-- D3 Menu -->
+            <div class="gd-design gd-d3">
+              <div class="gd-menu-head">— Spring Menu —</div>
+              <div class="gd-menu-item">Tomato Bisque ........ $12</div>
+              <div class="gd-menu-item">Truffle Risotto ......... $24</div>
+              <div class="gd-menu-item">Wagyu Burger ......... $28</div>
+            </div>
+            <!-- D4 Social post -->
+            <div class="gd-design gd-d4">
+              <div class="gd-social">
+                <div class="gd-social-img"></div>
+                <div class="gd-social-cap">New collection drop<br><small>@dentaldigital</small></div>
+              </div>
+            </div>
+            <!-- D5 Business card -->
+            <div class="gd-design gd-d5">
+              <div class="gd-bc">
+                <div class="gd-bc-name">SARAH MILLER</div>
+                <div class="gd-bc-role">Brand Designer</div>
+                <div class="gd-bc-info">sarah@studio.co · (555) 0142</div>
+              </div>
+            </div>
           </div>
-          <div class="ugd-type"><strong>Aa</strong><span>Inter Display<br>Bold · Regular</span></div>
-          <span class="u-badge blue">🎨 Brand kit v2</span>
+          <span class="u-badge blue">🎨 Portfolio reel</span>
         </div>
         <h3>Graphic Designers</h3>
         <p>Pitch logos, flyers, brand identity, menus, brochures, and social media designs.</p>
       </div>
 
-      <!-- 8. Video Editors — editor preview + cut-up timeline -->
+      <!-- 8. Video Editors — preview cycling client-industry videos + scrubbing playhead -->
       <div class="card ucard">
         <div class="uviz uv8" aria-hidden="true">
-          <div class="uve-preview"><span>▶</span></div>
+          <span class="uve-now" id="ueNow"><span class="uve-rec"></span>Coach reel</span>
+          <div class="uve-preview">
+            <div class="uve-thumb"><span class="uve-thumb-ico">🎙️</span>Coach Reel</div>
+            <div class="uve-thumb"><span class="uve-thumb-ico">🏠</span>Property Tour</div>
+            <div class="uve-thumb"><span class="uve-thumb-ico">🍝</span>Restaurant Promo</div>
+            <div class="uve-thumb"><span class="uve-thumb-ico">💪</span>Gym Intro</div>
+            <div class="uve-play-icon">▶</div>
+          </div>
           <div class="uve-timeline">
             <div class="uve-clip"></div>
             <div class="uve-clip alt"></div>
@@ -3834,6 +3949,23 @@ form.addEventListener('submit', function (e) {
     }
   }
   loop();
+})();
+
+/* ================================================================
+   UV8 Video Editors — sync "Now editing" pill with the thumbnail cycle.
+   The 4 thumbnails crossfade on a 12s loop (3s each). Pill label tracks them.
+   ================================================================ */
+(function () {
+  const el = document.getElementById('ueNow');
+  if (!el) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  const LABELS = ['Coach reel', 'Property tour', 'Restaurant promo', 'Gym intro'];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % LABELS.length;
+    el.innerHTML = '<span class="uve-rec"></span>' + LABELS[i];
+  }, 3000);
 })();
 
 /* ================================================================
