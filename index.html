@@ -1396,6 +1396,72 @@
   }
 
   /* ============================================================
+     COUNTRY SEARCH animation for "50+ countries" benefit card
+     ============================================================ */
+  .bv-csearch {
+    background: linear-gradient(160deg, #f1f5ff 0%, #fff 60%, #fff5f5 100%);
+    padding: 14px; display:flex; flex-direction:column; gap:9px; isolation:isolate;
+    position:relative;
+  }
+  .bv-csearch .cs-bar {
+    display:flex; align-items:center; gap:8px;
+    background:#fff; border:1.5px solid var(--line); border-radius:10px;
+    padding:8px 10px; box-shadow: 0 4px 12px rgba(11,31,58,.06);
+    transition: border-color .25s, box-shadow .25s;
+  }
+  .bv-csearch .cs-flag {
+    font-size: 18px; flex-shrink: 0;
+    animation: csFlagFade 4.5s ease-in-out infinite;
+  }
+  @keyframes csFlagFade {
+    0%, 5%, 95%, 100% { opacity: 0.4; transform: scale(.85); }
+    10%, 88%          { opacity: 1; transform: scale(1); }
+  }
+  .bv-csearch .cs-text {
+    flex:1; font-size: 12.5px; font-weight: 700; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    min-height: 16px;
+  }
+  .bv-csearch .cs-caret {
+    display:inline-block; width:2px; height:14px; background: var(--blue);
+    margin-left:1px; animation: csBlink .9s step-end infinite;
+  }
+  @keyframes csBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .bv-csearch .cs-btn {
+    flex-shrink:0; width:26px; height:26px; border-radius:6px;
+    background: var(--gradient); color:#fff;
+    display:grid; place-items:center;
+    box-shadow: 0 4px 10px rgba(29,111,255,.35);
+  }
+  .bv-csearch .cs-results { display:flex; flex-direction:column; gap:6px; flex:1; }
+  .bv-csearch .cs-result {
+    display:flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:7px 10px;
+    opacity:0; transform: translateY(6px);
+    animation: csResultIn 4.5s ease-in-out infinite;
+  }
+  .bv-csearch .cs-result:nth-of-type(1) { animation-delay: 1.2s; }
+  .bv-csearch .cs-result:nth-of-type(2) { animation-delay: 1.5s; }
+  .bv-csearch .cs-result:nth-of-type(3) { animation-delay: 1.8s; }
+  @keyframes csResultIn {
+    0%, 15%   { opacity:0; transform: translateY(6px); }
+    25%, 88%  { opacity:1; transform: translateY(0); }
+    100%      { opacity:0; transform: translateY(6px); }
+  }
+  .bv-csearch .cs-pin { font-size:11px; flex-shrink:0; }
+  .bv-csearch .cs-name {
+    flex:1; font-size:11.5px; font-weight:700; color: var(--ink);
+    white-space:nowrap; overflow:hidden; text-overflow: ellipsis;
+  }
+  .bv-csearch .cs-rate {
+    font-size:10px; font-weight:700; color: #f59e0b; flex-shrink:0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bv-csearch .cs-flag, .bv-csearch .cs-caret, .bv-csearch .cs-result { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ============================================================
      UNIVERSAL .uviz MEDIA — real video / image / cross-fade / Ken Burns
      Used by Why-Choose-Us cards (and any .uviz with real assets).
      ============================================================ */
@@ -2391,7 +2457,7 @@
       <!-- BENEFIT 2 — Pitch any service: REAL VIDEO of inbox flooded with pitch replies -->
       <div class="card bcard">
         <div class="bviz">
-          <video src="800%2B%20replies.mp4"
+          <video src="assets/inbox-replies.mp4" poster="assets/inbox-replies-poster.jpg"
                  autoplay muted loop playsinline preload="metadata"
                  aria-label="Real inbox flooded with 800+ replies from pitched services"></video>
           <span class="vid-pulse" title="live"></span>
@@ -2401,14 +2467,22 @@
         <p>Website design, SEO, ads, branding, copywriting, social media, video editing, and more.</p>
       </div>
 
-      <!-- BENEFIT 3 — 50+ countries: REAL VIDEO of a multi-country leads CSV -->
+      <!-- BENEFIT 3 — 50+ countries: live animated search cycling through countries -->
       <div class="card bcard">
-        <div class="bviz">
-          <video src="another%20leads%20sample.mp4"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Sample CSV showing leads from many different countries"></video>
+        <div class="bviz bv-csearch" aria-hidden="true">
+          <div class="cs-bar">
+            <span class="cs-flag" id="csFlag">🇺🇸</span>
+            <span class="cs-text" id="csText">Dentists in United States</span>
+            <span class="cs-caret"></span>
+            <span class="cs-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+          </div>
+          <div class="cs-results">
+            <div class="cs-result"><span class="cs-pin">📍</span><span class="cs-name" id="csR1">Bright Smile Dental</span><span class="cs-rate">★ 4.8</span></div>
+            <div class="cs-result"><span class="cs-pin">📍</span><span class="cs-name" id="csR2">Lone Star Family Dental</span><span class="cs-rate">★ 4.6</span></div>
+            <div class="cs-result"><span class="cs-pin">📍</span><span class="cs-name" id="csR3">Hill Country Orthodontics</span><span class="cs-rate">★ 4.9</span></div>
+          </div>
           <span class="vid-pulse" title="live"></span>
-          <span class="biz-badge blue">🇺🇸 🇬🇧 🇨🇦 🇦🇺 🇩🇪 🇦🇪 + 44 more</span>
+          <span class="biz-badge blue">🌍 50+ countries</span>
         </div>
         <h3>50+ countries</h3>
         <p>Target businesses in the USA, UK, Canada, Australia, UAE, Germany, Singapore, and 40+ other countries.</p>
@@ -3550,6 +3624,37 @@ form.addEventListener('submit', function (e) {
     i = (i + 1) % PLACES.length;
     el.innerHTML = '<span class="fl">' + PLACES[i][0] + '</span> ' + PLACES[i][1];
   }, 2200);
+})();
+
+/* ================================================================
+   50+ COUNTRIES — live search rotator (Pitch any niche, anywhere)
+   ================================================================ */
+(function () {
+  const flag = document.getElementById('csFlag');
+  const text = document.getElementById('csText');
+  const r1 = document.getElementById('csR1'), r2 = document.getElementById('csR2'), r3 = document.getElementById('csR3');
+  if (!flag || !text || !r1) return;
+  // Real-sounding local business names for each country
+  const SCENES = [
+    { fl:'🇺🇸', q:'Dentists in United States',  r:['Bright Smile Dental','Lone Star Family Dental','Hill Country Orthodontics'] },
+    { fl:'🇬🇧', q:'Roofers in United Kingdom',  r:['London City Roofing','Thames Valley Roofers','North West Roof Co.'] },
+    { fl:'🇨🇦', q:'Restaurants in Canada',      r:['Maple Grill Toronto','Old Montréal Bistro','Pacific Coast Sushi'] },
+    { fl:'🇦🇺', q:'Real estate agents in Australia', r:['Harbourside Property','Bondi Realty Group','Outback Estates'] },
+    { fl:'🇩🇪', q:'Gyms in Germany',            r:['FitWerk Berlin','Munich Fitness Hub','Hamburg Gym Co.'] },
+    { fl:'🇦🇪', q:'Law firms in UAE',           r:['Dubai Legal Partners','Emirates Law Group','Al-Burj Advocates'] },
+    { fl:'🇸🇬', q:'Salons in Singapore',         r:['Orchard Glow Salon','Marina Bay Beauty','Tanjong Pagar Studio'] },
+    { fl:'🇯🇵', q:'Hotels in Japan',             r:['Tokyo Sky Hotel','Kyoto Garden Ryokan','Osaka Bay Inn'] },
+  ];
+  let i = 0;
+  function setScene(s) {
+    flag.textContent = s.fl;
+    text.textContent = s.q;
+    r1.textContent = s.r[0];
+    r2.textContent = s.r[1];
+    r3.textContent = s.r[2];
+  }
+  setScene(SCENES[0]);
+  setInterval(() => { i = (i + 1) % SCENES.length; setScene(SCENES[i]); }, 4500);
 })();
 
 /* ================================================================
