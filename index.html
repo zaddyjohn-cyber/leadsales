@@ -1825,6 +1825,50 @@
   @media (max-width:900px){ .proof-gallery{ column-count:2; } }
   @media (max-width:600px){ .proof-gallery{ column-count:1; } }
   .proof-gallery .proof-card { display:inline-block; width:100%; margin-bottom:22px; break-inside:avoid; }
+
+  /* "Wall of proof" — compact thumbnail grid of every remaining unused screenshot */
+  .proof-wall-head {
+    text-align:center; max-width:760px; margin: 50px auto 22px;
+  }
+  .proof-wall-head .pw-eyebrow {
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase; color: var(--c-peach);
+    background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
+    padding:6px 13px; border-radius:999px;
+  }
+  .proof-wall-head h3 { color:#fff; font-size: clamp(22px,3vw,30px); margin: 14px 0 8px; }
+  .proof-wall-head p  { color: rgba(255,255,255,.72); font-size: 15px; }
+  .proof-wall-head p strong { color:#fff; }
+  .proof-wall {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px; max-width: 1180px; margin: 0 auto;
+  }
+  @media (max-width:600px){
+    .proof-wall { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap:6px; }
+  }
+  .proof-wall a {
+    position:relative; display:block; aspect-ratio: 3/4;
+    overflow:hidden; border-radius:8px;
+    border:1px solid rgba(255,255,255,.10); background:#0b1f3a;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .proof-wall a:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: var(--c-coral);
+    box-shadow: 0 10px 24px rgba(0,0,0,.4);
+  }
+  .proof-wall a img {
+    width:100%; height:100%; object-fit:cover; object-position:center top; display:block;
+  }
+  .proof-wall a::after {
+    content:'🔍'; position:absolute; top:6px; right:6px;
+    width:22px; height:22px; border-radius:50%;
+    background: rgba(0,0,0,.55); color:#fff;
+    display:grid; place-items:center; font-size:11px;
+    opacity:0; transition: opacity .25s ease;
+  }
+  .proof-wall a:hover::after { opacity:1; }
   .proof-shot { background:#fff; display:block; border-bottom:1px solid rgba(255,255,255,.1); }
   .proof-shot img { width:100%; height:auto; display:block; }
   .proof-amt { position:absolute; }
@@ -2777,6 +2821,62 @@
         <div class="proof-meta"><h3>$600 USD — Stripe receipt</h3><p>“Payment received via Stripe” — client name redacted.</p></div>
       </div>
 
+    </div>
+
+    <!-- The full receipt archive — every WhatsApp chat, Bybit deposit email and
+         inbox screenshot from the last few months. Tap any thumbnail to open it full-size. -->
+    <div class="proof-wall-head">
+      <span class="pw-eyebrow">📂 The full archive</span>
+      <h3>Every receipt, every chat, every confirmation.</h3>
+      <p>The cards above are the headliners. Below is <strong>everything else</strong> — Bybit deposit emails, client WhatsApp chats, payment-sent confirmations and inbox screenshots from outreach campaigns. Tap any tile to open it full-size.</p>
+    </div>
+    <div class="proof-wall">
+      <!-- June-17 batch: 27 WhatsApp screenshots of chats / Bybit deposit emails / outreach inbox -->
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.01.46 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.01.46 PM.jpeg" alt="WhatsApp client chat — payment + delivery discussion" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.04.13 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.04.13 PM.jpeg" alt="WhatsApp client chat about a paid gig" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.06.17 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.06.17 PM.jpeg" alt="WhatsApp client chat about a paid gig" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.07.34 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.07.34 PM.jpeg" alt="WhatsApp client chat about a paid gig" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.09.24 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.09.24 PM.jpeg" alt="WhatsApp client chat about a paid gig" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.43.12 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.43.12 PM.jpeg" alt="Bybit deposit confirmation email — 300 USDT" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.43.53 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.43.53 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.44.46 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.44.46 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.45.39 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.45.39 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.46.06 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.46.06 PM.jpeg" alt="Bybit deposit confirmation — 500 USDT (ERC20)" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.46.41 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.46.41 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.47.40 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.47.40 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.48.05 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.48.05 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.48.23 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.48.23 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.48.40 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.48.40 PM.jpeg" alt="Bybit deposit confirmation — 499.7 USDT on TON chain" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.48.59 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.48.59 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.49.25 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.49.25 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.49.43 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.49.43 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.50.01 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.50.01 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.50.18 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.50.18 PM.jpeg" alt="Bybit deposit confirmation — 396.7 USDT on TON chain" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.50.36 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.50.36 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.50.55 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.50.55 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.51.11 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.51.11 PM.jpeg" alt="Bybit deposit confirmation email" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.51.37 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.51.37 PM.jpeg" alt="Outreach inbox showing payment-sent confirmations" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.52.11 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.52.11 PM.jpeg" alt="Outreach inbox / payment confirmation thread" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.52.53 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.52.53 PM.jpeg" alt="Outreach inbox / payment confirmation thread" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-17 at 4.58.02 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-17 at 4.58.02 PM.jpeg" alt="Outreach inbox — Payment sent &amp; Payment confirmed threads" loading="lazy" /></a>
+
+      <!-- June-18 PM batch: 6 Stripe receipt screenshots (2 "Congratulations" framings + 4 alternate captures) -->
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.05.04 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.05.04 PM.jpeg" alt="Stripe Congratulations email — $600 received" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.05.54 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.05.54 PM.jpeg" alt="Stripe gross volume — $12,891.73 lifetime" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.07.04 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.07.04 PM.jpeg" alt="Stripe $1,750 Payment for Invoice — Succeeded" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.11.09 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.11.09 PM.jpeg" alt="Stripe Congratulations email — $1,200 received" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.14.25 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.14.25 PM.jpeg" alt="Stripe $699 Payment for Invoice — Succeeded" loading="lazy" /></a>
+      <a href="proof/WhatsApp Image 2026-06-18 at 5.15.31 PM.jpeg" target="_blank" rel="noopener"><img src="proof/WhatsApp Image 2026-06-18 at 5.15.31 PM.jpeg" alt="Stripe gross volume — $1,449 spike" loading="lazy" /></a>
+
+      <!-- Desktop screenshot batch: 8 additional client conversations / TronScan + payment-confirmation screenshots -->
+      <a href="proof/Screenshot 2026-06-17 153000.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 153000.png" alt="USDT TRON TRC20 client payment — TronScan tx link shared" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 153130.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 153130.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 153549.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 153549.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 153736.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 153736.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 153815.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 153815.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 154254.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 154254.png" alt="Client agreeing to $500 USD for an article (1-month for Own Portfolio instrument)" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 154528.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 154528.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
+      <a href="proof/Screenshot 2026-06-17 154624.png" target="_blank" rel="noopener"><img src="proof/Screenshot 2026-06-17 154624.png" alt="Client conversation about a paid gig" loading="lazy" /></a>
     </div>
 
     <p class="proof-disc">
