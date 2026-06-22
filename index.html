@@ -3384,102 +3384,45 @@ form.addEventListener('submit', function (e) {
   // ----------------------------------------------------------------
   // Collect the data
   // ----------------------------------------------------------------
+  const state    = country.value === 'United States' ? stateSelect.value : '';
+  const location = state ? state + ', ' + country.value : country.value;
+
+  // Web3Forms payload (free, unlimited submissions, emails freelanceleadshub@gmail.com)
   const payload = {
-    fullName: fullName.value.trim(),
-    email:    email.value.trim(),
-    niche:    niche.value.trim(),
-    country:  country.value,
-    state:    country.value === 'United States' ? stateSelect.value : '',
-    quantity: quantity.value,
-    notes:    document.getElementById('notes').value.trim(),
-    submittedAt: new Date().toISOString()
+    access_key: '8a1d2a1f-08dd-4604-852a-7112b126eeb9',
+    subject:    'New Lead Request — ' + niche.value.trim() + ' in ' + location + ' (' + quantity.value + ')',
+    from_name:  'Freelance LeadsHub — Lead Request',
+    // Form fields (these show in the email body and Web3Forms dashboard)
+    name:       fullName.value.trim(),
+    email:      email.value.trim(),
+    niche:      niche.value.trim(),
+    country:    country.value,
+    state:      state,
+    location:   location,
+    quantity:   quantity.value,
+    notes:      document.getElementById('notes').value.trim() || '(none)',
+    submitted:  new Date().toISOString(),
+    // Honeypot anti-spam field (must stay empty for legit submissions)
+    botcheck:   ''
   };
 
-  /* ================================================================
-     >>> CONNECT YOUR EMAIL / STORAGE SERVICE HERE <<<
-     The `payload` object above contains the full lead request.
-     You need TWO things to happen on submit:
-       (1) The USER receives a confirmation email.
-       (2) YOU (the owner) receive the request details.
-       (3) Later, you manually email the finished CSV within 24 hours.
+  // Disable the submit button + show a "sending" state so users don't double-click
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending your request…';
 
-     Pick ONE of the options below and uncomment / fill it in.
-     ----------------------------------------------------------------
-
-     OPTION A — FORMSPREE (easiest, no backend)
-     ------------------------------------------
-     1. Create a form at https://formspree.io and get your form ID.
-     2. Set the <form> action OR use fetch like this:
-
-        return fetch('https://formspree.io/f/YOUR_FORM_ID', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-        .then(r => { if (r.ok) { onSuccess(); } else { onFail(); } })
-        .catch(onFail);
-     - Formspree emails YOU automatically. Enable "autoresponse"
-       in Formspree settings so the USER also gets a confirmation.
-
-     ----------------------------------------------------------------
-     OPTION B — EMAILJS (sends both emails from the browser)
-     -------------------------------------------------------
-     1. Add the SDK in <head>:
-        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser/dist/email.min.js"><\/script>
-     2. Init + send two templates (owner notify + user confirmation):
-
-        emailjs.init('YOUR_PUBLIC_KEY');
-        Promise.all([
-          emailjs.send('SERVICE_ID', 'OWNER_TEMPLATE_ID', payload),   // notify you
-          emailjs.send('SERVICE_ID', 'USER_TEMPLATE_ID', payload)     // confirm to user
-        ]).then(onSuccess).catch(onFail);
-
-     ----------------------------------------------------------------
-     OPTION C — MAKE.COM / ZAPIER WEBHOOK (most flexible)
-     ----------------------------------------------------
-     Create a webhook trigger, then route it to: send user email,
-     send owner email, add row to Google Sheet / Airtable, etc.
-
-        return fetch('https://hook.eu1.make.com/YOUR_WEBHOOK', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(onSuccess).catch(onFail);
-
-     ----------------------------------------------------------------
-     OPTION D — GOOGLE SHEETS (Apps Script Web App)
-     ----------------------------------------------
-     Deploy an Apps Script doPost() that appends to a sheet AND
-     uses MailApp.sendEmail() to email both you and the user:
-
-        return fetch('https://script.google.com/macros/s/XXXX/exec', {
-          method: 'POST',
-          body: JSON.stringify(payload)
-        }).then(onSuccess).catch(onFail);
-
-     ----------------------------------------------------------------
-     OPTION E — AIRTABLE (store request) — pair with an automation
-     ----------------------------------------------------
-     POST to the Airtable API to create a record, then use an
-     Airtable Automation to send the confirmation + owner emails.
-
-     ----------------------------------------------------------------
-     OPTION F — YOUR OWN BACKEND API
-     -------------------------------
-        return fetch('/api/lead-request', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(onSuccess).catch(onFail);
-     ================================================================ */
-
-  // ----------------------------------------------------------------
-  // DEMO behaviour (no backend connected yet):
-  // logs the payload and shows the success message.
-  // Remove this once you connect a real service above.
-  // ----------------------------------------------------------------
-  console.log('Lead request submitted:', payload);
-  onSuccess();
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data && data.success) { onSuccess(); }
+    else { onFail(data && data.message ? data.message : ''); }
+  })
+  .catch(err => onFail(err && err.message ? err.message : ''));
 
   // Success / failure handlers ------------------------------------
   function onSuccess() {
@@ -3488,8 +3431,11 @@ form.addEventListener('submit', function (e) {
     formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
     // form.reset(); // uncomment if you want to clear fields
   }
-  function onFail() {
-    alert('Sorry, something went wrong sending your request. Please try again or contact us directly.');
+  function onFail(msg) {
+    // Re-enable the submit button so the user can retry
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalBtnText;
+    alert('Sorry, something went wrong sending your request' + (msg ? ' (' + msg + ')' : '') + '. Please try again or email freelanceleadshub@gmail.com directly.');
   }
 });
 
