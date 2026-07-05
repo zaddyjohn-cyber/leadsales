@@ -197,42 +197,70 @@
         <select id="category">
           <option value="">— Select a category —</option>
           <optgroup label="Food & Beverage">
-            <option>Restaurant</option><option>Bakery</option><option>Cafe</option>
-            <option>Bar</option><option>Pizza Shop</option><option>Fast Food</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="bakery">Bakery</option>
+            <option value="cafe">Cafe</option>
+            <option value="bar">Bar</option>
+            <option value="pizza_restaurant">Pizza Shop</option>
+            <option value="fast_food_restaurant">Fast Food</option>
           </optgroup>
           <optgroup label="Health & Medical">
-            <option>Dentist</option><option>Pharmacy</option><option>Veterinarian</option>
-            <option>Chiropractor</option><option>Optometrist</option><option>Hospital</option>
-            <option>Physical Therapist</option><option>Pediatrician</option>
+            <option value="dentist">Dentist</option>
+            <option value="pharmacy">Pharmacy</option>
+            <option value="veterinarian">Veterinarian</option>
+            <option value="chiropractor">Chiropractor</option>
+            <option value="optometrist">Optometrist</option>
+            <option value="hospital">Hospital</option>
+            <option value="physical_therapist">Physical Therapist</option>
+            <option value="pediatrician">Pediatrician</option>
           </optgroup>
           <optgroup label="Professional Services">
-            <option>Law Firm</option><option>Accountant</option><option>Insurance Agency</option>
-            <option>Financial Advisor</option><option>Consulting Firm</option>
+            <option value="law_firm">Law Firm</option>
+            <option value="accountant">Accountant</option>
+            <option value="insurance_agency">Insurance Agency</option>
+            <option value="financial_planner">Financial Advisor</option>
+            <option value="business_management_consultant">Consulting Firm</option>
           </optgroup>
           <optgroup label="Real Estate & Construction">
-            <option>Real Estate Agent</option><option>Roofer</option><option>Plumber</option>
-            <option>Electrician</option><option>HVAC</option><option>Landscaping</option>
-            <option>Cleaning Company</option><option>Interior Designer</option>
+            <option value="real_estate_agency">Real Estate Agency</option>
+            <option value="roofing_contractor">Roofer</option>
+            <option value="plumber">Plumber</option>
+            <option value="electrician">Electrician</option>
+            <option value="hvac_contractor">HVAC</option>
+            <option value="landscaper">Landscaping</option>
+            <option value="house_cleaning_service">Cleaning Company</option>
+            <option value="interior_designer">Interior Designer</option>
           </optgroup>
           <optgroup label="Automotive">
-            <option>Auto Repair Shop</option><option>Car Dealership</option>
-            <option>Auto Parts Store</option>
+            <option value="auto_repair_shop">Auto Repair Shop</option>
+            <option value="car_dealer">Car Dealership</option>
+            <option value="auto_parts_store">Auto Parts Store</option>
           </optgroup>
           <optgroup label="Beauty & Wellness">
-            <option>Beauty Salon</option><option>Gym / Fitness Center</option>
-            <option>Spa</option><option>Nail Salon</option><option>Barber Shop</option>
+            <option value="beauty_salon">Beauty Salon</option>
+            <option value="gym">Gym / Fitness Center</option>
+            <option value="spa">Spa</option>
+            <option value="nail_salon">Nail Salon</option>
+            <option value="barber_shop">Barber Shop</option>
           </optgroup>
           <optgroup label="Retail & Hospitality">
-            <option>Hotel</option><option>Florist</option><option>Jewelry Store</option>
-            <option>Clothing Store</option><option>Supermarket</option>
+            <option value="hotel">Hotel</option>
+            <option value="florist">Florist</option>
+            <option value="jewelry_store">Jewelry Store</option>
+            <option value="clothing_store">Clothing Store</option>
+            <option value="supermarket">Supermarket</option>
           </optgroup>
           <optgroup label="Education & Community">
-            <option>School / Tutoring</option><option>Church</option><option>Daycare</option>
-            <option>Library</option>
+            <option value="tutoring_service">School / Tutoring</option>
+            <option value="church">Church</option>
+            <option value="day_care_center">Daycare</option>
+            <option value="library">Library</option>
           </optgroup>
           <optgroup label="Events & Media">
-            <option>Event Planner</option><option>Photography Studio</option>
-            <option>Videographer</option><option>Marketing Agency</option>
+            <option value="event_planner">Event Planner</option>
+            <option value="photographer">Photography Studio</option>
+            <option value="video_production_service">Videographer</option>
+            <option value="marketing_agency">Marketing Agency</option>
           </optgroup>
         </select>
       </div>
@@ -282,24 +310,57 @@
         <div class="form-group" id="stateRow">
           <label>US State</label>
           <select id="state">
-            <option value="ALL">All States</option>
-            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
-            <option>Arkansas</option><option>California</option><option>Colorado</option>
-            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
-            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
-            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
-            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
-            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
-            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
-            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
-            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
-            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
-            <option>Texas</option><option>Utah</option><option>Vermont</option>
-            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
-            <option>Wisconsin</option><option>Wyoming</option>
+            <option value="All">All States</option>
+            <option value="AL">AL — Alabama</option>
+            <option value="AK">AK — Alaska</option>
+            <option value="AZ">AZ — Arizona</option>
+            <option value="AR">AR — Arkansas</option>
+            <option value="CA">CA — California</option>
+            <option value="CO">CO — Colorado</option>
+            <option value="CT">CT — Connecticut</option>
+            <option value="DE">DE — Delaware</option>
+            <option value="FL">FL — Florida</option>
+            <option value="GA">GA — Georgia</option>
+            <option value="HI">HI — Hawaii</option>
+            <option value="ID">ID — Idaho</option>
+            <option value="IL">IL — Illinois</option>
+            <option value="IN">IN — Indiana</option>
+            <option value="IA">IA — Iowa</option>
+            <option value="KS">KS — Kansas</option>
+            <option value="KY">KY — Kentucky</option>
+            <option value="LA">LA — Louisiana</option>
+            <option value="ME">ME — Maine</option>
+            <option value="MD">MD — Maryland</option>
+            <option value="MA">MA — Massachusetts</option>
+            <option value="MI">MI — Michigan</option>
+            <option value="MN">MN — Minnesota</option>
+            <option value="MS">MS — Mississippi</option>
+            <option value="MO">MO — Missouri</option>
+            <option value="MT">MT — Montana</option>
+            <option value="NE">NE — Nebraska</option>
+            <option value="NV">NV — Nevada</option>
+            <option value="NH">NH — New Hampshire</option>
+            <option value="NJ">NJ — New Jersey</option>
+            <option value="NM">NM — New Mexico</option>
+            <option value="NY">NY — New York</option>
+            <option value="NC">NC — North Carolina</option>
+            <option value="ND">ND — North Dakota</option>
+            <option value="OH">OH — Ohio</option>
+            <option value="OK">OK — Oklahoma</option>
+            <option value="OR">OR — Oregon</option>
+            <option value="PA">PA — Pennsylvania</option>
+            <option value="RI">RI — Rhode Island</option>
+            <option value="SC">SC — South Carolina</option>
+            <option value="SD">SD — South Dakota</option>
+            <option value="TN">TN — Tennessee</option>
+            <option value="TX">TX — Texas</option>
+            <option value="UT">UT — Utah</option>
+            <option value="VT">VT — Vermont</option>
+            <option value="VA">VA — Virginia</option>
+            <option value="WA">WA — Washington</option>
+            <option value="WV">WV — West Virginia</option>
+            <option value="WI">WI — Wisconsin</option>
+            <option value="WY">WY — Wyoming</option>
           </select>
         </div>
       </div>

@@ -16,18 +16,19 @@ function today(): string {
 }
 
 function transformLead(raw: Record<string, unknown>): Record<string, string> {
-  const categories = Array.isArray(raw.categories) ? raw.categories : [];
+  // Parse categories — actor returns pipe-separated string
+  const cats = String(raw.google_business_categories || raw.categoryName || '').split('|');
+  const industry = cats[0].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   return {
     'Lead ID':       generateLeadId(),
-    'Business Name': String(raw.title || raw.name || ''),
-    'Industry':      categories[0] || String(raw.categoryName || ''),
+    'Business Name': String(raw.name || raw.title || ''),
+    'Industry':      industry,
     'Address':       String(raw.street || raw.address || ''),
     'City':          String(raw.city || ''),
-    'State':         String(raw.state || ''),
-    'Country':       String(raw.country || ''),
-    'Phone':         String(raw.phone || raw.phoneUnformatted || ''),
+    'Country':       String(raw.country_code || raw.country || ''),
+    'Phone':         String(raw.phone_number || raw.phone || raw.phoneUnformatted || ''),
     'Email':         String(raw.email || ''),
-    'Website':       String(raw.website || ''),
+    'Website':       String(raw.url || raw.website || ''),
     'Facebook':      String(raw.facebook || ''),
     'Instagram':     String(raw.instagram || ''),
     'LinkedIn':      String(raw.linkedin || ''),
@@ -62,7 +63,9 @@ Deno.serve(async (req: Request) => {
     const { data: { user }, error: authErr } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''));
     if (authErr || !user) return new Response(JSON.stringify({ error: 'Invalid session' }), { status: 401, headers: corsHeaders });
 
-    const { category, keyword, country, state, quantity } = await req.json();
+    const { category: rawCategory, keyword, country, state, quantity } = await req.json();
+    // Convert "Law Firm" → "law_firm" to match Apify's required format
+    const category = rawCategory ? rawCategory.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '') : rawCategory;
 
     if (!category && !keyword) return new Response(JSON.stringify({ error: 'category or keyword required' }), { status: 400, headers: corsHeaders });
     if (!quantity || quantity < 1) return new Response(JSON.stringify({ error: 'quantity required' }), { status: 400, headers: corsHeaders });
@@ -116,7 +119,7 @@ Deno.serve(async (req: Request) => {
 
     // Transform + filter — only leads with email or phone
     const leads = raw
-      .filter(r => r.email || r.phone || r.phoneUnformatted)
+      .filter(r => r.email || r.phone_number || r.phone)
       .slice(0, quantity)
       .map(transformLead);
 
