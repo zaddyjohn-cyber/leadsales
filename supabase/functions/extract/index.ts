@@ -134,6 +134,41 @@ Deno.serve(async (req: Request) => {
       leads_returned: actualCount,
     });
 
+    // Check monthly pool usage and alert at 90k
+    const monthStart = new Date();
+    monthStart.setDate(1); monthStart.setHours(0, 0, 0, 0);
+
+    const { data: usageRows } = await supabase
+      .from('extraction_logs')
+      .select('leads_returned')
+      .gte('created_at', monthStart.toISOString());
+
+    const prevTotal = (usageRows || []).reduce((s: number, r: { leads_returned: number }) => s + (r.leads_returned || 0), 0);
+    const newTotal  = prevTotal + actualCount;
+
+    if (prevTotal < 90000 && newTotal >= 90000) {
+      const resendKey = Deno.env.get('RESEND_API_KEY');
+      const alertEmail = Deno.env.get('ALERT_EMAIL') || 'ogbonnajohne@gmail.com';
+      if (resendKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: 'Freelance LeadsHub <onboarding@resend.dev>',
+            to: [alertEmail],
+            subject: '⚠️ Apify pool at 90k — subscribe second instance',
+            html: `
+              <h2>Action needed — Apify pool almost full</h2>
+              <p>Your users have extracted <strong>${newTotal.toLocaleString()} leads</strong> this month.</p>
+              <p>You are at <strong>90% of your 100k monthly limit</strong>.</p>
+              <p><strong>Next step:</strong> Subscribe a second instance of the flat-fee actor on Apify and update your APIFY_ACTOR_ID secret in Supabase to get another 100k.</p>
+              <p style="color:#888;font-size:13px">This alert only fires once per month when the 90k threshold is crossed.</p>
+            `,
+          }),
+        });
+      }
+    }
+
     const csv = toCSV(leads);
     const filename = `FLH_${(keyword || category || 'leads').replace(/\s+/g, '_')}_${country || 'ALL'}_${Date.now()}.csv`;
 
