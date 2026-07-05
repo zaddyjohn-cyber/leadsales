@@ -28,3 +28,10 @@ WhatsApp Image *.jpg
 !assets/*.mp4
 _censor_bybit.py
 _censor_stripe.py
+
+# Backend secrets — never commit
+backend/.env
+backend/node_modules/
+
+# Preview file
+portal/_preview.html

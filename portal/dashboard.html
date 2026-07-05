@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard — Freelance LeadsHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --coral: #E5664A; --coral-light: #FF8C72; --peach: #F8D4BB;
+    --cream: #FDF4E8; --cream2: #F6E9D5; --ink: #2A1F1A;
+    --body: #5C4A3F; --muted: #8B7A6D; --gold: #C9A961;
+    --line: rgba(42,31,26,.10); --radius: 16px; --radius-lg: 24px;
+    --shadow-sm: 0 2px 8px rgba(160,100,70,.08);
+    --shadow: 0 12px 36px rgba(160,100,70,.14);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--body); background: var(--cream); min-height: 100vh; }
+
+  nav {
+    background: #fff; border-bottom: 1px solid var(--line);
+    padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); font-weight: 700; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-user { font-size: 14px; color: var(--muted); }
+  .nav-user span { color: var(--ink); font-weight: 600; }
+  .btn-logout {
+    font-size: 13px; font-weight: 600; color: var(--coral); background: none;
+    border: 1.5px solid var(--coral); border-radius: 999px; padding: 6px 16px; cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-logout:hover { background: var(--coral); color: #fff; }
+
+  .page { max-width: 1160px; margin: 0 auto; padding: 40px 24px; }
+
+  /* QUOTA BANNER */
+  .quota-banner {
+    background: linear-gradient(135deg, #2A1F1A 0%, #3B2D24 100%);
+    border-radius: var(--radius-lg); padding: 32px 36px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    margin-bottom: 36px; flex-wrap: wrap;
+  }
+  .quota-left { flex: 1; min-width: 200px; }
+  .quota-left h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; margin-bottom: 6px; }
+  .quota-left p { font-size: 14px; color: rgba(255,255,255,.55); }
+  .quota-right { text-align: right; }
+  .quota-num { font-size: 52px; font-weight: 900; color: var(--coral-light); line-height: 1; }
+  .quota-label { font-size: 13px; color: rgba(255,255,255,.45); margin-top: 4px; }
+  .quota-bar-wrap { width: 100%; margin-top: 20px; }
+  .quota-bar-bg { background: rgba(255,255,255,.12); border-radius: 999px; height: 8px; }
+  .quota-bar-fill { background: var(--coral-light); border-radius: 999px; height: 8px; transition: width .6s ease; }
+  .quota-meta { display: flex; justify-content: space-between; margin-top: 6px; }
+  .quota-meta span { font-size: 12px; color: rgba(255,255,255,.4); }
+  .quota-plan {
+    display: inline-block; background: rgba(255,255,255,.1); color: var(--peach);
+    font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 999px; margin-bottom: 10px;
+  }
+  .upgrade-link {
+    display: inline-block; margin-top: 14px; font-size: 13px; color: var(--coral-light);
+    font-weight: 600; text-decoration: underline; cursor: pointer;
+  }
+
+  /* NO SUB */
+  .no-sub-banner {
+    background: var(--cream2); border: 1.5px solid var(--peach); border-radius: var(--radius-lg);
+    padding: 40px; text-align: center; margin-bottom: 36px;
+  }
+  .no-sub-banner h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--ink); margin-bottom: 10px; }
+  .no-sub-banner p { color: var(--muted); margin-bottom: 24px; font-size: 15px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--coral); color: #fff; border: none; border-radius: 999px;
+    padding: 14px 30px; font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: background .2s, transform .15s; text-decoration: none;
+  }
+  .btn-primary:hover { background: #C24E36; transform: translateY(-1px); }
+
+  /* GRID */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .quota-banner { flex-direction: column; }
+    .quota-right { text-align: left; }
+  }
+
+  /* CARDS */
+  .card { background: #fff; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-sm); }
+  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); margin-bottom: 22px; }
+
+  /* FORM */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { margin-bottom: 16px; }
+  label { display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .05em; }
+  select, input[type="number"], input[type="text"] {
+    width: 100%; padding: 11px 14px; border: 1.5px solid #E8DDD5; border-radius: var(--radius);
+    font-size: 14px; font-family: 'Inter', sans-serif; color: var(--ink); background: #fff;
+    outline: none; transition: border-color .2s; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B7A6D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+  }
+  input[type="number"], input[type="text"] { background-image: none; }
+  select:focus, input:focus { border-color: var(--coral); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* State row — only shows when US is selected */
+  #stateRow { display: none; }
+  #stateRow.show { display: block; }
+
+  .btn-extract {
+    width: 100%; padding: 15px; background: var(--coral); color: #fff; border: none;
+    border-radius: 999px; font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: background .2s, transform .15s; display: flex; align-items: center;
+    justify-content: center; gap: 8px; margin-top: 8px;
+  }
+  .btn-extract:hover:not(:disabled) { background: #C24E36; transform: translateY(-1px); }
+  .btn-extract:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  /* PROGRESS */
+  .progress-wrap { display: none; margin-top: 20px; }
+  .progress-wrap.show { display: block; }
+  .progress-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .progress-bg { background: var(--cream2); border-radius: 999px; height: 8px; }
+  .progress-fill { background: var(--coral); border-radius: 999px; height: 8px; width: 0%; transition: width .5s ease; }
+  .progress-status { font-size: 13px; color: var(--coral); font-weight: 600; margin-top: 8px; }
+
+  /* MSG */
+  .msg { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 14px; display: none; }
+  .msg.show { display: block; }
+  .msg.error { background: #FEE8E4; color: #C24E36; }
+  .msg.success { background: #E8F5EE; color: #1A7A4A; }
+
+  /* HISTORY */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 12px; color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 11px 12px; border-bottom: 1px solid var(--line); color: var(--body); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--cream); }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .badge-green { background: #E8F5EE; color: #1A7A4A; }
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
+  .empty-state p { margin-top: 8px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Freelance LeadsHub</div>
+  <div class="nav-right">
+    <div class="nav-user">Welcome, <span id="navName">—</span></div>
+    <button class="btn-logout" onclick="logout()">Log Out</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Quota Banner -->
+  <div class="quota-banner" id="quotaBanner" style="display:none">
+    <div class="quota-left">
+      <div class="quota-plan" id="quotaPlan">— PLAN</div>
+      <h2>Your Lead Balance</h2>
+      <p>Pick a niche + country and download your CSV instantly.</p>
+      <div class="quota-bar-wrap">
+        <div class="quota-bar-bg"><div class="quota-bar-fill" id="quotaBar"></div></div>
+        <div class="quota-meta">
+          <span id="quotaUsed"></span>
+          <span id="quotaTotal"></span>
+        </div>
+      </div>
+      <a class="upgrade-link" href="../index.html#pricing">Need more leads? Upgrade →</a>
+    </div>
+    <div class="quota-right">
+      <div class="quota-num" id="quotaNum">—</div>
+      <div class="quota-label">leads remaining</div>
+    </div>
+  </div>
+
+  <!-- No Subscription -->
+  <div class="no-sub-banner" id="noSubBanner" style="display:none">
+    <h3>No Active Subscription</h3>
+    <p>Purchase a plan to start extracting business leads from any country, instantly.</p>
+    <a href="../index.html#pricing" class="btn-primary">View Plans & Pricing →</a>
+  </div>
+
+  <div class="grid">
+
+    <!-- Extract Form -->
+    <div class="card">
+      <h3>Extract Leads</h3>
+
+      <div class="form-group">
+        <label>Business Category</label>
+        <select id="category">
+          <option value="">— Select a category —</option>
+          <optgroup label="Food & Beverage">
+            <option>Restaurant</option><option>Bakery</option><option>Cafe</option>
+            <option>Bar</option><option>Pizza Shop</option><option>Fast Food</option>
+          </optgroup>
+          <optgroup label="Health & Medical">
+            <option>Dentist</option><option>Pharmacy</option><option>Veterinarian</option>
+            <option>Chiropractor</option><option>Optometrist</option><option>Hospital</option>
+            <option>Physical Therapist</option><option>Pediatrician</option>
+          </optgroup>
+          <optgroup label="Professional Services">
+            <option>Law Firm</option><option>Accountant</option><option>Insurance Agency</option>
+            <option>Financial Advisor</option><option>Consulting Firm</option>
+          </optgroup>
+          <optgroup label="Real Estate & Construction">
+            <option>Real Estate Agent</option><option>Roofer</option><option>Plumber</option>
+            <option>Electrician</option><option>HVAC</option><option>Landscaping</option>
+            <option>Cleaning Company</option><option>Interior Designer</option>
+          </optgroup>
+          <optgroup label="Automotive">
+            <option>Auto Repair Shop</option><option>Car Dealership</option>
+            <option>Auto Parts Store</option>
+          </optgroup>
+          <optgroup label="Beauty & Wellness">
+            <option>Beauty Salon</option><option>Gym / Fitness Center</option>
+            <option>Spa</option><option>Nail Salon</option><option>Barber Shop</option>
+          </optgroup>
+          <optgroup label="Retail & Hospitality">
+            <option>Hotel</option><option>Florist</option><option>Jewelry Store</option>
+            <option>Clothing Store</option><option>Supermarket</option>
+          </optgroup>
+          <optgroup label="Education & Community">
+            <option>School / Tutoring</option><option>Church</option><option>Daycare</option>
+            <option>Library</option>
+          </optgroup>
+          <optgroup label="Events & Media">
+            <option>Event Planner</option><option>Photography Studio</option>
+            <option>Videographer</option><option>Marketing Agency</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Or custom keyword</label>
+        <input type="text" id="keyword" placeholder="e.g. dog groomer, solar panel installer…"/>
+        <div class="hint">Overrides category when filled.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Country</label>
+          <select id="country" onchange="onCountryChange()">
+            <option value="ALL">All Countries</option>
+            <option value="US">🇺🇸 United States</option>
+            <option value="GB">🇬🇧 United Kingdom</option>
+            <option value="CA">🇨🇦 Canada</option>
+            <option value="AU">🇦🇺 Australia</option>
+            <option value="DE">🇩🇪 Germany</option>
+            <option value="FR">🇫🇷 France</option>
+            <option value="NL">🇳🇱 Netherlands</option>
+            <option value="ES">🇪🇸 Spain</option>
+            <option value="IT">🇮🇹 Italy</option>
+            <option value="SE">🇸🇪 Sweden</option>
+            <option value="NO">🇳🇴 Norway</option>
+            <option value="DK">🇩🇰 Denmark</option>
+            <option value="FI">🇫🇮 Finland</option>
+            <option value="CH">🇨🇭 Switzerland</option>
+            <option value="AT">🇦🇹 Austria</option>
+            <option value="BE">🇧🇪 Belgium</option>
+            <option value="PT">🇵🇹 Portugal</option>
+            <option value="IE">🇮🇪 Ireland</option>
+            <option value="PL">🇵🇱 Poland</option>
+            <option value="CZ">🇨🇿 Czech Republic</option>
+            <option value="NZ">🇳🇿 New Zealand</option>
+            <option value="SG">🇸🇬 Singapore</option>
+            <option value="AE">🇦🇪 UAE</option>
+            <option value="ZA">🇿🇦 South Africa</option>
+            <option value="IN">🇮🇳 India</option>
+            <option value="BR">🇧🇷 Brazil</option>
+            <option value="MX">🇲🇽 Mexico</option>
+            <option value="JP">🇯🇵 Japan</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="stateRow">
+          <label>US State</label>
+          <select id="state">
+            <option value="ALL">All States</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+            <option>Arkansas</option><option>California</option><option>Colorado</option>
+            <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+            <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+            <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+            <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+            <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+            <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+            <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+            <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+            <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+            <option>Texas</option><option>Utah</option><option>Vermont</option>
+            <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Number of Leads</label>
+        <input type="number" id="quantity" placeholder="e.g. 500" min="1"/>
+        <div class="hint" id="quantityHint">Max: your remaining balance.</div>
+      </div>
+
+      <button class="btn-extract" id="extractBtn" onclick="startExtract()" disabled>
+        ⬇ Download Leads CSV
+      </button>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label">Extracting your leads — usually 30–90 seconds…</div>
+        <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-status" id="progressStatus">Connecting to data source…</div>
+      </div>
+
+      <div class="msg" id="extractMsg"></div>
+    </div>
+
+    <!-- Extraction History -->
+    <div class="card">
+      <h3>Extraction History</h3>
+      <div class="table-wrap" id="historyWrap">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const API   = 'http://localhost:3001/api';
+  let token   = localStorage.getItem('flh_token');
+  let user    = JSON.parse(localStorage.getItem('flh_user') || '{}');
+  let quota   = null;
+
+  if (!token) window.location.href = 'login.html';
+  document.getElementById('navName').textContent = user.full_name || user.email || '—';
+
+  async function apiFetch(path, opts = {}) {
+    const res = await fetch(`${API}${path}`, {
+      ...opts,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        ...(opts.headers || {}),
+      },
+    });
+    if (res.status === 401) {
+      logout();
+    }
+    return res;
+  }
+
+  function onCountryChange() {
+    const country = document.getElementById('country').value;
+    document.getElementById('stateRow').classList.toggle('show', country === 'US');
+  }
+
+  async function loadQuota() {
+    try {
+      const res  = await apiFetch('/extract/quota');
+      const data = await res.json();
+      quota = data;
+
+      if (!data.active) {
+        document.getElementById('noSubBanner').style.display  = '';
+        document.getElementById('quotaBanner').style.display  = 'none';
+        document.getElementById('extractBtn').disabled = true;
+        return;
+      }
+
+      document.getElementById('quotaBanner').style.display  = '';
+      document.getElementById('noSubBanner').style.display  = 'none';
+      document.getElementById('extractBtn').disabled = false;
+
+      document.getElementById('quotaNum').textContent   = data.leads_remaining.toLocaleString();
+      document.getElementById('quotaPlan').textContent  = (data.plan || '').toUpperCase() + ' PLAN';
+      document.getElementById('quotaUsed').textContent  = `${(data.leads_total - data.leads_remaining).toLocaleString()} used`;
+      document.getElementById('quotaTotal').textContent = `${data.leads_total.toLocaleString()} total`;
+
+      const pct = (data.leads_remaining / data.leads_total) * 100;
+      document.getElementById('quotaBar').style.width = pct + '%';
+      document.getElementById('quantityHint').textContent =
+        `Max: ${data.leads_remaining.toLocaleString()} (your remaining balance)`;
+      document.getElementById('quantity').max = data.leads_remaining;
+
+    } catch (e) {
+      console.error('Quota load error:', e);
+    }
+  }
+
+  async function loadHistory() {
+    try {
+      const res  = await apiFetch('/extract/history');
+      const data = await res.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        document.getElementById('historyWrap').innerHTML =
+          `<div class="empty-state">
+            <strong>No extractions yet</strong>
+            <p>Your downloads will appear here.</p>
+          </div>`;
+        return;
+      }
+
+      const rows = data.map(r => {
+        const date = new Date(r.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'2-digit' });
+        const loc  = [r.country, r.state].filter(x => x && x !== 'ALL').join(' · ') || 'Worldwide';
+        return `<tr>
+          <td>${date}</td>
+          <td>${r.category || '—'}</td>
+          <td>${loc}</td>
+          <td>${(r.leads_returned || 0).toLocaleString()}</td>
+          <td><span class="badge badge-green">Done</span></td>
+        </tr>`;
+      }).join('');
+
+      document.getElementById('historyWrap').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Niche</th><th>Location</th><th>Leads</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    } catch (e) {
+      document.getElementById('historyWrap').innerHTML =
+        `<div class="empty-state">Could not load history.</div>`;
+    }
+  }
+
+  function animateProgress() {
+    const fill   = document.getElementById('progressFill');
+    const status = document.getElementById('progressStatus');
+    const steps  = [
+      [12,  'Connecting to data source…'],
+      [28,  'Querying business database…'],
+      [48,  'Filtering by niche & location…'],
+      [65,  'Verifying contact details…'],
+      [80,  'Formatting your leads…'],
+      [92,  'Preparing CSV download…'],
+    ];
+    let i = 0;
+    return setInterval(() => {
+      if (i >= steps.length) return;
+      fill.style.width   = steps[i][0] + '%';
+      status.textContent = steps[i][1];
+      i++;
+    }, 2000);
+  }
+
+  function showMsg(text, type) {
+    const el = document.getElementById('extractMsg');
+    el.textContent = text;
+    el.className = `msg show ${type}`;
+  }
+
+  async function startExtract() {
+    const category = document.getElementById('category').value;
+    const keyword  = document.getElementById('keyword').value.trim();
+    const country  = document.getElementById('country').value;
+    const state    = document.getElementById('state').value;
+    const quantity = parseInt(document.getElementById('quantity').value);
+
+    if (!category && !keyword) { showMsg('Please select a category or enter a keyword.', 'error'); return; }
+    if (!quantity || quantity < 1) { showMsg('Please enter how many leads you want.', 'error'); return; }
+    if (quota && quantity > quota.leads_remaining) {
+      showMsg(`You only have ${quota.leads_remaining.toLocaleString()} leads left. Lower the number or upgrade your plan.`, 'error');
+      return;
+    }
+
+    document.getElementById('extractBtn').disabled = true;
+    document.getElementById('extractMsg').className = 'msg';
+    document.getElementById('progressWrap').classList.add('show');
+    const iv = animateProgress();
+
+    try {
+      const res = await apiFetch('/extract', {
+        method: 'POST',
+        body: JSON.stringify({
+          category: keyword || category,
+          keyword:  keyword || null,
+          country,
+          state,
+          quantity,
+        }),
+      });
+
+      clearInterval(iv);
+      document.getElementById('progressFill').style.width   = '100%';
+      document.getElementById('progressStatus').textContent = 'Done!';
+
+      if (!res.ok) {
+        const err = await res.json();
+        showMsg(err.error || 'Extraction failed. Please try again.', 'error');
+        document.getElementById('progressWrap').classList.remove('show');
+        document.getElementById('extractBtn').disabled = false;
+        return;
+      }
+
+      const blob      = await res.blob();
+      const returned  = res.headers.get('X-Leads-Returned') || quantity;
+      const niche     = (keyword || category || 'leads').replace(/\s+/g, '_');
+
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+      a.href    = url;
+      a.download = `FLH_${niche}_${country}_${Date.now()}.csv`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+
+      showMsg(`✓ ${Number(returned).toLocaleString()} leads downloaded successfully.`, 'success');
+      await loadQuota();
+      await loadHistory();
+
+    } catch (e) {
+      clearInterval(iv);
+      showMsg('Network error. Please try again.', 'error');
+    }
+
+    document.getElementById('progressWrap').classList.remove('show');
+    document.getElementById('extractBtn').disabled = false;
+  }
+
+  function logout() {
+    localStorage.removeItem('flh_token');
+    localStorage.removeItem('flh_user');
+    window.location.href = 'login.html';
+  }
+
+  loadQuota();
+  loadHistory();
+</script>
+</body>
+</html>
