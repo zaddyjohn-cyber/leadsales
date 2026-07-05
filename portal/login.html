@@ -7,44 +7,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --coral: #E5664A; --peach: #F8D4BB; --cream: #FDF4E8;
-    --ink: #2A1F1A; --body: #5C4A3F; --muted: #8B7A6D;
-    --gold: #C9A961; --radius: 16px;
+    --coral: #E5664A; --cream: #FDF4E8; --ink: #2A1F1A;
+    --body: #5C4A3F; --muted: #8B7A6D; --radius: 16px;
     --shadow: 0 12px 40px rgba(160,100,70,.16);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Inter', sans-serif; color: var(--body);
     background: radial-gradient(80% 60% at 50% 0%, #FFE9D8 0%, transparent 55%), var(--cream);
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 24px;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
   }
-  .card {
-    background: #fff; border-radius: 24px; padding: 48px 40px;
-    width: 100%; max-width: 440px; box-shadow: var(--shadow);
-  }
+  .card { background: #fff; border-radius: 24px; padding: 48px 40px; width: 100%; max-width: 440px; box-shadow: var(--shadow); }
   .logo { text-align: center; margin-bottom: 32px; }
   .logo h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--ink); }
   .logo p { font-size: 14px; color: var(--muted); margin-top: 4px; }
   .tabs { display: flex; background: var(--cream); border-radius: 999px; padding: 4px; margin-bottom: 32px; }
-  .tab {
-    flex: 1; text-align: center; padding: 10px; border-radius: 999px; cursor: pointer;
-    font-size: 14px; font-weight: 600; color: var(--muted); transition: all .2s;
-  }
+  .tab { flex: 1; text-align: center; padding: 10px; border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--muted); transition: all .2s; }
   .tab.active { background: #fff; color: var(--coral); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
   .form-group { margin-bottom: 18px; }
   label { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-  input {
-    width: 100%; padding: 12px 16px; border: 1.5px solid #E8DDD5; border-radius: var(--radius);
-    font-size: 15px; font-family: 'Inter', sans-serif; color: var(--ink);
-    background: #fff; outline: none; transition: border-color .2s;
-  }
+  input { width: 100%; padding: 12px 16px; border: 1.5px solid #E8DDD5; border-radius: var(--radius); font-size: 15px; font-family: 'Inter', sans-serif; color: var(--ink); background: #fff; outline: none; transition: border-color .2s; }
   input:focus { border-color: var(--coral); }
-  .btn {
-    width: 100%; padding: 14px; background: var(--coral); color: #fff; border: none;
-    border-radius: 999px; font-size: 15px; font-weight: 700; cursor: pointer;
-    transition: background .2s, transform .15s; margin-top: 8px;
-  }
+  .btn { width: 100%; padding: 14px; background: var(--coral); color: #fff; border: none; border-radius: 999px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s, transform .15s; margin-top: 8px; }
   .btn:hover { background: #C24E36; transform: translateY(-1px); }
   .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
   .msg { margin-top: 16px; padding: 12px 16px; border-radius: 10px; font-size: 14px; display: none; }
@@ -58,7 +42,7 @@
 <div class="card">
   <div class="logo">
     <h1>Freelance LeadsHub</h1>
-    <p>Your US business leads portal</p>
+    <p>Your business leads portal</p>
   </div>
 
   <div class="tabs">
@@ -66,34 +50,17 @@
     <div class="tab" onclick="switchTab('signup')">Sign Up</div>
   </div>
 
-  <!-- Login Form -->
   <form id="loginForm" onsubmit="handleLogin(event)">
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="loginEmail" placeholder="you@example.com" required/>
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="••••••••" required/>
-    </div>
+    <div class="form-group"><label>Email Address</label><input type="email" id="loginEmail" placeholder="you@example.com" required/></div>
+    <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" required/></div>
     <button class="btn" type="submit" id="loginBtn">Log In</button>
     <div class="msg" id="loginMsg"></div>
   </form>
 
-  <!-- Signup Form -->
   <form id="signupForm" style="display:none" onsubmit="handleSignup(event)">
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" id="signupName" placeholder="Your name" required/>
-    </div>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="signupEmail" placeholder="you@example.com" required/>
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="signupPassword" placeholder="At least 8 characters" minlength="8" required/>
-    </div>
+    <div class="form-group"><label>Full Name</label><input type="text" id="signupName" placeholder="Your name" required/></div>
+    <div class="form-group"><label>Email Address</label><input type="email" id="signupEmail" placeholder="you@example.com" required/></div>
+    <div class="form-group"><label>Password</label><input type="password" id="signupPassword" placeholder="At least 8 characters" minlength="8" required/></div>
     <button class="btn" type="submit" id="signupBtn">Create Account</button>
     <div class="msg" id="signupMsg"></div>
   </form>
@@ -101,8 +68,11 @@
   <div class="back-link"><a href="../index.html">← Back to main site</a></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-  const API = 'http://localhost:3001/api';
+  const SUPABASE_URL  = 'https://ezninmuueoojvrwyxakm.supabase.co';
+  const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY'; // paste anon key here
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
   function switchTab(tab) {
     document.querySelectorAll('.tab').forEach((t, i) => {
@@ -123,24 +93,23 @@
     const btn = document.getElementById('loginBtn');
     btn.disabled = true; btn.textContent = 'Logging in…';
 
-    const res = await fetch(`${API}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: document.getElementById('loginEmail').value,
-        password: document.getElementById('loginPassword').value,
-      }),
+    const { data, error } = await sb.auth.signInWithPassword({
+      email: document.getElementById('loginEmail').value,
+      password: document.getElementById('loginPassword').value,
     });
-    const data = await res.json();
 
-    if (!res.ok) {
-      showMsg('loginMsg', data.error, 'error');
+    if (error) {
+      showMsg('loginMsg', 'Invalid email or password.', 'error');
       btn.disabled = false; btn.textContent = 'Log In';
       return;
     }
 
-    localStorage.setItem('flh_token', data.access_token);
-    localStorage.setItem('flh_user', JSON.stringify(data.user));
+    localStorage.setItem('flh_token', data.session.access_token);
+    localStorage.setItem('flh_user', JSON.stringify({
+      id: data.user.id,
+      email: data.user.email,
+      full_name: data.user.user_metadata?.full_name,
+    }));
     window.location.href = 'dashboard.html';
   }
 
@@ -149,19 +118,14 @@
     const btn = document.getElementById('signupBtn');
     btn.disabled = true; btn.textContent = 'Creating account…';
 
-    const res = await fetch(`${API}/auth/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: document.getElementById('signupEmail').value,
-        password: document.getElementById('signupPassword').value,
-        full_name: document.getElementById('signupName').value,
-      }),
+    const { error } = await sb.auth.signUp({
+      email: document.getElementById('signupEmail').value,
+      password: document.getElementById('signupPassword').value,
+      options: { data: { full_name: document.getElementById('signupName').value } },
     });
-    const data = await res.json();
 
-    if (!res.ok) {
-      showMsg('signupMsg', data.error, 'error');
+    if (error) {
+      showMsg('signupMsg', error.message, 'error');
       btn.disabled = false; btn.textContent = 'Create Account';
       return;
     }
@@ -172,9 +136,9 @@
   }
 
   // Redirect if already logged in
-  if (localStorage.getItem('flh_token')) {
-    window.location.href = 'dashboard.html';
-  }
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session) window.location.href = 'dashboard.html';
+  });
 </script>
 </body>
 </html>

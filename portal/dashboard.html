@@ -334,17 +334,29 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-  const API   = 'http://localhost:3001/api';
-  let token   = localStorage.getItem('flh_token');
-  let user    = JSON.parse(localStorage.getItem('flh_user') || '{}');
-  let quota   = null;
+  const SUPABASE_URL  = 'https://ezninmuueoojvrwyxakm.supabase.co';
+  const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY'; // paste anon key here
+  const FN_BASE       = `${SUPABASE_URL}/functions/v1`;
+  const sb            = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  let token = localStorage.getItem('flh_token');
+  let user  = JSON.parse(localStorage.getItem('flh_user') || '{}');
+  let quota = null;
 
   if (!token) window.location.href = 'login.html';
   document.getElementById('navName').textContent = user.full_name || user.email || '—';
 
+  // Refresh token from Supabase session silently
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (!session) { logout(); return; }
+    token = session.access_token;
+    localStorage.setItem('flh_token', token);
+  });
+
   async function apiFetch(path, opts = {}) {
-    const res = await fetch(`${API}${path}`, {
+    const res = await fetch(`${FN_BASE}${path}`, {
       ...opts,
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -352,9 +364,7 @@
         ...(opts.headers || {}),
       },
     });
-    if (res.status === 401) {
-      logout();
-    }
+    if (res.status === 401) logout();
     return res;
   }
 
@@ -365,7 +375,7 @@
 
   async function loadQuota() {
     try {
-      const res  = await apiFetch('/extract/quota');
+      const res  = await apiFetch('/quota');
       const data = await res.json();
       quota = data;
 
@@ -398,7 +408,7 @@
 
   async function loadHistory() {
     try {
-      const res  = await apiFetch('/extract/history');
+      const res  = await apiFetch('/history');
       const data = await res.json();
 
       if (!Array.isArray(data) || data.length === 0) {
