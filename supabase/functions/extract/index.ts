@@ -16,24 +16,16 @@ function today(): string {
 }
 
 function transformLead(raw: Record<string, unknown>): Record<string, string> {
-  // Parse categories — actor returns pipe-separated string
-  const cats = String(raw.google_business_categories || raw.categoryName || '').split('|');
-  const industry = cats[0].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   return {
-    'Lead ID':       generateLeadId(),
-    'Business Name': String(raw.name || raw.title || ''),
-    'Industry':      industry,
-    'Address':       String(raw.street || raw.address || ''),
-    'City':          String(raw.city || ''),
-    'Country':       String(raw.country_code || raw.country || ''),
-    'Phone':         String(raw.phone_number || raw.phone || raw.phoneUnformatted || ''),
-    'Email':         String(raw.email || ''),
-    'Website':       String(raw.url || raw.website || ''),
-    'Facebook':      String(raw.facebook || ''),
-    'Instagram':     String(raw.instagram || ''),
-    'LinkedIn':      String(raw.linkedin || ''),
-    'Date Sourced':  today(),
-    'Status':        'New',
+    'name':            String(raw.name || ''),
+    'email':           String(raw.email || ''),
+    'phone number':    String(raw.phone_number || ''),
+    'city':            String(raw.city || ''),
+    'website':         String(raw.url || ''),
+    'google maps url': String(raw.google_maps_url || ''),
+    'facebook':        String(raw.facebook || ''),
+    'instagram':       String(raw.instagram || ''),
+    'reviews number':  String(raw.reviews_number || ''),
   };
 }
 
