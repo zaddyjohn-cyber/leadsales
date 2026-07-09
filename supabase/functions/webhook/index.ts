@@ -66,7 +66,7 @@ Deno.serve(async (req: Request) => {
           'Authorization': `Bearer ${RESEND_KEY}`,
         },
         body: JSON.stringify({
-          from: 'Freelance LeadsHub <noreply@freelanceleadshub.shop>',
+          from: 'Freelance LeadsHub <noreply@zaramwebmailer.online>',
           to: email,
           subject: `✅ Payment confirmed — your ${planLabel} plan is active`,
           html: `
