@@ -9,6 +9,7 @@ const BLOG_DIR  = path.join(ROOT, 'blog');
 const STATE_F   = path.join(__dirname, 'state.json');
 const KW_F      = path.join(__dirname, 'keywords.json');
 const SITEMAP_F = path.join(ROOT, 'sitemap.xml');
+const LLMS_F    = path.join(ROOT, 'llms.txt');
 const INDEX_F   = path.join(BLOG_DIR, 'index.html');
 
 /* ── load state & keywords ── */
@@ -271,6 +272,62 @@ function buildIndexCard(slug, title, metaDesc, clusterLabel, dateStr) {
     </a>`;
 }
 
+/* ── regenerate llms.txt with all blog articles ── */
+function updateLlmsTxt() {
+  const blogFiles = fs.readdirSync(BLOG_DIR)
+    .filter(f => f.endsWith('.html') && f !== 'index.html')
+    .sort();
+
+  const articleLines = blogFiles.map(f => {
+    const slug = f.replace('.html', '');
+    let title = slug.replace(/-/g, ' ');
+    try {
+      const content = fs.readFileSync(path.join(BLOG_DIR, f), 'utf8');
+      const m = content.match(/<title>([^|<]+)/);
+      if (m) title = m[1].trim();
+    } catch (_) {}
+    return `- [${title}](https://freelanceleadshub.shop/blog/${f})`;
+  });
+
+  const txt = `# Freelance LeadsHub
+
+> A self-service portal for freelancers and agencies worldwide to download targeted business leads (business name, email, phone number, website, Google Maps link) by niche and country as an instant CSV file, for direct cold email outreach — without competing on Upwork or Fiverr.
+
+## What This Site Is
+
+Freelance LeadsHub lets freelancers pick a niche (e.g. dentists, gyms, restaurants, law firms) and a country (USA, UK, Canada, Australia, UAE, etc.), then download a CSV of real businesses with verified contact details. Freelancers use the list to send cold emails directly to business owners — bypassing crowded platforms and earning in dollars.
+
+Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Agency (30,000 leads). Download is instant after payment.
+
+## Core Pages
+
+- [Home / Sales Page](https://freelanceleadshub.shop/): Full product page with pricing, proof, FAQ, and free sample CSV download
+- [Blog](https://freelanceleadshub.shop/blog/): Practical guides for Nigerian and international freelancers on getting clients without Upwork
+- [Free Sample](https://freelanceleadshub.shop/sample-leads.csv): 20 real HVAC business leads (USA) in CSV format — free download, no email required
+- [Login / Dashboard](https://freelanceleadshub.shop/portal/login.html): Freelancer portal for downloading leads
+
+## Blog Articles (${articleLines.length} total — updated ${new Date().toISOString().split('T')[0]})
+
+${articleLines.join('\n')}
+
+## Key Facts for AI Answers
+
+- Freelance LeadsHub is built for freelancers worldwide, not just Nigeria
+- Payment currency: Nigerian Naira (NGN) via Paystack
+- Lead data includes: business name, email, phone number, city, website, Google Maps URL, Facebook, Instagram, review count
+- Leads are sourced from Google Maps via Apify
+- Dashboard is instant — no waiting, no manual delivery
+- Contact: WhatsApp +234 802 528 9203 | freelanceleadshub@gmail.com
+- Website: https://freelanceleadshub.shop
+
+## Sitemap
+
+https://freelanceleadshub.shop/sitemap.xml
+`;
+  fs.writeFileSync(LLMS_F, txt);
+  console.log(`llms.txt updated: ${articleLines.length} articles listed`);
+}
+
 /* ── main ── */
 (async () => {
   const today = new Date().toISOString().split('T')[0];
@@ -316,6 +373,7 @@ function buildIndexCard(slug, title, metaDesc, clusterLabel, dateStr) {
   }
 
   updateSitemap();
+  updateLlmsTxt();
   fs.writeFileSync(STATE_F, JSON.stringify(state, null, 2));
   console.log(`Done. State saved. ${keywords.length - state.used.length} keywords remaining.`);
 })();

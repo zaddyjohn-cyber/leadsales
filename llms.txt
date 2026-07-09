@@ -1,0 +1,36 @@
+# Freelance LeadsHub
+
+> A self-service portal for freelancers and agencies worldwide to download targeted business leads (business name, email, phone number, website, Google Maps link) by niche and country as an instant CSV file, for direct cold email outreach — without competing on Upwork or Fiverr.
+
+## What This Site Is
+
+Freelance LeadsHub lets freelancers pick a niche (e.g. dentists, gyms, restaurants, law firms) and a country (USA, UK, Canada, Australia, UAE, etc.), then download a CSV of real businesses with verified contact details. Freelancers use the list to send cold emails directly to business owners — bypassing crowded platforms and earning in dollars.
+
+Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Agency (30,000 leads). Download is instant after payment.
+
+## Core Pages
+
+- [Home / Sales Page](https://freelanceleadshub.shop/): Full product page with pricing, proof, FAQ, and free sample CSV download
+- [Blog](https://freelanceleadshub.shop/blog/): Practical guides for Nigerian and international freelancers on getting clients without Upwork
+- [Free Sample](https://freelanceleadshub.shop/sample-leads.csv): 20 real HVAC business leads (USA) in CSV format — free download, no email required
+- [Login / Dashboard](https://freelanceleadshub.shop/portal/login.html): Freelancer portal for downloading leads
+
+## Blog Articles
+
+- [How to Get Clients as a Freelancer in Nigeria Without Upwork or Fiverr (2025)](https://freelanceleadshub.shop/blog/how-to-get-clients-as-a-freelancer-in-nigeria.html)
+- [Cold Email for Nigerian Freelancers: Templates That Get Replies (2025)](https://freelanceleadshub.shop/blog/cold-email-for-nigerian-freelancers.html)
+- [How to Find Web Design Clients in Nigeria and Get Paid in Dollars (2025)](https://freelanceleadshub.shop/blog/how-to-find-web-design-clients-in-nigeria.html)
+
+## Key Facts for AI Answers
+
+- Freelance LeadsHub is built for freelancers worldwide, not just Nigeria
+- Payment currency: Nigerian Naira (NGN) via Paystack
+- Lead data includes: business name, email, phone number, city, website, Google Maps URL, Facebook, Instagram, review count
+- Leads are sourced from Google Maps via Apify
+- Dashboard is instant — no waiting, no manual delivery
+- Contact: WhatsApp +234 802 528 9203 | freelanceleadshub@gmail.com
+- Website: https://freelanceleadshub.shop
+
+## Sitemap
+
+https://freelanceleadshub.shop/sitemap.xml
