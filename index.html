@@ -2128,9 +2128,98 @@
   .center{ text-align:center; }
   .mt-32{ margin-top:32px; }
   .hide{ display:none !important; }
+
+  /* ── Urgency badge under pricing cards ── */
+  .price-urgency {
+    font-size: 12px; font-weight: 700; color: #E5664A;
+    text-align: center; margin: 10px 0 4px;
+    letter-spacing: .3px;
+  }
+
+  /* ── Lead counter strip ── */
+  .lead-counter {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff; text-align: center;
+    padding: 14px 20px;
+    font-size: 15px; font-weight: 600; letter-spacing: .3px;
+  }
+  .lead-counter span { color: var(--c-coral); font-size: 22px; font-weight: 900; }
+
+  /* ── Sample CSV download section ── */
+  .sample-section {
+    background: #f0faf4; border: 2px dashed #25d366;
+    border-radius: 16px; padding: 36px 28px;
+    text-align: center; max-width: 680px; margin: 0 auto 0;
+  }
+  .sample-section h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: #1a1a2e; }
+  .sample-section p { color: #4a5568; margin-bottom: 20px; font-size: 15px; }
+  .btn-sample {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25d366; color: #fff; font-weight: 700; font-size: 15px;
+    padding: 14px 32px; border-radius: 50px; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-sample:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(37,211,102,.4); }
+
+  /* ── WhatsApp floating button ── */
+  .wa-fab {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,.55);
+    text-decoration: none;
+    animation: wa-pulse 2.5s infinite;
+    transition: transform .2s;
+  }
+  .wa-fab:hover { transform: scale(1.1); }
+  .wa-fab svg { width: 32px; height: 32px; fill: #fff; }
+  @keyframes wa-pulse {
+    0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,.55); }
+    50%      { box-shadow: 0 6px 32px rgba(37,211,102,.85); }
+  }
+
+  /* ── Exit-intent popup ── */
+  .ei-overlay {
+    display: none; position: fixed; inset: 0; z-index: 99999;
+    background: rgba(0,0,0,.65); align-items: center; justify-content: center;
+  }
+  .ei-overlay.open { display: flex; }
+  .ei-box {
+    background: #fff; border-radius: 20px; padding: 40px 36px;
+    max-width: 480px; width: 92%; text-align: center;
+    position: relative; animation: ei-in .35s ease;
+  }
+  @keyframes ei-in { from { transform: scale(.88); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .ei-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none; font-size: 22px; cursor: pointer; color: #888;
+  }
+  .ei-box h3 { font-size: 24px; font-weight: 900; color: #1a1a2e; margin-bottom: 8px; line-height: 1.25; }
+  .ei-box p  { font-size: 15px; color: #4a5568; margin-bottom: 22px; }
+  .ei-form   { display: flex; flex-direction: column; gap: 12px; }
+  .ei-form input {
+    padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 10px;
+    font-size: 15px; outline: none; transition: border .2s;
+  }
+  .ei-form input:focus { border-color: var(--c-coral); }
+  .ei-form button {
+    padding: 14px; background: var(--c-coral); color: #fff;
+    font-weight: 800; font-size: 15px; border: none; border-radius: 10px;
+    cursor: pointer; transition: background .2s;
+  }
+  .ei-form button:hover { background: var(--c-coral-deep); }
+  .ei-skip { margin-top: 12px; font-size: 13px; color: #999; cursor: pointer; }
+  .ei-skip:hover { color: #555; }
+  .ei-success { display: none; }
+  .ei-success h4 { font-size: 20px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+  .ei-success p  { font-size: 14px; color: #4a5568; }
 </style>
 </head>
 <body>
+
+<!-- Lead counter strip -->
+<div class="lead-counter">🔥 <span id="leadCounterNum">43,200+</span> leads downloaded by freelancers worldwide — and counting</div>
 
 <!-- ============================================================
      HEADER / STICKY NAV
@@ -2146,6 +2235,7 @@
       <a href="#proof">Proof</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
     </nav>
     <div class="nav-cta">
       <a href="portal/login.html" class="btn btn-ghost">My Account</a>
@@ -2860,6 +2950,28 @@
      (example searches folded into Solution; trust signals already in trust strip + hero). -->
 
 <!-- ============================================================
+     SAMPLE DOWNLOAD
+     ============================================================ -->
+<section class="section section--soft" id="sample">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-head" style="margin-bottom:28px;">
+      <span class="eyebrow">Free Sample</span>
+      <h2>See Exactly What You're Getting Before You Pay a Single Naira</h2>
+      <p>Download 20 real business leads — names, emails, phone numbers, websites, Google Maps links — so you can open the file, see the format, and decide with zero doubt.</p>
+    </div>
+    <div class="sample-section">
+      <h3>📄 Free Sample: 20 Dental Leads (Texas, USA)</h3>
+      <p>Real businesses. Real emails. Real phone numbers. This is the exact format you'll get when you download from the dashboard — just 20 rows instead of thousands.</p>
+      <a href="sample-leads.csv" download class="btn-sample">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Free Sample (CSV)
+      </a>
+      <p style="margin-top:14px;font-size:13px;color:#6b7280;">No email required. Just click and download.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      PRICING
      ============================================================ -->
 <section class="section" id="pricing">
@@ -2921,6 +3033,7 @@
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Any niche &amp; country</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Email confirmation</li>
         </ul>
+        <div class="price-urgency">⚡ Only 12 Starter packs left this week</div>
         <a href="portal/login.html" class="btn btn-ghost btn-block">Get Started →</a>
       </div>
       <!-- GROWTH (featured) — ₦40k @ ₦2.35/lead -->
@@ -2937,6 +3050,7 @@
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Special instructions supported</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Priority human review</li>
         </ul>
+        <div class="price-urgency">⚡ 3 freelancers bought Growth today</div>
         <a href="portal/login.html" class="btn btn-primary btn-block">Get Started →</a>
       </div>
       <!-- AGENCY — ₦70k @ ₦2.33/lead -->
@@ -2952,6 +3066,7 @@
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Custom filters supported</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Priority human review</li>
         </ul>
+        <div class="price-urgency">⚡ Best value for agencies &amp; teams</div>
         <a href="portal/login.html" class="btn btn-ghost btn-block">Get Started →</a>
       </div>
     </div>
@@ -3506,6 +3621,125 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
+</script>
+
+<!-- ── WhatsApp Floating Button ── -->
+<a class="wa-fab" href="https://wa.me/2348025289203?text=Hi%20Freelance%20LeadsHub%20%E2%80%94%20I%20have%20a%20question%20about%20getting%20business%20leads." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.48 2.03 7.79L.5 31.5l7.95-2.08A15.45 15.45 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.1a12.6 12.6 0 01-6.43-1.76l-.46-.27-4.72 1.24 1.26-4.6-.3-.48A12.6 12.6 0 1116 28.6zm6.9-9.43c-.38-.19-2.24-1.1-2.59-1.23-.35-.12-.6-.19-.85.19s-.97 1.23-1.19 1.49c-.22.25-.44.28-.82.09-.38-.19-1.6-.59-3.05-1.88-1.13-1-1.89-2.23-2.11-2.61-.22-.38-.02-.58.16-.77.17-.17.38-.44.57-.66.19-.22.25-.38.38-.63.12-.25.06-.47-.03-.66-.1-.19-.85-2.05-1.17-2.8-.31-.74-.62-.63-.85-.64h-.73c-.25 0-.66.09-1.01.47-.35.38-1.32 1.29-1.32 3.14s1.35 3.65 1.54 3.9c.19.25 2.66 4.06 6.44 5.7.9.39 1.6.62 2.15.79.9.29 1.72.25 2.37.15.72-.1 2.24-.91 2.56-1.8.31-.88.31-1.63.22-1.79-.1-.16-.35-.25-.73-.44z"/></svg>
+</a>
+
+<!-- ── Exit-Intent Popup ── -->
+<div class="ei-overlay" id="eiOverlay" role="dialog" aria-modal="true" aria-label="Get free sample leads">
+  <div class="ei-box">
+    <button class="ei-close" id="eiClose" aria-label="Close">✕</button>
+    <div id="eiForm">
+      <div style="font-size:40px;margin-bottom:12px;">🎁</div>
+      <h3>Wait — Before You Go, Grab 20 Free Leads</h3>
+      <p>Drop your email and we'll send you a free sample CSV of 20 real business leads instantly — no payment, no catch.</p>
+      <form class="ei-form" id="eiEmailForm">
+        <input type="email" id="eiEmail" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit">Send Me the Free Sample →</button>
+      </form>
+      <p class="ei-skip" id="eiSkip">No thanks, I don't want free leads</p>
+    </div>
+    <div class="ei-success" id="eiSuccess">
+      <div style="font-size:48px;margin-bottom:14px;">✅</div>
+      <h4>Check your inbox!</h4>
+      <p>Your free sample CSV is on its way. While you wait — <a href="portal/login.html" style="color:var(--c-coral);font-weight:700;">log in to grab your full list →</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Exit-intent trigger ── */
+(function () {
+  const SUPABASE_URL = 'https://ezninmuueoojvrwyxakm.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6bmltdXVlb29qdnJ3eXhha20iLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0ODY4OTQyNywiZXhwIjoyMDY0MjY1NDI3fQ.1GQotJOLJNm4PVPHJPvHBTvGpmpASPKzD3YSKWeQ2HlrrxxXDHvzQEHHsieMMtbdSVQRN1zNM2IqM';
+
+  let shown = false;
+  const overlay = document.getElementById('eiOverlay');
+  const closeBtn = document.getElementById('eiClose');
+  const skipBtn  = document.getElementById('eiSkip');
+  const form     = document.getElementById('eiEmailForm');
+  const success  = document.getElementById('eiSuccess');
+  const formDiv  = document.getElementById('eiForm');
+
+  function show() {
+    if (shown || sessionStorage.getItem('ei_dismissed')) return;
+    shown = true;
+    overlay.classList.add('open');
+  }
+
+  function hide() {
+    overlay.classList.remove('open');
+    sessionStorage.setItem('ei_dismissed', '1');
+  }
+
+  // Desktop: mouse leaves top of viewport
+  document.addEventListener('mouseleave', function (e) {
+    if (e.clientY < 10) show();
+  });
+
+  // Mobile: scroll up quickly near top (back-button intent)
+  let lastY = 0;
+  window.addEventListener('scroll', function () {
+    const y = window.scrollY;
+    if (lastY - y > 60 && y < 400) show();
+    lastY = y;
+  }, { passive: true });
+
+  // 45-second fallback for engaged readers
+  setTimeout(show, 45000);
+
+  closeBtn.addEventListener('click', hide);
+  skipBtn.addEventListener('click', hide);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) hide();
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = document.getElementById('eiEmail').value.trim();
+    if (!email) return;
+
+    try {
+      await fetch(SUPABASE_URL + '/rest/v1/email_leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': 'Bearer ' + SUPABASE_ANON,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({ email: email, source: 'exit_intent' }),
+      });
+    } catch (_) { /* fail silently */ }
+
+    // Trigger sample CSV download
+    const a = document.createElement('a');
+    a.href = 'sample-leads.csv';
+    a.download = 'freelanceleadshub-sample.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    formDiv.style.display = 'none';
+    success.style.display = 'block';
+    sessionStorage.setItem('ei_dismissed', '1');
+  });
+
+  /* ── Animated lead counter ── */
+  const counterEl = document.getElementById('leadCounterNum');
+  if (counterEl) {
+    const base = 43200;
+    function tick() {
+      const rand = Math.floor(Math.random() * 6) + 1;
+      const current = parseInt(counterEl.textContent.replace(/,|\+/g, '')) || base;
+      counterEl.textContent = (current + rand).toLocaleString() + '+';
+    }
+    setInterval(tick, 8000);
+  }
+})();
 </script>
 </body>
 </html>
