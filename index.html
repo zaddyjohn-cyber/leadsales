@@ -2129,6 +2129,25 @@
   .mt-32{ margin-top:32px; }
   .hide{ display:none !important; }
 
+  /* ── FAQ action buttons ── */
+  .faq-action-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 14px; padding: 12px 22px; border-radius: 50px;
+    font-weight: 700; font-size: 14px; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .faq-action-btn:hover { transform: translateY(-2px); text-decoration: none; }
+  .faq-btn-wa {
+    background: #25d366; color: #fff;
+    box-shadow: 0 4px 16px rgba(37,211,102,.35);
+  }
+  .faq-btn-wa:hover { box-shadow: 0 8px 24px rgba(37,211,102,.5); }
+  .faq-btn-blue {
+    background: #1a1a2e; color: #fff;
+    box-shadow: 0 4px 16px rgba(26,26,46,.25);
+  }
+  .faq-btn-blue:hover { box-shadow: 0 8px 24px rgba(26,26,46,.4); }
+
   /* ── Urgency badge under pricing cards ── */
   .price-urgency {
     font-size: 12px; font-weight: 700; color: #E5664A;
@@ -3219,7 +3238,13 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">Do I need to know how to use cold email? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>No, but it helps. You can use the leads for cold email, WhatsApp outreach, calls, DMs, or manual follow-up.</p></div>
+        <div class="faq-a">
+          <p>No, but it helps. You can use the leads for cold email, WhatsApp outreach, calls, DMs, or manual follow-up.</p>
+          <p>If you want to start sending cold emails immediately after downloading your CSV, use <strong>Zaram Web Mailer</strong> — load your lead list, write your email, and send bulk outreach directly from the platform.</p>
+          <a href="https://zaramwebmailer.online" target="_blank" rel="noopener" class="faq-action-btn faq-btn-blue">
+            🚀 Start Cold Mailing at zaramwebmailer.online →
+          </a>
+        </div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Will these leads guarantee clients? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -3247,7 +3272,13 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">Can I request businesses without websites? <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Yes. You can mention this in the notes field, and the request will be prepared based on your instructions where possible.</p></div>
+        <div class="faq-a">
+          <p>Yes. You can mention this in the notes field when downloading from the dashboard, and the request will be prepared based on your instructions where possible.</p>
+          <p>Not sure if this filter is available for your specific niche or location? Message us on WhatsApp first — we'll confirm before you pay.</p>
+          <a href="https://wa.me/2348025289203?text=Hi%20Freelance%20LeadsHub%20%E2%80%94%20I%27d%20like%20to%20request%20businesses%20without%20websites%20for%20my%20outreach.%20Can%20you%20confirm%20if%20this%20is%20available%20for%20my%20niche%3F" target="_blank" rel="noopener" class="faq-action-btn faq-btn-wa">
+            💬 Ask on WhatsApp — No-Website Leads
+          </a>
+        </div>
       </div>
       </div>
   </div>
