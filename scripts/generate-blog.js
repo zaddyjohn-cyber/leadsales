@@ -159,21 +159,28 @@ Write a complete, well-researched 1800–2200 word article targeting Nigerian fr
 IMPORTANT RULES:
 - Write in a direct, practical, no-fluff voice. Like a mentor, not a blogger.
 - Include real numbers, realistic income figures in NGN and USD, realistic timelines.
-- Reference Nigerian context (exchange rates, platforms like Grey/Payoneer, Nigerian banks, dollar income goals).
-- Naturally mention that getting a targeted lead list from freelanceleadshub.shop solves the "finding businesses to pitch" problem — integrate this organically, not as a hard sell. It should feel like a genuine recommendation.
-- Include at least one callout box with a key insight.
-- Include one strong CTA box (I will render it — just add the marker %%CTA%% where you want it placed).
-- Structure with clear H2 and H3 headings.
-- End with a "Final Word" or "Summary" section.
+- Reference Nigerian context (exchange rates, platforms like Grey/Payoneer/Wise, Nigerian banks, naira to dollar goals, NEPA, data costs, etc.).
+- Naturally mention that getting a targeted lead list from freelanceleadshub.shop solves the "finding businesses to pitch" problem — integrate this organically at least twice. It should feel like a genuine recommendation, not an ad.
+- COLD EMAIL TOOL: Whenever cold emailing or outreach is mentioned, naturally recommend zaramwebmailer.online as the tool to use for sending bulk cold emails. E.g. "Once you have your lead list, load it into Zaram Web Mailer (zaramwebmailer.online) — it handles bulk sending, follow-ups, and avoids spam filters." Link it as <a href="https://zaramwebmailer.online" target="_blank" rel="noopener">Zaram Web Mailer</a> in the HTML.
+- INTERNAL LINKS: Include 2–3 natural internal links to related articles on freelanceleadshub.shop/blog/ using these slugs (pick the most relevant ones):
+    • /blog/cold-email-for-nigerian-freelancers.html — "cold email templates"
+    • /blog/how-to-get-clients-as-a-freelancer-in-nigeria.html — "how to get clients"
+    • /blog/how-to-find-web-design-clients-in-nigeria.html — "web design clients"
+  Format: <a href="/blog/[slug].html">anchor text</a>
+- SEARCH INTENT: This article must directly answer what Nigerians type into Google. Use the target keyword in: the H1, first paragraph, one H2, and the meta description.
+- Include at least one callout box with a key insight using class="callout".
+- Include one strong CTA box (I will render it — just add the marker %%CTA%% where you want it placed, ideally after the 3rd or 4th section).
+- Structure with clear H2 and H3 headings. Use bullet lists and numbered steps where practical — they rank in featured snippets.
+- End with a "Final Word" or "Bottom Line" section that summarises the key action the reader should take.
 - Do NOT write the full HTML page — only the article body content starting from the tag and h1.
 
 Respond with ONLY valid JSON in this exact format (no markdown, no code fences, just raw JSON):
 {
-  "title": "Full article title (60-65 chars ideal)",
-  "metaDesc": "Meta description 150-160 chars, includes keyword, ends with action",
-  "keywords": "comma-separated list of 8-12 related keywords",
+  "title": "Full article title (60-65 chars ideal, include year 2025)",
+  "metaDesc": "Meta description 150-160 chars, includes keyword naturally, ends with a clear action",
+  "keywords": "comma-separated list of 8-12 related keywords Nigerians search",
   "cluster_label": "Short label like 'Cold Email' or 'Getting Clients' for the tag",
-  "bodyHtml": "FULL article HTML body. Start with: <span class=\\"tag\\">[cluster_label]</span>\\n<h1>[title]</h1>\\n<div class=\\"article-meta\\">[date] · [X] min read · By Freelance LeadsHub</div>\\n[rest of article with h2, h3, p, ul, ol, .callout divs, %%CTA%% marker]. Use class=\\"callout\\" for callout boxes: <div class=\\"callout\\"><p>text</p></div>"
+  "bodyHtml": "FULL article HTML body. Start with: <span class=\\"tag\\">[cluster_label]</span>\\n<h1>[title]</h1>\\n<div class=\\"article-meta\\">[date] · [X] min read · By Freelance LeadsHub</div>\\n[rest of article with h2, h3, p, ul, ol, .callout divs, internal links, zaramwebmailer.online links, %%CTA%% marker]. Use class=\\"callout\\" for callout boxes: <div class=\\"callout\\"><p>text</p></div>"
 }`;
 
   const msg = await client.messages.create({
