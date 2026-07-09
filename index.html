@@ -3651,11 +3651,75 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 </div>
 
 <script>
-/* ── Exit-intent trigger ── */
+/* ── Exit-intent + device fingerprint ── */
 (function () {
-  const SUPABASE_URL = 'https://ezninmuueoojvrwyxakm.supabase.co';
+  const SUPABASE_URL  = 'https://ezninmuueoojvrwyxakm.supabase.co';
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6bmltdXVlb29qdnJ3eXhha20iLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0ODY4OTQyNywiZXhwIjoyMDY0MjY1NDI3fQ.1GQotJOLJNm4PVPHJPvHBTvGpmpASPKzD3YSKWeQ2HlrrxxXDHvzQEHHsieMMtbdSVQRN1zNM2IqM';
+  const LS_KEY        = 'flh_sample_claimed';
 
+  /* ── 1. Device fingerprint (canvas + stable browser signals) ── */
+  function getFingerprint() {
+    const nav = window.navigator;
+    // Canvas fingerprint — GPU renders text slightly differently per device/driver
+    let canvasStr = '';
+    try {
+      const c = document.createElement('canvas');
+      const ctx = c.getContext('2d');
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.fillStyle = '#f60';
+      ctx.fillRect(125, 1, 62, 20);
+      ctx.fillStyle = '#069';
+      ctx.fillText('FLH🔥', 2, 15);
+      ctx.fillStyle = 'rgba(102,204,0,0.7)';
+      ctx.fillText('FLH🔥', 4, 17);
+      canvasStr = c.toDataURL().slice(-80);
+    } catch (_) {}
+
+    const raw = [
+      nav.language,
+      nav.platform,
+      nav.hardwareConcurrency || '',
+      screen.width + 'x' + screen.height,
+      screen.colorDepth,
+      Intl.DateTimeFormat().resolvedOptions().timeZone,
+      canvasStr,
+    ].join('|');
+
+    // Simple djb2 hash → hex string
+    let h = 5381;
+    for (let i = 0; i < raw.length; i++) h = ((h << 5) + h) ^ raw.charCodeAt(i);
+    return (h >>> 0).toString(16).padStart(8, '0');
+  }
+
+  const deviceId = getFingerprint();
+
+  /* ── 2. Instant localStorage check (covers 90 % of repeat visits) ── */
+  function alreadyClaimed() {
+    return localStorage.getItem(LS_KEY) === '1';
+  }
+
+  function markClaimed() {
+    localStorage.setItem(LS_KEY, '1');
+    // Also set a long-lived cookie as a second layer
+    document.cookie = LS_KEY + '=1; max-age=' + (60 * 60 * 24 * 365) + '; path=/; SameSite=Lax';
+  }
+
+  /* ── 3. Supabase fingerprint check (catches incognito / cleared storage) ── */
+  async function fingerprintExists() {
+    try {
+      const res = await fetch(
+        SUPABASE_URL + '/rest/v1/email_leads?device_id=eq.' + deviceId + '&select=id&limit=1',
+        { headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON } }
+      );
+      const rows = await res.json();
+      return Array.isArray(rows) && rows.length > 0;
+    } catch (_) {
+      return false; // if check fails, allow download (don't penalise real users)
+    }
+  }
+
+  /* ── Popup elements ── */
   let shown = false;
   const overlay = document.getElementById('eiOverlay');
   const closeBtn = document.getElementById('eiClose');
@@ -3663,9 +3727,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   const form     = document.getElementById('eiEmailForm');
   const success  = document.getElementById('eiSuccess');
   const formDiv  = document.getElementById('eiForm');
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
 
   function show() {
-    if (shown || sessionStorage.getItem('ei_dismissed')) return;
+    if (shown || sessionStorage.getItem('ei_dismissed') || alreadyClaimed()) return;
     shown = true;
     overlay.classList.add('open');
   }
@@ -3675,12 +3740,23 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     sessionStorage.setItem('ei_dismissed', '1');
   }
 
-  // Desktop: mouse leaves top of viewport
+  // Show already-claimed message inside the popup
+  function showAlreadyClaimed() {
+    if (!formDiv) return;
+    formDiv.innerHTML = `
+      <div style="font-size:40px;margin-bottom:12px;">🔒</div>
+      <h3 style="font-size:20px;">You've already downloaded the sample</h3>
+      <p>Each device can claim the free sample once.<br>Ready to get the full list?</p>
+      <a href="portal/login.html" style="display:inline-block;margin-top:8px;background:var(--c-coral);color:#fff;padding:13px 28px;border-radius:50px;font-weight:800;font-size:15px;text-decoration:none;">Get Full Lead List →</a>
+      <p class="ei-skip" style="margin-top:14px;font-size:13px;color:#999;cursor:pointer;" onclick="document.getElementById('eiOverlay').classList.remove('open')">Close</p>`;
+  }
+
+  // Desktop exit intent
   document.addEventListener('mouseleave', function (e) {
     if (e.clientY < 10) show();
   });
 
-  // Mobile: scroll up quickly near top (back-button intent)
+  // Mobile quick-scroll-up near top
   let lastY = 0;
   window.addEventListener('scroll', function () {
     const y = window.scrollY;
@@ -3688,20 +3764,32 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     lastY = y;
   }, { passive: true });
 
-  // 45-second fallback for engaged readers
+  // 45-second fallback
   setTimeout(show, 45000);
 
-  closeBtn.addEventListener('click', hide);
-  skipBtn.addEventListener('click', hide);
-  overlay.addEventListener('click', function (e) {
+  closeBtn && closeBtn.addEventListener('click', hide);
+  skipBtn  && skipBtn.addEventListener('click', hide);
+  overlay  && overlay.addEventListener('click', function (e) {
     if (e.target === overlay) hide();
   });
 
-  form.addEventListener('submit', async function (e) {
+  /* ── Form submit with fingerprint gate ── */
+  form && form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('eiEmail').value.trim();
     if (!email) return;
 
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Checking…'; }
+
+    // Check Supabase for existing device_id
+    const alreadyInDB = await fingerprintExists();
+    if (alreadyInDB || alreadyClaimed()) {
+      markClaimed();
+      showAlreadyClaimed();
+      return;
+    }
+
+    // Save to Supabase with device fingerprint
     try {
       await fetch(SUPABASE_URL + '/rest/v1/email_leads', {
         method: 'POST',
@@ -3711,11 +3799,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
           'Authorization': 'Bearer ' + SUPABASE_ANON,
           'Prefer': 'return=minimal',
         },
-        body: JSON.stringify({ email: email, source: 'exit_intent' }),
+        body: JSON.stringify({ email: email, source: 'exit_intent', device_id: deviceId }),
       });
-    } catch (_) { /* fail silently */ }
+    } catch (_) {}
 
-    // Trigger sample CSV download
+    // Mark this device as claimed locally
+    markClaimed();
+
+    // Trigger CSV download
     const a = document.createElement('a');
     a.href = 'sample-leads.csv';
     a.download = 'freelanceleadshub-sample.csv';
@@ -3731,11 +3822,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   /* ── Animated lead counter ── */
   const counterEl = document.getElementById('leadCounterNum');
   if (counterEl) {
-    const base = 43200;
     function tick() {
-      const rand = Math.floor(Math.random() * 6) + 1;
-      const current = parseInt(counterEl.textContent.replace(/,|\+/g, '')) || base;
-      counterEl.textContent = (current + rand).toLocaleString() + '+';
+      const current = parseInt(counterEl.textContent.replace(/,|\+/g, '')) || 43200;
+      counterEl.textContent = (current + Math.floor(Math.random() * 6) + 1).toLocaleString() + '+';
     }
     setInterval(tick, 8000);
   }
