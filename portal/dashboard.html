@@ -181,9 +181,29 @@
 
   <!-- No Subscription -->
   <div class="no-sub-banner" id="noSubBanner" style="display:none">
-    <h3>No Active Subscription</h3>
-    <p>Purchase a plan to start extracting business leads from any country, instantly.</p>
-    <a href="../index.html#pricing" class="btn-primary">View Plans & Pricing →</a>
+    <h3>Choose a Plan to Get Started</h3>
+    <p>Pay once and start downloading business leads instantly from your dashboard.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+      <div style="background:#fff;border-radius:16px;padding:24px 28px;min-width:200px;text-align:center;box-shadow:0 4px 16px rgba(160,100,70,.10);">
+        <div style="font-weight:800;font-size:18px;color:#2A1F1A;margin-bottom:4px;">Starter</div>
+        <div style="font-size:28px;font-weight:900;color:#E5664A;margin-bottom:2px;">₦20,000</div>
+        <div style="font-size:13px;color:#8B7A6D;margin-bottom:16px;">8,500 leads</div>
+        <button onclick="payFromDashboard('starter',2000000)" class="btn-primary" style="width:100%;justify-content:center;">Buy Now</button>
+      </div>
+      <div style="background:#2A1F1A;border-radius:16px;padding:24px 28px;min-width:200px;text-align:center;box-shadow:0 4px 16px rgba(160,100,70,.18);position:relative;">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#E5664A;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.05em;">MOST POPULAR</div>
+        <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:4px;">Growth</div>
+        <div style="font-size:28px;font-weight:900;color:#FF8C72;margin-bottom:2px;">₦40,000</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px;">17,000 leads</div>
+        <button onclick="payFromDashboard('growth',4000000)" class="btn-primary" style="width:100%;justify-content:center;">Buy Now</button>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:24px 28px;min-width:200px;text-align:center;box-shadow:0 4px 16px rgba(160,100,70,.10);">
+        <div style="font-weight:800;font-size:18px;color:#2A1F1A;margin-bottom:4px;">Agency</div>
+        <div style="font-size:28px;font-weight:900;color:#E5664A;margin-bottom:2px;">₦70,000</div>
+        <div style="font-size:13px;color:#8B7A6D;margin-bottom:16px;">30,000 leads</div>
+        <button onclick="payFromDashboard('agency',7000000)" class="btn-primary" style="width:100%;justify-content:center;">Buy Now</button>
+      </div>
+    </div>
   </div>
 
   <div class="grid">
@@ -611,6 +631,24 @@
 
   loadQuota();
   loadHistory();
+
+  function payFromDashboard(plan, amount) {
+    const user = JSON.parse(localStorage.getItem('flh_user') || '{}');
+    if (!user.email) return alert('Please log in first.');
+    const handler = PaystackPop.setup({
+      key: 'pk_live_3cf98eddeae2340429c80504af83d8b0b9f09dfd',
+      email: user.email,
+      amount: amount,
+      currency: 'NGN',
+      metadata: { plan: plan },
+      callback: function() {
+        setTimeout(() => { loadQuota(); }, 4000);
+      },
+      onClose: function() {}
+    });
+    handler.openIframe();
+  }
 </script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 </body>
 </html>
