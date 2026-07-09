@@ -1,21 +1,21 @@
-name,email,phone number,city,website,google maps url,facebook,instagram,reviews number
-Bright Smile Dental,hello@brightsmileatx.com,+1 512-555-0142,Austin,https://brightsmileatx.com,https://maps.google.com/?cid=123456789,https://facebook.com/brightsmileatx,,212
-Lone Star Family Dental,contact@lonestardental.com,+1 214-555-0188,Dallas,https://lonestardental.com,https://maps.google.com/?cid=234567890,,,47
-Hill Country Orthodontics,info@hcortho.com,+1 210-555-0123,San Antonio,https://hcortho.com,https://maps.google.com/?cid=345678901,,https://instagram.com/hcortho,389
-Gulf Coast Dental Care,care@gulfcoastdental.com,+1 713-555-0177,Houston,https://gulfcoastdental.com,https://maps.google.com/?cid=456789012,https://facebook.com/gulfcoastdental,,96
-Prairie Dental Group,hello@prairiedental.com,+1 806-555-0150,Lubbock,https://prairiedental.com,https://maps.google.com/?cid=567890123,,,31
-Capital City Smiles,appointments@capitalcitysmiles.com,+1 512-555-0199,Austin,https://capitalcitysmiles.com,https://maps.google.com/?cid=678901234,https://facebook.com/capitalcitysmiles,,184
-Texas Dental Center,info@texasdentalcenter.com,+1 972-555-0166,Plano,https://texasdentalcenter.com,https://maps.google.com/?cid=789012345,,https://instagram.com/texasdentalcenter,67
-Smiles of Pearland,smile@smilesofpearland.com,+1 713-555-0188,Pearland,https://smilesofpearland.com,https://maps.google.com/?cid=890123456,,,23
-North Texas Dental,ntdental@outlook.com,+1 817-555-0144,Fort Worth,https://northtexasdental.net,https://maps.google.com/?cid=901234567,https://facebook.com/northtexasdental,,58
-Rosewood Family Dentistry,hello@rosewooddentistry.com,+1 469-555-0111,McKinney,https://rosewooddentistry.com,https://maps.google.com/?cid=012345678,,,142
-Austin Cosmetic Dentistry,info@austincosmetic.com,+1 512-555-0177,Austin,https://austincosmetic.com,https://maps.google.com/?cid=112233445,,https://instagram.com/austincosmetic,301
-Alamo City Dental,contact@alamocitydental.com,+1 210-555-0155,San Antonio,https://alamocitydental.com,https://maps.google.com/?cid=223344556,https://facebook.com/alamocitydental,,89
-Houston Smile Studio,smile@houstonsmlilestudio.com,+1 713-555-0133,Houston,https://houstonsmilestudio.com,https://maps.google.com/?cid=334455667,,,76
-Denton Family Dental,info@dentonfamilydental.com,+1 940-555-0122,Denton,https://dentonfamilydental.com,https://maps.google.com/?cid=445566778,,,34
-Woodlands Dental Group,hello@woodlandsdentalgroup.com,+1 281-555-0199,The Woodlands,https://woodlandsdentalgroup.com,https://maps.google.com/?cid=556677889,https://facebook.com/woodlandsdentalgroup,https://instagram.com/woodlandsdentalgroup,218
-Laredo Smiles,appointments@laredosmiles.com,+1 956-555-0144,Laredo,https://laredosmiles.com,https://maps.google.com/?cid=667788990,,,41
-Abilene Family Dentistry,info@abilenefamilydentistry.com,+1 325-555-0166,Abilene,https://abilenefamilydentistry.com,https://maps.google.com/?cid=778899001,,,29
-Corpus Christi Dental,hello@ccdentalcare.com,+1 361-555-0133,Corpus Christi,https://ccdentalcare.com,https://maps.google.com/?cid=889900112,https://facebook.com/ccdentalcare,,63
-Killeen Smiles Dental,killeensmiles@gmail.com,+1 254-555-0177,Killeen,https://killeensmiles.com,https://maps.google.com/?cid=990011223,,,18
-Midland Dental Associates,info@midlanddental.com,+1 432-555-0155,Midland,https://midlanddental.com,https://maps.google.com/?cid=101122334,,,52
+name,email,google_maps_url,facebook,instagram,linkedin,phone_number,street,city,url,reviews_number
+HQR Air,dispatch@hqrpro.com,https://www.google.com/maps?cid=13024784790130544024,,,,+1 925-326-6187,1070 Concord Ave,Concord,https://hqrair.com/contact-us/,
+Water Heater,gregory@waterheaterseaside.com,https://www.google.com/maps?cid=17425983128455668433,,,,+1 831-605-3132,1667 Darwin St,Seaside,https://waterheaterseaside.com/,
+Star Mechanical,shan@starairconditioningandheating.com,https://www.google.com/maps?cid=17199431873713552556,https://www.facebook.com/1starmechanical,,,+1 209-269-5064,17637 S Austin Rd,Manteca,https://starairconditioningandheating.com/locations/manteca-ca/,
+First Choice Heating and Air,rob@firstchoicecool.com,https://www.google.com/maps?cid=6876706653492538318,https://www.facebook.com/firstchoicecool/,,,+1 801-699-5398,9037 S Tolman Farms Cir,Sandy,https://firstchoiceairutah.com/contact-us,
+Pacific NW Reps,scott.herberg@pacificnwreps.com,https://www.google.com/maps?cid=9734294576452684365,,,,+1 425-836-0907,7804 W Washington St,Yakima,http://www.pacificnwreps.com/,
+B & I Heating,andy.biheating@gmail.com,https://www.google.com/maps?cid=4804080782878988314,https://www.facebook.com/B-I-Heating-AC-Electrical-LLC-1392122917752914/,,,+1 704-873-0930,358 Triplett Rd,Cleveland,https://www.biheatingandair.com/about/contact-us/,
+Crawford's Heating & Cooling,service@crawfordshvac.com,https://www.google.com/maps?cid=12840724925759626859,https://facebook.com/add,,,+1 573-336-0085,1125 Old Rte 66,St Robert,https://www.crawfordshvac.com/contact-crawfords-heating-and-cooling-st-robe,
+Air Tech Heating And Air Conditioning Service Inc,leo@airtechair.net,https://www.google.com/maps?cid=920390351426521734,,https://www.instagram.com/airtech2005/,,+1 818-845-0777,2514 N Glenoaks Blvd,Burbank,https://www.airtek1.com/,
+Chaddock Refrigeration Heating & Air Conditioning,chaddock@bellsouth.net,https://www.google.com/maps?cid=7082393801495821774,,,,+1 904-346-3031,5035 St Augustine Rd,Jacksonville,https://www.chaddockrefrigerationfl.com/,
+Arctic Refrigeration,arcticrefrigeration@midco.net,https://www.google.com/maps?cid=17993044159761001046,,,,+1 605-996-5145,112 S Edmunds St,Mitchell,http://arcticrefrigerationsd.com/,
+Austin Air & Ice LLC,service@austinairandice.com,https://www.google.com/maps?cid=16515577860972995254,https://www.facebook.com/austinairandice,https://www.instagram.com/austinairandice/,,+1 512-800-2228,7696 183A Toll Rd Unit 6B,Leander,https://www.austinairandice.com/,
+Stivers HVAC,cwright@stivers-hvac.com,https://www.google.com/maps?cid=13868371628010516461,https://www.facebook.com/StiversHVAC/,,,+1 859-226-0809,1201 Industry Rd,Lexington,https://stivers-hvac.com/contact-us/,
+Coastal M&R,coastal.mr252@gmail.com,https://www.google.com/maps?cid=5427690912325968961,https://www.facebook.com/profile.php?id=100084784426530,,,+1 252-571-6383,101 Longleaf Ln,New Bern,https://www.coastal-mr-refrigeration.com/,
+Refrigeration Solutions,rsidispatch@rsiclimate.com,https://www.google.com/maps?cid=13944619373155651508,,,,+1 800-838-9741,1172 W National Dr,Sacramento,https://rsiclimate.com/contact-us/,
+Abby Air Inc,abbyairinc@gmail.com,https://www.google.com/maps?cid=5811970535780508140,http://www.facebook.com/share/15yWEfeGb6/?mibextid=wwXlfr,,,,4646 Domestic Ave,Naples,https://www.abbyairinc.com/,
+Smart Heating and Cooling,smartheatcool@outlook.com,https://www.google.com/maps?cid=9168676153298453603,https://facebook.com/109303594926709,,,+1 913-423-2169,11327 132nd Ct,Overland Park,https://www.smartheatingandcooling.com/contact,
+Clay's Refrigeration,staff@claysrefrig.com,https://www.google.com/maps?cid=18305415083194067611,https://www.facebook.com/Clays-Refrigeration-441785549586038/,,,+1 800-688-9082,445 River Ave,Eugene,https://www.claysrefrig.com/,
+Northwest Services,nwserviceshvac@gmail.com,https://www.google.com/maps?cid=11610764458002418667,,,,+1 419-548-5017,101 East Airport Highway Swanton Swan Creek Township,Swanton,https://www.nwshvac.com/contact-us/,
+Individualized HVAC Options!,goliath71916@yahoo.com,https://www.google.com/maps?cid=12127366580406997714,https://www.facebook.com/velabrothers/,,,+1 806-231-7763,5400 Viewpoint Ave,Amarillo,https://www.goliathheatingandair.com/contact,
+Precision Mechanical Services,seanr@precisionmechanicalservices.net,https://www.google.com/maps?cid=6758984668940222932,,https://www.instagram.com/precision_mechanicalservices/,,+1 843-504-5974,316 Wembley Way,Murrells Inlet,https://www.precisionmechanicalservices.net/about-us,
