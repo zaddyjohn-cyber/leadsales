@@ -1,0 +1,9 @@
+{
+  "name": "leadshub-blog-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0"
+  }
+}

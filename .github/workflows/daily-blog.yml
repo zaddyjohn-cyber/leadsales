@@ -1,0 +1,40 @@
+name: Daily Blog Publisher
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 6 AM UTC = 7 AM WAT every day
+  workflow_dispatch:       # also lets you trigger manually from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: scripts
+
+      - name: Generate and publish blog articles
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-blog.js
+
+      - name: Commit and push new articles
+        run: |
+          git config user.name "LeadsHub Blog Bot"
+          git config user.email "bot@freelanceleadshub.shop"
+          git add .
+          git diff --staged --quiet || git commit -m "auto: publish blog articles $(date +'%Y-%m-%d')"
+          git push
