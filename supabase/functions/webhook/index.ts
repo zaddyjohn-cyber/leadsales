@@ -6,9 +6,9 @@ const corsHeaders = {
 };
 
 const PLANS: Record<string, { leads: number }> = {
-  starter: { leads: 2000  },
-  pro:     { leads: 8500  },
-  agency:  { leads: 20000 },
+  starter: { leads: 8500  },
+  growth:  { leads: 17000 },
+  agency:  { leads: 30000 },
 };
 
 Deno.serve(async (req: Request) => {
