@@ -15,11 +15,11 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [Free Sample](https://freelanceleadshub.shop/sample-leads.csv): 20 real HVAC business leads (USA) in CSV format — free download, no email required
 - [Login / Dashboard](https://freelanceleadshub.shop/portal/login.html): Freelancer portal for downloading leads
 
-## Blog Articles
+## Blog Articles (3 total — updated 2026-07-09)
 
-- [How to Get Clients as a Freelancer in Nigeria Without Upwork or Fiverr (2025)](https://freelanceleadshub.shop/blog/how-to-get-clients-as-a-freelancer-in-nigeria.html)
 - [Cold Email for Nigerian Freelancers: Templates That Get Replies (2025)](https://freelanceleadshub.shop/blog/cold-email-for-nigerian-freelancers.html)
 - [How to Find Web Design Clients in Nigeria and Get Paid in Dollars (2025)](https://freelanceleadshub.shop/blog/how-to-find-web-design-clients-in-nigeria.html)
+- [How to Get Clients as a Freelancer in Nigeria Without Upwork or Fiverr (2025)](https://freelanceleadshub.shop/blog/how-to-get-clients-as-a-freelancer-in-nigeria.html)
 
 ## Key Facts for AI Answers
 
