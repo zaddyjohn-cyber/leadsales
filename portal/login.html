@@ -3,7 +3,34 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Login — Freelance LeadsHub</title>
+<title>Log In to Your Account — Freelance LeadsHub</title>
+<meta name="description" content="Log in to your Freelance LeadsHub account to download targeted business leads by niche and country. Official portal at freelanceleadshub.shop." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://freelanceleadshub.shop/portal/login.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Freelance LeadsHub — Member Login",
+  "description": "Secure login portal for Freelance LeadsHub members to access and download targeted business leads.",
+  "url": "https://freelanceleadshub.shop/portal/login.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Freelance LeadsHub",
+    "url": "https://freelanceleadshub.shop"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Freelance LeadsHub",
+    "url": "https://freelanceleadshub.shop",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+234-802-528-9203",
+      "contactType": "customer support"
+    }
+  }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -36,6 +63,10 @@
   .msg.success { background: #E8F5EE; color: #1A7A4A; display: block; }
   .back-link { text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted); }
   .back-link a { color: var(--coral); font-weight: 600; }
+  .trust-badge { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:28px; padding-top:20px; border-top:1px solid #F0E8E0; font-size:12px; color:#a08878; }
+  .trust-badge svg { width:14px; height:14px; flex-shrink:0; }
+  .page-footer { text-align:center; margin-top:20px; font-size:12px; color:#b8a89a; line-height:1.8; }
+  .page-footer a { color:#a08878; }
 </style>
 </head>
 <body>
@@ -65,8 +96,19 @@
     <div class="msg" id="signupMsg"></div>
   </form>
 
-  <div class="back-link"><a href="../index.html">← Back to main site</a></div>
+  <div class="back-link"><a href="../index.html">← Back to freelanceleadshub.shop</a></div>
+
+  <div class="trust-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Secured by Supabase · Official portal of freelanceleadshub.shop
+  </div>
 </div>
+
+<footer class="page-footer">
+  © <span id="yr"></span> Freelance LeadsHub · <a href="https://freelanceleadshub.shop">freelanceleadshub.shop</a><br>
+  Questions? <a href="https://wa.me/2348025289203">WhatsApp +234 802 528 9203</a> · <a href="mailto:freelanceleadshub@gmail.com">freelanceleadshub@gmail.com</a>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
