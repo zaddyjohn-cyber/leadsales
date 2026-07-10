@@ -33,5 +33,9 @@ _censor_stripe.py
 backend/.env
 backend/node_modules/
 
+# Blog generator dependencies — installed fresh by GitHub Actions
+scripts/node_modules/
+scripts/package-lock.json
+
 # Preview file
 portal/_preview.html
