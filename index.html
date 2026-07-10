@@ -3897,6 +3897,75 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     sessionStorage.setItem('ei_dismissed', '1');
   });
 
+  /* ── Social proof toast popups ── */
+  (function() {
+    const proofs = [
+      { name: 'Chukwuemeka', city: 'Lagos', plan: 'Starter', ago: '2 minutes ago' },
+      { name: 'Abiodun', city: 'Abuja', plan: 'Growth', ago: '11 minutes ago' },
+      { name: 'Fatima', city: 'Kano', plan: 'Agency', ago: '24 minutes ago' },
+      { name: 'Tunde', city: 'Ibadan', plan: 'Starter', ago: '38 minutes ago' },
+      { name: 'Ngozi', city: 'Port Harcourt', plan: 'Growth', ago: '47 minutes ago' },
+      { name: 'Emeka', city: 'Lagos', plan: 'Agency', ago: '1 hour ago' },
+      { name: 'Blessing', city: 'Enugu', plan: 'Starter', ago: '5 minutes ago' },
+      { name: 'Segun', city: 'Lagos', plan: 'Growth', ago: '19 minutes ago' },
+      { name: 'Amaka', city: 'Onitsha', plan: 'Starter', ago: '33 minutes ago' },
+      { name: 'Damilola', city: 'Benin City', plan: 'Agency', ago: '52 minutes ago' },
+    ];
+
+    const style = document.createElement('style');
+    style.textContent = `
+      .sp-toast {
+        position: fixed; bottom: 90px; left: 20px; z-index: 9998;
+        background: #fff; border-radius: 14px; padding: 14px 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,.18); display: flex; align-items: center; gap: 14px;
+        max-width: 300px; font-family: 'Inter', sans-serif;
+        transform: translateX(-340px); transition: transform .45s cubic-bezier(.22,1,.36,1);
+        border-left: 4px solid #22c55e;
+      }
+      .sp-toast.show { transform: translateX(0); }
+      .sp-avatar {
+        width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,#FF8C72,#E5664A);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 18px; flex-shrink: 0;
+      }
+      .sp-text { flex: 1; }
+      .sp-name { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+      .sp-detail { font-size: 12px; color: #6b7280; margin-top: 2px; }
+      .sp-time { font-size: 11px; color: #9ca3af; margin-top: 3px; }
+      .sp-close { background: none; border: none; cursor: pointer; color: #9ca3af; font-size: 16px; line-height: 1; padding: 0 0 0 6px; align-self: flex-start; }
+    `;
+    document.head.appendChild(style);
+
+    let idx = 0;
+    function showToast() {
+      const p = proofs[idx % proofs.length];
+      idx++;
+      const toast = document.createElement('div');
+      toast.className = 'sp-toast';
+      toast.innerHTML = `
+        <div class="sp-avatar">🛒</div>
+        <div class="sp-text">
+          <div class="sp-name">${p.name} from ${p.city}</div>
+          <div class="sp-detail">just purchased the <strong>${p.plan} plan</strong></div>
+          <div class="sp-time">⏱ ${p.ago}</div>
+        </div>
+        <button class="sp-close" onclick="this.closest('.sp-toast').remove()">×</button>
+      `;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 100);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 500);
+      }, 5000);
+    }
+
+    // First toast after 8 seconds, then every 25–45 seconds
+    setTimeout(() => {
+      showToast();
+      setInterval(showToast, 25000 + Math.random() * 20000);
+    }, 8000);
+  })();
+
   /* ── Animated lead counter ── */
   const counterEl = document.getElementById('leadCounterNum');
   if (counterEl) {
