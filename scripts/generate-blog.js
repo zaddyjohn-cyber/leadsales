@@ -180,7 +180,7 @@ Respond with ONLY valid JSON in this exact format (no markdown, no code fences, 
 
   const msg = await client.messages.create({
     model: 'claude-opus-4-8',
-    max_tokens: 4096,
+    max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   });
 
