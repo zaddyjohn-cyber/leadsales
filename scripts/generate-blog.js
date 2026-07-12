@@ -231,7 +231,7 @@ async function generateImage(slug, keyword, cluster) {
     const resp = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'dall-e-3', prompt: imagePrompt, n: 1, size: '1792x1024', quality: 'standard', response_format: 'url' }),
+      body: JSON.stringify({ model: 'dall-e-2', prompt: imagePrompt, n: 1, size: '512x512', response_format: 'url' }),
     });
     const data = await resp.json();
     if (!data.data?.[0]?.url) { console.log('  ⚠ DALL-E returned no URL'); return null; }
