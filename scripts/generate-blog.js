@@ -25,7 +25,7 @@ if (unused.length === 0) {
   process.exit(0);
 }
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-const toGenerate = shuffle([...unused]).slice(0, 4);
+const toGenerate = shuffle([...unused]).slice(0, 5);
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
