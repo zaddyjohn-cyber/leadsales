@@ -6,6 +6,7 @@ const path = require('path');
 /* ── paths ── */
 const ROOT      = path.join(__dirname, '..');
 const BLOG_DIR  = path.join(ROOT, 'blog');
+const IMG_DIR   = path.join(BLOG_DIR, 'images');
 const STATE_F   = path.join(__dirname, 'state.json');
 const KW_F      = path.join(__dirname, 'keywords.json');
 const SITEMAP_F = path.join(ROOT, 'sitemap.xml');
@@ -25,7 +26,7 @@ let toGenerate = shuffle([...unused]).slice(0, 5);
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 /* ── HTML page template ── */
-function buildPage({ slug, title, metaDesc, keywordList, dateStr, bodyHtml, readNextCards }) {
+function buildPage({ slug, title, metaDesc, keywordList, dateStr, bodyHtml, readNextCards, imgPath }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,7 @@ function buildPage({ slug, title, metaDesc, keywordList, dateStr, bodyHtml, read
 <meta property="og:title" content="${escHtml(title)}" />
 <meta property="og:description" content="${escHtml(metaDesc)}" />
 <meta property="og:url" content="https://freelanceleadshub.shop/blog/${slug}.html" />
-<meta property="og:image" content="https://freelanceleadshub.shop/og-image.png" />
+<meta property="og:image" content="https://freelanceleadshub.shop${imgPath || '/og-image.png'}" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
 {
@@ -197,6 +198,57 @@ Respond with ONLY valid JSON in this exact format (no markdown, no code fences, 
   return parsed;
 }
 
+/* ── generate a DALL-E 3 image for the article and save to blog/images/ ── */
+async function generateImage(slug, keyword, cluster) {
+  if (!process.env.OPENAI_API_KEY) { console.log('  ⚠ No OPENAI_API_KEY — skipping image'); return null; }
+  if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
+
+  const clusterPrompts = {
+    'cold-email': 'a Nigerian freelancer at a laptop writing professional cold emails, modern workspace, warm lighting',
+    'getting-clients': 'a confident Nigerian professional shaking hands with a business client, office setting',
+    'web-design': 'a Nigerian web designer working on a bright colorful website on dual monitors',
+    'seo': 'data charts and search engine results on a computer screen, modern analytics dashboard',
+    'social-media': 'smartphone showing social media growth charts and notifications, vibrant colors',
+    'getting-paid': 'dollar bills and naira notes beside a laptop showing bank transfer, clean desk',
+    'platforms': 'multiple device screens showing freelance platform dashboards and profiles',
+    'leads': 'a spreadsheet of business contacts and leads glowing on a laptop screen, data visualization',
+    'income': 'a Nigerian freelancer celebrating earnings on a laptop, charts showing income growth',
+    'scaling': 'a small team of Nigerian freelancers collaborating in a bright co-working space',
+    'portfolio': 'a sleek digital portfolio displayed on a laptop and tablet, creative design work',
+    'copywriting': 'a writer at a typewriter with words floating around, creative content creation',
+    'video-editing': 'colorful video timeline on a monitor, professional video editing workspace',
+    'graphic-design': 'vibrant graphic design work on a tablet, creative tools and colorful artwork',
+    'va': 'a virtual assistant on a video call, organized desk with multiple screens',
+    'tools': 'an array of productivity apps and tools on a computer screen, clean flat lay',
+    'pricing': 'a freelancer reviewing a professional invoice and pricing chart on a laptop',
+    'getting-started': 'a young Nigerian professional starting their freelance journey, motivated at a laptop',
+  };
+
+  const scene = clusterPrompts[cluster] || `a Nigerian freelancer succeeding online, related to: ${keyword}`;
+  const imagePrompt = `Professional blog header image: ${scene}. Style: modern, flat illustration, coral and dark navy color palette, clean and inspiring. No text in image.`;
+
+  try {
+    const resp = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'dall-e-3', prompt: imagePrompt, n: 1, size: '1792x1024', quality: 'standard', response_format: 'url' }),
+    });
+    const data = await resp.json();
+    if (!data.data?.[0]?.url) { console.log('  ⚠ DALL-E returned no URL'); return null; }
+
+    // Download and save the image
+    const imgResp = await fetch(data.data[0].url);
+    const buffer = Buffer.from(await imgResp.arrayBuffer());
+    const imgPath = path.join(IMG_DIR, `${slug}.jpg`);
+    fs.writeFileSync(imgPath, buffer);
+    console.log(`  🖼 Image saved: blog/images/${slug}.jpg`);
+    return `/blog/images/${slug}.jpg`;
+  } catch (err) {
+    console.error(`  ⚠ Image generation failed: ${err.message}`);
+    return null;
+  }
+}
+
 /* ── pick 2 random other blog posts for "read next" ── */
 function pickReadNextCards(currentSlug) {
   const allPosts = fs.readdirSync(BLOG_DIR)
@@ -259,11 +311,14 @@ ${blogEntries.join('\n')}
 }
 
 /* ── build an index card for blog/index.html ── */
-function buildIndexCard(slug, title, metaDesc, clusterLabel, dateStr) {
+function buildIndexCard(slug, title, metaDesc, clusterLabel, dateStr, imgPath) {
   const emoji = { 'cold-email':'📧', 'getting-clients':'🎯', 'web-design':'💻', 'seo':'🔍', 'social-media':'📱', 'getting-paid':'💰', 'platforms':'🌐', 'leads':'📋', 'income':'💵', 'scaling':'🚀', 'portfolio':'📂', 'copywriting':'✍️', 'video-editing':'🎬', 'graphic-design':'🎨', 'va':'🤝', 'tools':'🛠️', 'pricing':'💲', 'getting-started':'⭐' };
   const icon = emoji[slug.split('-')[0]] || '📝';
+  const cardImg = imgPath
+    ? `<img src="${imgPath}" alt="${escHtml(title)}" style="width:100%;height:180px;object-fit:cover;" />`
+    : `<div class="card-img">${icon}</div>`;
   return `    <a href="/blog/${slug}.html" class="article-card" style="text-decoration:none;color:inherit;">
-      <div class="card-img">${icon}</div>
+      ${cardImg}
       <div class="card-body">
         <span class="card-tag">${escHtml(clusterLabel)}</span>
         <h2>${escHtml(title)}</h2>
@@ -392,6 +447,7 @@ Respond ONLY with valid JSON array, no markdown:
 </div>`;
       const finalBody = art.bodyHtml.replace('%%CTA%%', ctaHtml);
 
+      const imgPath = await generateImage(kw.slug, kw.keyword, kw.cluster);
       const readNext = pickReadNextCards(kw.slug);
       const page = buildPage({
         slug: kw.slug,
@@ -401,12 +457,13 @@ Respond ONLY with valid JSON array, no markdown:
         dateStr: today,
         bodyHtml: finalBody,
         readNextCards: readNext,
+        imgPath,
       });
 
       fs.writeFileSync(path.join(BLOG_DIR, `${kw.slug}.html`), page);
       state.used.push(kw.slug);
 
-      newIndexCards.push(buildIndexCard(kw.slug, art.title, art.metaDesc, art.cluster_label, today));
+      newIndexCards.push(buildIndexCard(kw.slug, art.title, art.metaDesc, art.cluster_label, today, imgPath));
       console.log(`  ✓ Written: blog/${kw.slug}.html`);
     } catch (err) {
       console.error(`  ✗ Failed ${kw.slug}: ${err.message}`);

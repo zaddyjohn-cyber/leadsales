@@ -29,6 +29,7 @@ jobs:
       - name: Generate and publish blog articles
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/generate-blog.js
 
       - name: Commit and push new articles
