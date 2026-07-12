@@ -180,7 +180,7 @@ Respond with ONLY valid JSON in this exact format (no markdown, no code fences, 
 }`;
 
   const msg = await client.messages.create({
-    model: 'claude-opus-4-8',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 8192,
     messages: [{ role: 'user', content: prompt }],
   });
@@ -389,7 +389,7 @@ https://freelanceleadshub.shop/sitemap.xml
 async function generateFreshTopics(n) {
   const allUsedSlugs = state.used.join(', ');
   const msg = await client.messages.create({
-    model: 'claude-opus-4-8',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 1024,
     messages: [{
       role: 'user',
