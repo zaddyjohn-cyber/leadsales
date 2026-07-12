@@ -16,16 +16,11 @@ const INDEX_F   = path.join(BLOG_DIR, 'index.html');
 const keywords = JSON.parse(fs.readFileSync(KW_F, 'utf8'));
 const state    = fs.existsSync(STATE_F) ? JSON.parse(fs.readFileSync(STATE_F, 'utf8')) : { used: [] };
 
-/* ── pick up to 4 unused keywords, shuffled for variety ── */
-const unused = keywords.filter(k => !state.used.includes(k.slug));
-if (unused.length === 0) {
-  console.log('All keywords used — resetting state for next cycle.');
-  state.used = [];
-  fs.writeFileSync(STATE_F, JSON.stringify(state));
-  process.exit(0);
-}
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-const toGenerate = shuffle([...unused]).slice(0, 5);
+
+/* ── pick 5 topics: from fixed list first, then AI-generated fresh ones ── */
+const unused = keywords.filter(k => !state.used.includes(k.slug));
+let toGenerate = shuffle([...unused]).slice(0, 5);
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -335,10 +330,54 @@ https://freelanceleadshub.shop/sitemap.xml
   console.log(`llms.txt updated: ${articleLines.length} articles listed`);
 }
 
+/* ── ask Claude to generate N fresh keyword topics not yet covered ── */
+async function generateFreshTopics(n) {
+  const allUsedSlugs = state.used.join(', ');
+  const msg = await client.messages.create({
+    model: 'claude-opus-4-8',
+    max_tokens: 1024,
+    messages: [{
+      role: 'user',
+      content: `You are generating SEO keyword topics for Freelance LeadsHub (freelanceleadshub.shop) — a lead generation tool for Nigerian freelancers who want to cold email businesses directly instead of using Upwork/Fiverr.
+
+Generate exactly ${n} FRESH keyword topics that have NOT already been covered. Each must target Nigerian freelancers searching on Google.
+
+Already covered slugs (do NOT repeat these): ${allUsedSlugs}
+
+Focus on topics like: getting clients without Upwork, cold email strategies, finding businesses to pitch, lead generation tactics, earning in dollars from Nigeria, specific niche freelancing (graphics, copywriting, SEO, VA, video editing), payment methods (Payoneer, Grey, Wise, USDT), scaling a freelance business in Nigeria, Nairaland marketing, LinkedIn outreach, WhatsApp marketing for freelancers, freelance contracts, pricing in USD, Omegle alternatives for client finding, etc.
+
+Respond ONLY with valid JSON array, no markdown:
+[
+  {"slug": "unique-kebab-case-slug", "keyword": "exact search phrase Nigerians type", "cluster": "one of: getting-clients, cold-email, getting-paid, platforms, leads, income, scaling, web-design, seo, social-media, copywriting, tools, portfolio, pricing, getting-started, graphic-design, va, video-editing"},
+  ...
+]`
+    }]
+  });
+
+  const raw = msg.content[0].text.trim();
+  try {
+    const arr = JSON.parse(raw);
+    return arr.filter(t => t.slug && t.keyword && !state.used.includes(t.slug)).slice(0, n);
+  } catch (_) {
+    const match = raw.match(/\[[\s\S]*\]/);
+    if (!match) return [];
+    return JSON.parse(match[0]).filter(t => t.slug && t.keyword && !state.used.includes(t.slug)).slice(0, n);
+  }
+}
+
 /* ── main ── */
 (async () => {
   const today = new Date().toISOString().split('T')[0];
   const newIndexCards = [];
+
+  /* If fixed list doesn't have enough, top up with AI-generated topics */
+  if (toGenerate.length < 5) {
+    const needed = 5 - toGenerate.length;
+    console.log(`Fixed list has ${toGenerate.length} unused — generating ${needed} fresh AI topics...`);
+    const fresh = await generateFreshTopics(needed);
+    toGenerate = [...toGenerate, ...fresh];
+    console.log(`Total topics for today: ${toGenerate.length}`);
+  }
 
   for (const kw of toGenerate) {
     console.log(`Generating: ${kw.keyword}`);
@@ -382,5 +421,6 @@ https://freelanceleadshub.shop/sitemap.xml
   updateSitemap();
   updateLlmsTxt();
   fs.writeFileSync(STATE_F, JSON.stringify(state, null, 2));
-  console.log(`Done. State saved. ${keywords.length - state.used.length} keywords remaining.`);
+  const remaining = keywords.filter(k => !state.used.includes(k.slug)).length;
+  console.log(`Done. State saved. ${remaining} fixed keywords remaining (AI generates more when exhausted).`);
 })();
