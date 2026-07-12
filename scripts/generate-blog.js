@@ -170,14 +170,19 @@ IMPORTANT RULES:
 - End with a "Final Word" or "Bottom Line" section that summarises the key action the reader should take.
 - Do NOT write the full HTML page — only the article body content starting from the tag and h1.
 
-Respond with ONLY valid JSON in this exact format (no markdown, no code fences, just raw JSON):
-{
-  "title": "Full article title (60-65 chars ideal, include year 2025)",
-  "metaDesc": "Meta description 150-160 chars, includes keyword naturally, ends with a clear action",
-  "keywords": "comma-separated list of 8-12 related keywords Nigerians search",
-  "cluster_label": "Short label like 'Cold Email' or 'Getting Clients' for the tag",
-  "bodyHtml": "FULL article HTML body. Start with: <span class=\\"tag\\">[cluster_label]</span>\\n<h1>[title]</h1>\\n<div class=\\"article-meta\\">[date] · [X] min read · By Freelance LeadsHub</div>\\n[rest of article with h2, h3, p, ul, ol, .callout divs, internal links, zaramwebmailer.online links, %%CTA%% marker]. Use class=\\"callout\\" for callout boxes: <div class=\\"callout\\"><p>text</p></div>"
-}`;
+OUTPUT FORMAT — follow this exactly:
+First output a JSON block with ONLY these 4 fields (no bodyHtml):
+{"title":"...","metaDesc":"...","keywords":"...","cluster_label":"..."}
+
+Then output the exact separator on its own line:
+---HTML---
+
+Then output the full article HTML body. Start with:
+<span class="tag">[cluster_label]</span>
+<h1>[title]</h1>
+<div class="article-meta">[date] · [X] min read · By Freelance LeadsHub</div>
+Then the rest of the article with h2, h3, p, ul, ol, callout divs, internal links, zaramwebmailer.online links, and the %%CTA%% marker.
+Use class="callout" for callout boxes: <div class="callout"><p>text</p></div>`;
 
   const msg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -186,16 +191,22 @@ Respond with ONLY valid JSON in this exact format (no markdown, no code fences, 
   });
 
   const raw = msg.content[0].text.trim();
-  let parsed;
+  const sepIdx = raw.indexOf('---HTML---');
+  if (sepIdx === -1) throw new Error('Missing ---HTML--- separator for keyword: ' + kw.slug);
+
+  const jsonPart = raw.slice(0, sepIdx).trim();
+  const bodyHtml = raw.slice(sepIdx + 10).trim();
+
+  let meta;
   try {
-    parsed = JSON.parse(raw);
+    meta = JSON.parse(jsonPart);
   } catch (_) {
-    // Try to extract JSON if Claude added any surrounding text
-    const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error('Claude did not return valid JSON for keyword: ' + kw.slug);
-    parsed = JSON.parse(match[0]);
+    const match = jsonPart.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('Claude did not return valid JSON metadata for keyword: ' + kw.slug);
+    meta = JSON.parse(match[0]);
   }
-  return parsed;
+
+  return { ...meta, bodyHtml };
 }
 
 /* ── generate a DALL-E 3 image for the article and save to blog/images/ ── */
