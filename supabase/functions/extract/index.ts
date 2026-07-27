@@ -81,7 +81,7 @@ Deno.serve(async (req: Request) => {
 
     // Build Apify input
     const actorInput: Record<string, unknown> = {
-      maxResults: Math.min(quantity, 50000),
+      maxResults: Math.min(quantity, 100000),
     };
     if (keyword) actorInput.keyword = keyword;
     else if (category) actorInput.category = category;
