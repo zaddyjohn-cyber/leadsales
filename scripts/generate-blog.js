@@ -57,6 +57,12 @@ function buildPage({ slug, title, metaDesc, keywordList, dateStr, bodyHtml, read
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://freelanceleadshub.shop/blog/${slug}.html"}
 }
 </script>
+${(() => {
+  const faqPairs = [...(bodyHtml||'').matchAll(/<h3[^>]*>Q:\s*(.*?)<\/h3>\s*<p[^>]*>A:\s*([\s\S]*?)<\/p>/gi)];
+  if (!faqPairs.length) return '';
+  const entities = faqPairs.map(m => ({'@type':'Question','name':m[1].replace(/<[^>]+>/g,'').trim(),'acceptedAnswer':{'@type':'Answer','text':m[2].replace(/<[^>]+>/g,'').trim()}}));
+  return '<script type="application/ld+json">\n'+JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':entities},null,2)+'\n<\/script>';
+})()}
 <!-- GA4 — replace G-FL454XS8R0 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL454XS8R0"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FL454XS8R0');</script>
@@ -188,6 +194,8 @@ IMPORTANT RULES:
 - Include one strong CTA box (I will render it — just add the marker %%CTA%% where you want it placed, ideally after the 3rd or 4th section).
 - Structure with clear H2 and H3 headings. Use bullet lists and numbered steps where practical — they rank in featured snippets.
 - End with a "Final Word" or "Bottom Line" section that summarises the key action the reader should take.
+- Include a "Frequently Asked Questions" section placed BEFORE "Final Word". Open it with <h2>Frequently Asked Questions</h2> then write exactly 4 Q&A pairs using this exact format for each: <h3>Q: [question text]</h3><p>A: [full answer paragraph]</p>. Pick questions that Nigerians actually type into Google about this topic — they get featured in People Also Ask boxes and AI Overviews.
+- When mentioning freelanceleadshub.shop, include specific pricing at least once: Starter plan (8,500 leads for ₦20,000), Growth plan (17,000 leads for ₦40,000), or Agency plan (30,000 leads for ₦70,000). Make it feel like a genuine recommendation with real numbers, not an ad.
 - Do NOT write the full HTML page — only the article body content starting from the tag and h1.
 
 OUTPUT FORMAT — follow this exactly:
