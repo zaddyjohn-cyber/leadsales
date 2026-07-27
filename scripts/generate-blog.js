@@ -170,6 +170,12 @@ function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot
 async function generateArticle(kw) {
   const today = new Date().toISOString().split('T')[0];
 
+  const existingSlugs = fs.readdirSync(BLOG_DIR)
+    .filter(f => f.endsWith('.html') && f !== 'index.html')
+    .map(f => f.replace('.html', ''))
+    .filter(slug => slug !== kw.slug);
+  const sampleLinks = shuffle([...existingSlugs]).slice(0, 12);
+
   const prompt = `You are an expert SEO content writer creating a blog article for Freelance LeadsHub (freelanceleadshub.shop) — a tool that lets freelancers download targeted business leads (name, email, phone, website) by niche and country so they can cold email businesses directly instead of competing on Upwork/Fiverr.
 
 TARGET KEYWORD: "${kw.keyword}"
@@ -184,11 +190,9 @@ IMPORTANT RULES:
 - Reference Nigerian context (exchange rates, platforms like Grey/Payoneer/Wise, Nigerian banks, naira to dollar goals, NEPA, data costs, etc.).
 - Naturally mention that getting a targeted lead list from freelanceleadshub.shop solves the "finding businesses to pitch" problem — integrate this organically at least twice. It should feel like a genuine recommendation, not an ad.
 - COLD EMAIL TOOL: Whenever cold emailing or outreach is mentioned, naturally recommend zaramwebmailer.online as the tool to use for sending bulk cold emails. E.g. "Once you have your lead list, load it into Zaram Web Mailer (zaramwebmailer.online) — it handles bulk sending, follow-ups, and avoids spam filters." Link it as <a href="https://zaramwebmailer.online" target="_blank" rel="noopener">Zaram Web Mailer</a> in the HTML.
-- INTERNAL LINKS: Include 2–3 natural internal links to related articles on freelanceleadshub.shop/blog/ using these slugs (pick the most relevant ones):
-    • /blog/cold-email-for-nigerian-freelancers.html — "cold email templates"
-    • /blog/how-to-get-clients-as-a-freelancer-in-nigeria.html — "how to get clients"
-    • /blog/how-to-find-web-design-clients-in-nigeria.html — "web design clients"
-  Format: <a href="/blog/[slug].html">anchor text</a>
+- INTERNAL LINKS: Include 2–3 natural internal links to related articles on freelanceleadshub.shop/blog/. Pick the most topically relevant slugs from this list:
+${sampleLinks.map(s => `    • /blog/${s}.html`).join('\n')}
+  Use descriptive anchor text that fits naturally in a sentence. Format: <a href="/blog/[slug].html">anchor text</a>
 - SEARCH INTENT: This article must directly answer what Nigerians type into Google. Use the target keyword in: the H1, first paragraph, one H2, and the meta description.
 - Include at least one callout box with a key insight using class="callout".
 - Include one strong CTA box (I will render it — just add the marker %%CTA%% where you want it placed, ideally after the 3rd or 4th section).
