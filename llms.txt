@@ -15,7 +15,7 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [Free Sample](https://freelanceleadshub.shop/sample-leads.csv): 20 real HVAC business leads (USA) in CSV format — free download, no email required
 - [Login / Dashboard](https://freelanceleadshub.shop/portal/login.html): Freelancer portal for downloading leads
 
-## Blog Articles (200 total — updated 2026-08-21)
+## Blog Articles (205 total — updated 2026-08-22)
 
 - [How to Get Freelance Accounting Clients in Nigeria: A Practical Cold Email Strategy](https://freelanceleadshub.shop/blog/accountant-freelance-clients-nigeria.html)
 - [Should I Start an Agency or Stay Freelance in Nigeria 2026? A Practical Guide](https://freelanceleadshub.shop/blog/agency-vs-freelancer-nigeria.html)
@@ -24,6 +24,7 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [B2B Leads for Nigerian Freelancers: How to Get Them and Land High-Paying Clients](https://freelanceleadshub.shop/blog/b2b-leads-for-freelancers-nigeria.html)
 - [Best Freelance Skills to Learn in Nigeria: 2026 Income Guide](https://freelanceleadshub.shop/blog/best-freelance-skills-to-learn-in-nigeria.html)
 - [Best Niches for Freelancers in Nigeria 2025: High-Paying Opportunities](https://freelanceleadshub.shop/blog/best-niches-for-freelancers-in-nigeria.html)
+- [Best Payment Gateway for Freelancers Nigeria 2025: Complete Comparison &amp; Setup Guide](https://freelanceleadshub.shop/blog/best-payment-gateway-freelancers-nigeria-2025.html)
 - [Best Platforms for Freelancers in Nigeria: Beyond Upwork &amp; Fiverr](https://freelanceleadshub.shop/blog/best-platforms-for-freelancers-in-nigeria.html)
 - [Best Cold Email Subject Lines for Freelancers 2025: Proven Formulas That Work in Nigeria](https://freelanceleadshub.shop/blog/best-subject-lines-cold-email-freelancers.html)
 - [How to Get Bookkeeping Clients in Nigeria as a Freelancer: A Practical Guide](https://freelanceleadshub.shop/blog/bookkeeping-clients-nigeria-freelancer.html)
@@ -69,6 +70,7 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [Freelance Contract Template for Nigeria: Protect Your International Deals](https://freelanceleadshub.shop/blog/freelance-contract-template-nigeria.html)
 - [Best Escrow Payment Methods for Freelancers in Nigeria 2025: Safe, Fast &amp; Reliable](https://freelanceleadshub.shop/blog/freelance-escrow-payment-method-nigeria-safe.html)
 - [Realistic Freelance Income in Nigeria 2026: Full Income Breakdown](https://freelanceleadshub.shop/blog/freelance-income-report-nigeria.html)
+- [Freelance Job Boards Alternatives Nigeria 2025: Beyond Upwork &amp; Fiverr](https://freelanceleadshub.shop/blog/freelance-job-boards-alternatives-nigeria-2025.html)
 - [Where to Get Freelance Leads in Nigeria: Business Contacts &amp; Outreach Strategies](https://freelanceleadshub.shop/blog/freelance-leads-nigeria.html)
 - [Best Freelance Niche to Choose in Nigeria 2025: High-Demand Opportunities](https://freelanceleadshub.shop/blog/freelance-niche-selection-highest-demand-nigeria-2025.html)
 - [How Much to Charge as a Freelancer in Nigeria in Dollars: The 2026 Rate Guide](https://freelanceleadshub.shop/blog/freelance-rate-calculator-nigeria.html)
@@ -97,6 +99,8 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [How to Earn in Dollars as a Nigerian Freelancer: A Practical 2026 Guide](https://freelanceleadshub.shop/blog/how-to-earn-in-dollars-as-a-nigerian-freelancer.html)
 - [How to Earn in Dollars as a Ghanaian Freelancer: The Complete 2026 Guide](https://freelanceleadshub.shop/blog/how-to-earn-in-dollars-ghanaian-freelancer.html)
 - [How to Find Accounting Clients in Nigeria as a Freelancer](https://freelanceleadshub.shop/blog/how-to-find-accounting-clients-nigeria-freelancer.html)
+- [How to Find Agencies Hiring Freelancers in Nigeria: A Direct Lead Generation Guide](https://freelanceleadshub.shop/blog/how-to-find-agencies-hiring-freelancers-nigeria.html)
+- [How to Find Business Emails in Nigeria: A Freelancer's Complete Guide](https://freelanceleadshub.shop/blog/how-to-find-business-emails-nigeria-freelancer.html)
 - [How to Find Business Owners on Facebook Marketplace Nigeria: A Freelancer's Cold Email Guide](https://freelanceleadshub.shop/blog/how-to-find-business-owners-on-facebook-marketplace-nigeria.html)
 - [How to Find Businesses to Pitch Your Freelance Services in Nigeria](https://freelanceleadshub.shop/blog/how-to-find-businesses-to-pitch-nigeria.html)
 - [How to Find Clients on Business Directories in Nigeria: A Freelancer's Guide to Direct Outreach](https://freelanceleadshub.shop/blog/how-to-find-clients-on-business-directories-nigeria.html)
@@ -131,6 +135,7 @@ Payment is via Paystack. Plans: Starter (8,500 leads), Growth (17,000 leads), Ag
 - [How to Get Paid in Dollars as a Freelancer in Nigeria: A Complete 2026 Guide](https://freelanceleadshub.shop/blog/how-to-get-paid-in-dollars-nigeria.html)
 - [How to Get Recurring Clients &amp; Retainer Contracts as a Nigeria Freelancer in 2026](https://freelanceleadshub.shop/blog/how-to-get-recurring-clients-retainer-contracts-nigeria-freelancer.html)
 - [How to Get Referrals as a Freelancer in Nigeria: The Complete 2026 Guide](https://freelanceleadshub.shop/blog/how-to-get-referrals-as-a-freelancer-nigeria.html)
+- [How to Get Repeat Clients as a Freelancer in Nigeria: A Practical Guide](https://freelanceleadshub.shop/blog/how-to-get-repeat-clients-freelancer-nigeria.html)
 - [How to Get SEO Clients in Nigeria: A Practical Guide for Freelancers](https://freelanceleadshub.shop/blog/how-to-get-seo-clients-nigeria.html)
 - [How to Get Shopify Store Owners as Clients: A Practical Guide for Nigerian Freelancers](https://freelanceleadshub.shop/blog/how-to-get-shopify-store-owners-clients-nigeria.html)
 - [How to Get Social Media Management Clients in Nigeria: A Direct Playbook for Freelancers](https://freelanceleadshub.shop/blog/how-to-get-social-media-management-clients-nigeria.html)
