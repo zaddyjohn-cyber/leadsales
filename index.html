@@ -2362,6 +2362,26 @@
      ============================================================ */
   .pain { opacity: 0; transform: translateX(-22px); transition: opacity .45s ease, transform .45s ease; }
   .pain.revealed { opacity: 1; transform: translateX(0); }
+
+  /* ── Conversation proof screenshots inside testimonials ── */
+  .convo-proof-wrap {
+    margin-top: 52px; text-align: center;
+  }
+  .convo-proof-label {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 24px; font-family: 'Inter', sans-serif;
+  }
+  .convo-proof-grid {
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; align-items: flex-start;
+  }
+  .convo-proof-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; box-shadow: var(--shadow-sm);
+    max-width: 220px; transition: transform .22s, box-shadow .22s;
+  }
+  .convo-proof-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .convo-proof-card img { width: 100%; display: block; border-bottom: 1px solid var(--line); }
+  .convo-proof-card img:last-child { border-bottom: none; }
 </style>
 </head>
 <body>
@@ -3326,6 +3346,24 @@
         <div class="testi-by"><div class="testi-av peach">I</div><div><b>Ifeoma Obi</b><span>Appointment Setter · Enugu</span></div></div>
       </div>
 
+    </div>
+
+    <!-- Real client conversation screenshots -->
+    <div class="convo-proof-wrap">
+      <p class="convo-proof-label">Real conversations — freelancers who got replies after cold-emailing from this list</p>
+      <div class="convo-proof-grid">
+        <div class="convo-proof-card">
+          <img src="proof/convo-top-a.png" alt="Client conversation screenshot" loading="lazy" />
+          <img src="proof/convo-cust-a.png" alt="Client conversation screenshot" loading="lazy" />
+        </div>
+        <div class="convo-proof-card">
+          <img src="proof/convo-top-b.png" alt="Client conversation screenshot" loading="lazy" />
+          <img src="proof/convo-cust-b.png" alt="Client conversation screenshot" loading="lazy" />
+        </div>
+        <div class="convo-proof-card">
+          <img src="proof/convo-cust-c.png" alt="Client conversation screenshot" loading="lazy" />
+        </div>
+      </div>
     </div>
   </div>
 </section>
