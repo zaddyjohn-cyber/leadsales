@@ -2280,6 +2280,88 @@
   .ei-success { display: none; }
   .ei-success h4 { font-size: 20px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
   .ei-success p  { font-size: 14px; color: #4a5568; }
+
+  /* ============================================================
+     DECISION MOMENT — dark tension-builder between sample + pricing
+     ============================================================ */
+  .decision-moment {
+    background: linear-gradient(160deg, #120804 0%, #2A1F1A 52%, #16213e 100%);
+    padding: 88px 0; text-align: center; position: relative; overflow: hidden;
+  }
+  .decision-moment::before {
+    content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 500px; pointer-events: none;
+    background: radial-gradient(circle, rgba(229,102,74,.30), transparent 68%);
+  }
+  .dm-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .dm-eyebrow {
+    font-size: 12px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--c-coral); margin-bottom: 22px; font-family: 'Inter', sans-serif;
+  }
+  .dm-head {
+    font-size: clamp(28px, 4.5vw, 46px); color: #fff; line-height: 1.2;
+    margin: 0 auto 22px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
+  }
+  .dm-sub {
+    font-size: 17px; color: rgba(255,255,255,.72); line-height: 1.65;
+    max-width: 620px; margin: 0 auto 36px; font-family: 'Inter', sans-serif;
+  }
+  .dm-btn {
+    background: var(--gradient); color: #fff;
+    padding: 16px 42px; border-radius: 50px; font-size: 16px; font-weight: 800;
+    box-shadow: 0 12px 32px rgba(229,102,74,.45); text-decoration: none; display: inline-block;
+    font-family: 'Inter', sans-serif; transition: transform .2s, box-shadow .2s;
+  }
+  .dm-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(229,102,74,.62); }
+  .dm-ring {
+    position: absolute; top: 50%; left: 50%; border-radius: 50%;
+    border: 1px solid rgba(229,102,74,.14);
+    width: 500px; height: 500px;
+    animation: dmRingExpand 3.8s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes dmRingExpand {
+    0%   { transform: translate(-50%,-50%) scale(.5); opacity: 1; }
+    100% { transform: translate(-50%,-50%) scale(1.6); opacity: 0; }
+  }
+
+  /* ============================================================
+     PROOF MARQUEE — auto-scrolling strip of extra payment proofs
+     ============================================================ */
+  .proof-marquee-section {
+    padding: 44px 0; background: var(--c-cream-2); overflow: hidden;
+  }
+  .pm-label {
+    text-align: center; font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .pm-track-outer {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  }
+  .pm-track {
+    display: flex; gap: 12px; width: max-content;
+    animation: pmScroll 42s linear infinite;
+  }
+  .pm-track:hover { animation-play-state: paused; }
+  .pm-track img {
+    height: 138px; width: auto; border-radius: 10px; flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15); object-fit: cover;
+    border: 2px solid rgba(255,255,255,.85);
+  }
+  @keyframes pmScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .pm-track { animation: none; } }
+
+  /* ============================================================
+     SCROLL REVEAL — pain-point items animate in on scroll
+     ============================================================ */
+  .pain { opacity: 0; transform: translateX(-22px); transition: opacity .45s ease, transform .45s ease; }
+  .pain.revealed { opacity: 1; transform: translateX(0); }
 </style>
 </head>
 <body>
@@ -3038,6 +3120,19 @@
 </section>
 
 <!-- ============================================================
+     DECISION MOMENT
+     ============================================================ -->
+<div class="decision-moment">
+  <div class="dm-ring" aria-hidden="true"></div>
+  <div class="dm-inner">
+    <p class="dm-eyebrow">The math is simple</p>
+    <h2 class="dm-head">One client from this list pays for the entire pack.<br>Every client after that is pure profit.</h2>
+    <p class="dm-sub">Freelancers who downloaded this list closed $400–$2,000 projects within weeks — by cold-emailing businesses that had no idea they existed. The leads are ready. The only thing left is your decision.</p>
+    <a href="#pricing" class="dm-btn">See Pricing &amp; Get Started →</a>
+  </div>
+</div>
+
+<!-- ============================================================
      PRICING
      ============================================================ -->
 <section class="section" id="pricing">
@@ -3234,6 +3329,38 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     PROOF MARQUEE — scrolling strip of extra payment proofs
+     ============================================================ -->
+<div class="proof-marquee-section">
+  <p class="pm-label">More real payments — from freelancers who pitched businesses directly</p>
+  <div class="pm-track-outer">
+    <div class="pm-track">
+      <img src="proof/payment-wa-500usdt.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/payment-wa-sent.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/payment-wa-usdt1000.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.04.13 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.06.17 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.07.34 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.09.24 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.43.12 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.43.53 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.44.46 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <!-- duplicate for seamless infinite loop -->
+      <img src="proof/payment-wa-500usdt.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/payment-wa-sent.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/payment-wa-usdt1000.jpg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.04.13 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.06.17 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.07.34 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.09.24 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.43.12 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.43.53 PM.jpeg" alt="Payment proof" loading="lazy" />
+      <img src="proof/WhatsApp Image 2026-06-17 at 4.44.46 PM.jpeg" alt="Payment proof" loading="lazy" />
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      FAQ
@@ -3989,6 +4116,41 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       showToast();
       setInterval(showToast, 25000 + Math.random() * 20000);
     }, 8000);
+  })();
+
+  /* ── Scroll-reveal: pain-point items slide in staggered ── */
+  (function() {
+    const pains = document.querySelectorAll('.pain');
+    if (!pains.length) return;
+    pains.forEach((el, i) => { el.style.transitionDelay = (i * 0.09) + 's'; });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: 0.15 });
+    pains.forEach(el => obs.observe(el));
+  })();
+
+  /* ── Meta Pixel conversion events (fires once YOUR_PIXEL_ID is set) ── */
+  (function() {
+    if (typeof fbq === 'undefined') return;
+    // InitiateCheckout — any pricing CTA click
+    document.querySelectorAll('.price-card .btn, .dm-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var card = this.closest('.price-card');
+        var plan = card ? (card.querySelector('.price-name') || {}).textContent || '' : 'CTA';
+        var amt  = plan.includes('Starter') ? 20000 : plan.includes('Growth') ? 40000 : plan.includes('Agency') ? 70000 : 0;
+        fbq('track', 'InitiateCheckout', { content_name: plan.trim() + ' Plan', value: amt, currency: 'NGN' });
+      });
+    });
+    // Lead — sample CSV download
+    var sampleBtn = document.querySelector('.btn-sample');
+    if (sampleBtn) sampleBtn.addEventListener('click', function() { fbq('track', 'Lead'); });
+    // ViewContent — when pricing section scrolls into view
+    var pricingEl = document.getElementById('pricing');
+    if (pricingEl) {
+      new IntersectionObserver(function(entries, obs) {
+        if (entries[0].isIntersecting) { fbq('track', 'ViewContent', { content_name: 'Pricing' }); obs.disconnect(); }
+      }, { threshold: 0.3 }).observe(pricingEl);
+    }
   })();
 
   /* ── Animated lead counter ── */
