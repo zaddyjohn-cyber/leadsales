@@ -417,7 +417,7 @@ ${articleLines.join('\n')}
 - Lead data includes: business name, email, phone number, city, website, Google Maps URL, Facebook, Instagram, review count
 - Leads are sourced from Google Maps via Apify
 - Dashboard is instant — no waiting, no manual delivery
-- Contact: WhatsApp +234 802 528 9203 | freelanceleadshub@gmail.com
+- Contact: WhatsApp +1 301 892 6590 | freelanceleadshub@gmail.com
 - Website: https://freelanceleadshub.shop
 
 ## Sitemap

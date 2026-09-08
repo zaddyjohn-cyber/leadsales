@@ -95,7 +95,7 @@ Deno.serve(async (req: Request) => {
 
                 <p style="margin-top:24px;font-size:13px;color:#9ca3af;">
                   Questions? Reply to this email or
-                  <a href="https://wa.me/2348025289203" style="color:#FF8C72;">message us on WhatsApp</a>.
+                  <a href="https://wa.me/13018926590" style="color:#FF8C72;">message us on WhatsApp</a>.
                 </p>
               </div>
             </div>
