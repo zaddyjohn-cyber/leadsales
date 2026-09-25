@@ -209,7 +209,7 @@
       <div class="form-group">
         <label>
           Business Category
-          <button type="button" class="lock-btn" id="lockBtn" onclick="toggleLock()">📷 Lock open</button>
+          <button type="button" class="lock-btn" id="lockBtn" onclick="toggleLock()" style="display:none;">📷 Lock open</button>
         </label>
         <input type="hidden" id="category" value=""/>
         <div class="custom-select-wrap" id="categoryWrap">
@@ -432,6 +432,11 @@
 <script>
   let leadsRemaining = 12500;
   let dropdownLocked = false;
+
+  // Screenshot helper — only visible with ?lock=1 in the URL
+  if (new URLSearchParams(location.search).has('lock')) {
+    document.getElementById('lockBtn').style.display = '';
+  }
 
   function toggleDropdown() {
     if (dropdownLocked) return;
