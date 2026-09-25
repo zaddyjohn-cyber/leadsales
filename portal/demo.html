@@ -128,6 +128,43 @@
   .badge-green { background: #E8F5EE; color: #1A7A4A; }
   .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
   .empty-state p { margin-top: 8px; font-size: 13px; }
+
+  /* CUSTOM DROPDOWN */
+  .custom-select-wrap { position: relative; }
+  .custom-select-trigger {
+    width: 100%; padding: 11px 14px; border: 1.5px solid #E8DDD5; border-radius: var(--radius);
+    font-size: 14px; font-family: 'Inter', sans-serif; color: var(--ink); background: #fff;
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    transition: border-color .2s; user-select: none;
+  }
+  .custom-select-trigger:hover { border-color: var(--coral); }
+  .custom-select-trigger .arrow { font-size: 10px; color: var(--muted); transition: transform .2s; }
+  .custom-select-trigger.open { border-color: var(--coral); }
+  .custom-select-trigger.open .arrow { transform: rotate(180deg); }
+  .custom-select-panel {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: #fff; border: 1.5px solid var(--coral); border-radius: var(--radius);
+    max-height: 280px; overflow-y: auto; z-index: 200;
+    box-shadow: 0 8px 24px rgba(160,100,70,.18);
+  }
+  .custom-select-panel.open { display: block; }
+  .custom-select-group { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .custom-select-group:last-child { border-bottom: none; }
+  .custom-select-group-label {
+    padding: 6px 14px 2px; font-size: 10px; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .custom-select-option {
+    padding: 9px 14px; font-size: 14px; color: var(--body); cursor: pointer; transition: background .15s;
+  }
+  .custom-select-option:hover, .custom-select-option.selected { background: var(--cream); color: var(--ink); font-weight: 600; }
+  .lock-btn {
+    display: inline-flex; align-items: center; gap: 5px; margin-left: 8px;
+    font-size: 11px; font-weight: 700; color: var(--muted); background: var(--cream2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px;
+    cursor: pointer; vertical-align: middle; transition: all .2s;
+  }
+  .lock-btn.locked { color: var(--coral); border-color: var(--coral); background: #FEE8E4; }
 </style>
 </head>
 <body>
@@ -170,76 +207,93 @@
       <h3>Extract Leads</h3>
 
       <div class="form-group">
-        <label>Business Category</label>
-        <select id="category">
-          <option value="">— Select a category —</option>
-          <optgroup label="Food &amp; Beverage">
-            <option value="restaurant">Restaurant</option>
-            <option value="bakery">Bakery</option>
-            <option value="cafe">Cafe</option>
-            <option value="bar">Bar</option>
-            <option value="pizza_restaurant">Pizza Shop</option>
-            <option value="fast_food_restaurant">Fast Food</option>
-          </optgroup>
-          <optgroup label="Health &amp; Medical">
-            <option value="dentist">Dentist</option>
-            <option value="pharmacy">Pharmacy</option>
-            <option value="veterinarian">Veterinarian</option>
-            <option value="chiropractor">Chiropractor</option>
-            <option value="optometrist">Optometrist</option>
-            <option value="hospital">Hospital</option>
-            <option value="physical_therapist">Physical Therapist</option>
-            <option value="pediatrician">Pediatrician</option>
-          </optgroup>
-          <optgroup label="Professional Services">
-            <option value="law_firm">Law Firm</option>
-            <option value="accountant">Accountant</option>
-            <option value="insurance_agency">Insurance Agency</option>
-            <option value="financial_planner">Financial Advisor</option>
-            <option value="business_management_consultant">Consulting Firm</option>
-          </optgroup>
-          <optgroup label="Real Estate &amp; Construction">
-            <option value="real_estate_agency">Real Estate Agency</option>
-            <option value="roofing_contractor">Roofer</option>
-            <option value="plumber">Plumber</option>
-            <option value="electrician">Electrician</option>
-            <option value="hvac_contractor">HVAC</option>
-            <option value="landscaper">Landscaping</option>
-            <option value="house_cleaning_service">Cleaning Company</option>
-            <option value="interior_designer">Interior Designer</option>
-          </optgroup>
-          <optgroup label="Automotive">
-            <option value="auto_repair_shop">Auto Repair Shop</option>
-            <option value="car_dealer">Car Dealership</option>
-            <option value="auto_parts_store">Auto Parts Store</option>
-          </optgroup>
-          <optgroup label="Beauty &amp; Wellness">
-            <option value="beauty_salon">Beauty Salon</option>
-            <option value="gym">Gym / Fitness Center</option>
-            <option value="spa">Spa</option>
-            <option value="nail_salon">Nail Salon</option>
-            <option value="barber_shop">Barber Shop</option>
-          </optgroup>
-          <optgroup label="Retail &amp; Hospitality">
-            <option value="hotel">Hotel</option>
-            <option value="florist">Florist</option>
-            <option value="jewelry_store">Jewelry Store</option>
-            <option value="clothing_store">Clothing Store</option>
-            <option value="supermarket">Supermarket</option>
-          </optgroup>
-          <optgroup label="Education &amp; Community">
-            <option value="tutoring_service">School / Tutoring</option>
-            <option value="church">Church</option>
-            <option value="day_care_center">Daycare</option>
-            <option value="library">Library</option>
-          </optgroup>
-          <optgroup label="Events &amp; Media">
-            <option value="event_planner">Event Planner</option>
-            <option value="photographer">Photography Studio</option>
-            <option value="video_production_service">Videographer</option>
-            <option value="marketing_agency">Marketing Agency</option>
-          </optgroup>
-        </select>
+        <label>
+          Business Category
+          <button type="button" class="lock-btn" id="lockBtn" onclick="toggleLock()">📷 Lock open</button>
+        </label>
+        <input type="hidden" id="category" value=""/>
+        <div class="custom-select-wrap" id="categoryWrap">
+          <div class="custom-select-trigger" id="categoryTrigger" onclick="toggleDropdown()">
+            <span id="categoryLabel">— Select a category —</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="custom-select-panel" id="categoryPanel">
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Food &amp; Beverage</div>
+              <div class="custom-select-option" onclick="selectCat('restaurant','Restaurant')">Restaurant</div>
+              <div class="custom-select-option" onclick="selectCat('bakery','Bakery')">Bakery</div>
+              <div class="custom-select-option" onclick="selectCat('cafe','Cafe')">Cafe</div>
+              <div class="custom-select-option" onclick="selectCat('bar','Bar')">Bar</div>
+              <div class="custom-select-option" onclick="selectCat('pizza_restaurant','Pizza Shop')">Pizza Shop</div>
+              <div class="custom-select-option" onclick="selectCat('fast_food_restaurant','Fast Food')">Fast Food</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Health &amp; Medical</div>
+              <div class="custom-select-option" onclick="selectCat('dentist','Dentist')">Dentist</div>
+              <div class="custom-select-option" onclick="selectCat('pharmacy','Pharmacy')">Pharmacy</div>
+              <div class="custom-select-option" onclick="selectCat('veterinarian','Veterinarian')">Veterinarian</div>
+              <div class="custom-select-option" onclick="selectCat('chiropractor','Chiropractor')">Chiropractor</div>
+              <div class="custom-select-option" onclick="selectCat('optometrist','Optometrist')">Optometrist</div>
+              <div class="custom-select-option" onclick="selectCat('hospital','Hospital')">Hospital</div>
+              <div class="custom-select-option" onclick="selectCat('physical_therapist','Physical Therapist')">Physical Therapist</div>
+              <div class="custom-select-option" onclick="selectCat('pediatrician','Pediatrician')">Pediatrician</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Professional Services</div>
+              <div class="custom-select-option" onclick="selectCat('law_firm','Law Firm')">Law Firm</div>
+              <div class="custom-select-option" onclick="selectCat('accountant','Accountant')">Accountant</div>
+              <div class="custom-select-option" onclick="selectCat('insurance_agency','Insurance Agency')">Insurance Agency</div>
+              <div class="custom-select-option" onclick="selectCat('financial_planner','Financial Advisor')">Financial Advisor</div>
+              <div class="custom-select-option" onclick="selectCat('business_management_consultant','Consulting Firm')">Consulting Firm</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Real Estate &amp; Construction</div>
+              <div class="custom-select-option" onclick="selectCat('real_estate_agency','Real Estate Agency')">Real Estate Agency</div>
+              <div class="custom-select-option" onclick="selectCat('roofing_contractor','Roofer')">Roofer</div>
+              <div class="custom-select-option" onclick="selectCat('plumber','Plumber')">Plumber</div>
+              <div class="custom-select-option" onclick="selectCat('electrician','Electrician')">Electrician</div>
+              <div class="custom-select-option" onclick="selectCat('hvac_contractor','HVAC')">HVAC</div>
+              <div class="custom-select-option" onclick="selectCat('landscaper','Landscaping')">Landscaping</div>
+              <div class="custom-select-option" onclick="selectCat('house_cleaning_service','Cleaning Company')">Cleaning Company</div>
+              <div class="custom-select-option" onclick="selectCat('interior_designer','Interior Designer')">Interior Designer</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Automotive</div>
+              <div class="custom-select-option" onclick="selectCat('auto_repair_shop','Auto Repair Shop')">Auto Repair Shop</div>
+              <div class="custom-select-option" onclick="selectCat('car_dealer','Car Dealership')">Car Dealership</div>
+              <div class="custom-select-option" onclick="selectCat('auto_parts_store','Auto Parts Store')">Auto Parts Store</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Beauty &amp; Wellness</div>
+              <div class="custom-select-option" onclick="selectCat('beauty_salon','Beauty Salon')">Beauty Salon</div>
+              <div class="custom-select-option" onclick="selectCat('gym','Gym / Fitness Center')">Gym / Fitness Center</div>
+              <div class="custom-select-option" onclick="selectCat('spa','Spa')">Spa</div>
+              <div class="custom-select-option" onclick="selectCat('nail_salon','Nail Salon')">Nail Salon</div>
+              <div class="custom-select-option" onclick="selectCat('barber_shop','Barber Shop')">Barber Shop</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Retail &amp; Hospitality</div>
+              <div class="custom-select-option" onclick="selectCat('hotel','Hotel')">Hotel</div>
+              <div class="custom-select-option" onclick="selectCat('florist','Florist')">Florist</div>
+              <div class="custom-select-option" onclick="selectCat('jewelry_store','Jewelry Store')">Jewelry Store</div>
+              <div class="custom-select-option" onclick="selectCat('clothing_store','Clothing Store')">Clothing Store</div>
+              <div class="custom-select-option" onclick="selectCat('supermarket','Supermarket')">Supermarket</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Education &amp; Community</div>
+              <div class="custom-select-option" onclick="selectCat('tutoring_service','School / Tutoring')">School / Tutoring</div>
+              <div class="custom-select-option" onclick="selectCat('church','Church')">Church</div>
+              <div class="custom-select-option" onclick="selectCat('day_care_center','Daycare')">Daycare</div>
+            </div>
+            <div class="custom-select-group">
+              <div class="custom-select-group-label">Events &amp; Media</div>
+              <div class="custom-select-option" onclick="selectCat('event_planner','Event Planner')">Event Planner</div>
+              <div class="custom-select-option" onclick="selectCat('photographer','Photography Studio')">Photography Studio</div>
+              <div class="custom-select-option" onclick="selectCat('video_production_service','Videographer')">Videographer</div>
+              <div class="custom-select-option" onclick="selectCat('marketing_agency','Marketing Agency')">Marketing Agency</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -354,6 +408,55 @@
 
 <script>
   let leadsRemaining = 12500;
+  let dropdownLocked = false;
+
+  function toggleDropdown() {
+    if (dropdownLocked) return;
+    const panel   = document.getElementById('categoryPanel');
+    const trigger = document.getElementById('categoryTrigger');
+    const isOpen  = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    trigger.classList.toggle('open', !isOpen);
+  }
+
+  function toggleLock() {
+    dropdownLocked = !dropdownLocked;
+    const panel   = document.getElementById('categoryPanel');
+    const trigger = document.getElementById('categoryTrigger');
+    const btn     = document.getElementById('lockBtn');
+    if (dropdownLocked) {
+      panel.classList.add('open');
+      trigger.classList.add('open');
+      btn.textContent = '🔒 Locked open';
+      btn.classList.add('locked');
+    } else {
+      panel.classList.remove('open');
+      trigger.classList.remove('open');
+      btn.textContent = '📷 Lock open';
+      btn.classList.remove('locked');
+    }
+  }
+
+  function selectCat(value, label) {
+    document.getElementById('category').value    = value;
+    document.getElementById('categoryLabel').textContent = label;
+    document.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+    event.target.classList.add('selected');
+    if (!dropdownLocked) {
+      document.getElementById('categoryPanel').classList.remove('open');
+      document.getElementById('categoryTrigger').classList.remove('open');
+    }
+  }
+
+  // close on outside click (only when not locked)
+  document.addEventListener('click', function(e) {
+    if (dropdownLocked) return;
+    const wrap = document.getElementById('categoryWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('categoryPanel').classList.remove('open');
+      document.getElementById('categoryTrigger').classList.remove('open');
+    }
+  });
 
   function onCountryChange() {
     const country = document.getElementById('country').value;
