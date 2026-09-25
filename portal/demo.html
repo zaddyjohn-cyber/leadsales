@@ -404,6 +404,29 @@
     </div>
 
   </div>
+
+  <!-- Leads Preview (appears after extraction) -->
+  <div class="card" id="previewCard" style="display:none;margin-top:28px;">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+      <h3 style="margin-bottom:0;">Your Leads</h3>
+      <span class="badge badge-green">CSV Downloaded</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:18px;" id="previewMeta"></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Business Name</th><th>Email</th><th>Phone</th><th>City</th><th>Website</th>
+          </tr>
+        </thead>
+        <tbody id="previewBody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:16px;">
+      Full CSV also includes Google Maps URL, Facebook, Instagram, LinkedIn and street address.
+      Load it straight into <a href="https://zaramwebmailer.online" style="color:var(--coral);font-weight:600;">Zaram Web Mailer</a> to start sending.
+    </p>
+  </div>
 </div>
 
 <script>
@@ -524,6 +547,7 @@
       URL.revokeObjectURL(url);
 
       showMsg(`✓ ${quantity.toLocaleString()} leads downloaded successfully.`, 'success');
+      renderPreview(niche, quantity);
 
       // update quota display
       leadsRemaining -= quantity;
@@ -548,16 +572,55 @@
     }, 12000);
   }
 
+  // Real leads from sample-leads.csv — actual product output, same schema users receive
+  const REAL_LEADS = [
+    ['HQR Air','dispatch@hqrpro.com','https://www.google.com/maps?cid=13024784790130544024','','','','+1 925-326-6187','1070 Concord Ave','Concord','https://hqrair.com/contact-us/',''],
+    ['Water Heater','gregory@waterheaterseaside.com','https://www.google.com/maps?cid=17425983128455668433','','','','+1 831-605-3132','1667 Darwin St','Seaside','https://waterheaterseaside.com/',''],
+    ['Star Mechanical','shan@starairconditioningandheating.com','https://www.google.com/maps?cid=17199431873713552556','https://www.facebook.com/1starmechanical','','','+1 209-269-5064','17637 S Austin Rd','Manteca','https://starairconditioningandheating.com/locations/manteca-ca/',''],
+    ['First Choice Heating and Air','rob@firstchoicecool.com','https://www.google.com/maps?cid=6876706653492538318','https://www.facebook.com/firstchoicecool/','','','+1 801-699-5398','9037 S Tolman Farms Cir','Sandy','https://firstchoiceairutah.com/contact-us',''],
+    ['Pacific NW Reps','scott.herberg@pacificnwreps.com','https://www.google.com/maps?cid=9734294576452684365','','','','+1 425-836-0907','7804 W Washington St','Yakima','http://www.pacificnwreps.com/',''],
+    ['B & I Heating','andy.biheating@gmail.com','https://www.google.com/maps?cid=4804080782878988314','https://www.facebook.com/B-I-Heating-AC-Electrical-LLC-1392122917752914/','','','+1 704-873-0930','358 Triplett Rd','Cleveland','https://www.biheatingandair.com/about/contact-us/',''],
+    ["Crawford's Heating & Cooling",'service@crawfordshvac.com','https://www.google.com/maps?cid=12840724925759626859','https://facebook.com/add','','','+1 573-336-0085','1125 Old Rte 66','St Robert','https://www.crawfordshvac.com/contact-crawfords-heating-and-cooling-st-robe',''],
+    ['Air Tech Heating And Air Conditioning Service Inc','leo@airtechair.net','https://www.google.com/maps?cid=920390351426521734','','https://www.instagram.com/airtech2005/','','+1 818-845-0777','2514 N Glenoaks Blvd','Burbank','https://www.airtek1.com/',''],
+    ['Chaddock Refrigeration Heating & Air Conditioning','chaddock@bellsouth.net','https://www.google.com/maps?cid=7082393801495821774','','','','+1 904-346-3031','5035 St Augustine Rd','Jacksonville','https://www.chaddockrefrigerationfl.com/',''],
+    ['Arctic Refrigeration','arcticrefrigeration@midco.net','https://www.google.com/maps?cid=17993044159761001046','','','','+1 605-996-5145','112 S Edmunds St','Mitchell','http://arcticrefrigerationsd.com/',''],
+    ['Austin Air & Ice LLC','service@austinairandice.com','https://www.google.com/maps?cid=16515577860972995254','https://www.facebook.com/austinairandice','https://www.instagram.com/austinairandice/','','+1 512-800-2228','7696 183A Toll Rd Unit 6B','Leander','https://www.austinairandice.com/',''],
+    ['Stivers HVAC','cwright@stivers-hvac.com','https://www.google.com/maps?cid=13868371628010516461','https://www.facebook.com/StiversHVAC/','','','+1 859-226-0809','1201 Industry Rd','Lexington','https://stivers-hvac.com/contact-us/',''],
+    ['Coastal M&R','coastal.mr252@gmail.com','https://www.google.com/maps?cid=5427690912325968961','https://www.facebook.com/profile.php?id=100084784426530','','','+1 252-571-6383','101 Longleaf Ln','New Bern','https://www.coastal-mr-refrigeration.com/',''],
+    ['Refrigeration Solutions','rsidispatch@rsiclimate.com','https://www.google.com/maps?cid=13944619373155651508','','','','+1 800-838-9741','1172 W National Dr','Sacramento','https://rsiclimate.com/contact-us/',''],
+    ['Abby Air Inc','abbyairinc@gmail.com','https://www.google.com/maps?cid=5811970535780508140','http://www.facebook.com/share/15yWEfeGb6/?mibextid=wwXlfr','','','','4646 Domestic Ave','Naples','https://www.abbyairinc.com/',''],
+    ['Smart Heating and Cooling','smartheatcool@outlook.com','https://www.google.com/maps?cid=9168676153298453603','https://facebook.com/109303594926709','','','+1 913-423-2169','11327 132nd Ct','Overland Park','https://www.smartheatingandcooling.com/contact',''],
+    ["Clay's Refrigeration",'staff@claysrefrig.com','https://www.google.com/maps?cid=18305415083194067611','https://www.facebook.com/Clays-Refrigeration-441785549586038/','','','+1 800-688-9082','445 River Ave','Eugene','https://www.claysrefrig.com/',''],
+    ['Northwest Services','nwserviceshvac@gmail.com','https://www.google.com/maps?cid=11610764458002418667','','','','+1 419-548-5017','101 East Airport Highway Swanton Swan Creek Township','Swanton','https://www.nwshvac.com/contact-us/',''],
+    ['Individualized HVAC Options!','goliath71916@yahoo.com','https://www.google.com/maps?cid=12127366580406997714','https://www.facebook.com/velabrothers/','','','+1 806-231-7763','5400 Viewpoint Ave','Amarillo','https://www.goliathheatingandair.com/contact',''],
+    ['Precision Mechanical Services','seanr@precisionmechanicalservices.net','https://www.google.com/maps?cid=6758984668940222932','','https://www.instagram.com/precision_mechanicalservices/','','+1 843-504-5974','316 Wembley Way','Murrells Inlet','https://www.precisionmechanicalservices.net/about-us','']
+  ];
+
+  const CSV_HEADER = ['name','email','google_maps_url','facebook','instagram','linkedin','phone_number','street','city','url','reviews_number'];
+
   function buildDemoCSV(niche, country, count) {
-    const header = 'Business Name,Phone,Email,Website,Address,City,Country,Rating,Reviews\n';
-    const names  = ['Green Valley', 'Sunrise', 'Premier', 'Golden Gate', 'Blue Ridge',
-                    'Westside', 'Harbor', 'Summit', 'Lakewood', 'Maple Street'];
-    const lines  = [];
-    for (let i = 0; i < Math.min(count, 50); i++) {
-      const n = names[i % names.length] + ' ' + niche.replace(/_/g, ' ');
-      lines.push(`"${n}","+1-555-${String(Math.floor(Math.random()*9000)+1000)}-${String(Math.floor(Math.random()*9000)+1000)}","contact@${niche.replace(/_/g,'')}-demo${i}.com","https://www.${niche.replace(/_/g,'')}-demo${i}.com","${100+i} Main St","Demo City","${country}","${(3.5+Math.random()*1.5).toFixed(1)}","${Math.floor(Math.random()*200)+10}"`);
+    const rows  = [];
+    for (let i = 0; i < Math.min(count, REAL_LEADS.length); i++) {
+      rows.push(REAL_LEADS[i].map(f => f.includes(',') ? `"${f}"` : f).join(','));
     }
-    return header + lines.join('\n') + (count > 50 ? '\n... (full dataset in production)' : '');
+    return CSV_HEADER.join(',') + '\n' + rows.join('\n') + '\n';
+  }
+
+  function renderPreview(niche, count) {
+    const shown = Math.min(count, REAL_LEADS.length);
+    const rows  = REAL_LEADS.slice(0, shown).map(r => `
+      <tr>
+        <td style="font-weight:600;color:var(--ink);white-space:nowrap;">${r[0]}</td>
+        <td style="color:var(--coral);">${r[1]}</td>
+        <td style="white-space:nowrap;">${r[6] || '—'}</td>
+        <td>${r[8]}</td>
+        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r[9]}</td>
+      </tr>`).join('');
+
+    document.getElementById('previewCard').style.display = '';
+    document.getElementById('previewMeta').textContent =
+      `Showing ${shown} of ${count.toLocaleString()} leads · downloaded as CSV`;
+    document.getElementById('previewBody').innerHTML = rows;
   }
 </script>
 </body>
